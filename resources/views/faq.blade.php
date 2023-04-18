@@ -3,24 +3,14 @@
 @section('content')
     <div class="page-header">
         <div class="page-header__container container">
-            <div class="page-header__breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a> <svg class="breadcrumb-arrow" width="6px"
-                                height="9px">
-                                <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
-                            </svg></li>
-                        <li class="breadcrumb-item"><a href="#">Breadcrumb</a> <svg class="breadcrumb-arrow"
-                                width="6px" height="9px">
-                                <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
-                            </svg></li>
-                        <li class="breadcrumb-item active" aria-current="page">Frequently Asked Questions</li>
-                    </ol>
-                </nav>
-            </div>
             <div class="page-header__title">
                 <h1>Frequently Asked Questions</h1>
             </div>
+            {{-- <div class="page-header__breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <span class="typography">Feel free to reach us at our Facebook messenger and</span>
+                </nav>
+            </div> --}}
         </div>
     </div>
     <div class="block faq">
@@ -74,7 +64,7 @@
                     <div class="row">
                         <div class="faq__section-column col-12 col-lg-6">
                             <div class="typography">
-                                <h6>What shipping methods are available?</h6>
+                                <h6>What payment methods are available?</h6>
                                 <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

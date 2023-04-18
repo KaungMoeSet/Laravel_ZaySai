@@ -47,3 +47,19 @@ Route::get('/product', function () {
 Route::get('/faq', function () {
     return view('faq');
 });
+
+Route::get('/privacyPolicy', function () {
+    return view('privacyPolicy');
+});
+
+Route::get('/cart', function () {
+    return view('cart');
+});
+
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
+Route::get('/trackOrder', function () {
+    return view('trackOrder');
+});

@@ -4,7 +4,7 @@
 <div class="page-header">
     <div class="page-header__container container">
         <div class="page-header__title">
-            <h1>Screwdrivers</h1>
+            <h1>All Products</h1>
         </div>
     </div>
 </div>

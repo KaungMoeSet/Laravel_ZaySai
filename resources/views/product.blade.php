@@ -11,7 +11,7 @@
                             <div class="product-gallery__featured">
                                 <div class="owl-carousel" id="product-image"><a
                                         href="/frontend/images/products/product-16.html" target="_blank"><img
-                                            src="/frontend/images/products/product-16.jpg" alt=""> </img><a
+                                            src="/frontend/images/products/product-16.jpg" alt=""> </a><a
                                             href="/frontend/images/products/product-16-1.html" target="_blank"><img
                                                 src="/frontend/images/products/product-16-1.jpg" alt=""> </a><a
                                             href="/frontend/images/products/product-16-2.html" target="_blank"><img

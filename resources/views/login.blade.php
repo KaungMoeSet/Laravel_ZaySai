@@ -16,8 +16,11 @@
                                 <div class="form-check"><span class="form-check-input input-check"><span class="input-check__body"><input class="input-check__input" type="checkbox" id="login-remember"> <span class="input-check__box"></span> <svg class="input-check__icon" width="9px" height="7px">
                                                 <use xlink:href="images/sprite.svg#check-9x7"></use>
                                             </svg> </span></span><label class="form-check-label" for="login-remember">Remember Me</label></div>
-                            </div><button type="submit" class="btn btn-primary mt-2 px-5">Login</button>
+                            </div><button type="submit" class="btn btn-primary my-2 px-5">Login</button>
                         </form>
+                        <div>
+                            <span>Don't have an account? <a href="/register">Sign Up</a></span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -105,7 +105,7 @@
                     </li>
                     <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
-                            <a href="/aboutUs" class="mobile-links__item-link">About</a>
+                            <a href="/aboutUs" class="mobile-links__item-link">About Us</a>
                         </div>
                     </li>
                     <li class="mobile-links__item" data-collapse-item>
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <a href="cart.html" class="indicator__button"><span class="indicator__area">
+                        <a href="/cart" class="indicator__button"><span class="indicator__area">
                                 <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">3</span></i>
 
                         </a>
@@ -185,19 +185,19 @@
                                 <!-- .nav-links -->
                                 <div class="nav-panel__nav-links nav-links">
                                     <ul class="nav-links__list">
-                                        <li class="nav-links__item">
+                                        <li class="nav-links__item {{ request()->is('/') ? 'active' : '' }}">
                                             <a href="/"><span>Home</span></a>
                                         </li>
 
-                                        <li class="nav-links__item">
+                                        <li class="nav-links__item {{ request()->is('products') ? 'active' : '' }}">
                                             <a href="/products"><span>All Products</span></a>
                                         </li>
 
-                                        <li class="nav-links__item">
+                                        <li class="nav-links__item {{ request()->is('aboutUs') ? 'active' : '' }}">
                                             <a href="/aboutUs"><span>About</span></a>
                                         </li>
 
-                                        <li class="nav-links__item">
+                                        <li class="nav-links__item  {{ request()->is('contactUs') ? 'active' : '' }}">
                                             <a href="/contactUs"><span>Contact Us</span></a>
                                         </li>
 
@@ -253,12 +253,12 @@
                                     <ul class="footer-links__list">
                                         <li class="footer-links__item"><a href="/aboutUs" class="footer-links__link">About
                                                 Us</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
-                                                Information</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Privacy
+                                        {{-- <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
+                                                Information</a></li> --}}
+                                        <li class="footer-links__item"><a href="/privacyPolicy" class="footer-links__link">Privacy
                                                 Policy</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">FAQ</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Contact
+                                        <li class="footer-links__item"><a href="/faq" class="footer-links__link">FAQ</a></li>
+                                        <li class="footer-links__item"><a href="/contactUs" class="footer-links__link">Contact
                                                 Us</a></li>
                                     </ul>
                                 </div>
@@ -274,7 +274,7 @@
                                         social networks</div>
                                     <ul class="footer-newsletter__social-links">
                                         <li class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="https://www.facebook.com/May-Madi-Online-Store-207867532689515/?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                         </li>
                                         <li class="footer-newsletter__social-link footer-newsletter__social-link--twitter">
                                             <a href="https://themeforest.net/user/kos9" target="_blank"><i class="fa-brands fa-telegram"></i></a>

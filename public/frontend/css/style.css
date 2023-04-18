@@ -4501,6 +4501,15 @@ screen and (-ms-high-contrast:active) {
     box-shadow: none
 }
 
+.nav-links__item.active a{
+    color: inherit; 
+}
+
+.nav-links__item.active a span {
+    background: hsla(0, 0%, 100%, .5);
+    box-shadow: none
+}
+
 .nav-links__item:hover>a svg {
     fill: rgba(0, 0, 0, .3)
 }
@@ -5634,7 +5643,7 @@ screen and (-ms-high-contrast:active) {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: justify;
-    justify-content: space-between
+    justify-content: end
 }
 
 .cart__coupon-form {
@@ -8645,7 +8654,7 @@ screen and (min-width:480px) and (-ms-high-contrast:active) {
 }
 
 .block {
-    margin-bottom: 70px
+    margin-bottom: 70px;
 }
 
 .block--highlighted {
