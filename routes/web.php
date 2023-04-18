@@ -35,3 +35,15 @@ Route::controller(ProductController::class)->group(function () {
 Route::get('/contactUs', function () {
     return view('contactUs');
 });
+
+Route::get('/aboutUs', function () {
+    return view('aboutUs');
+});
+
+Route::get('/product', function () {
+    return view('product');
+});
+
+Route::get('/faq', function () {
+    return view('faq');
+});

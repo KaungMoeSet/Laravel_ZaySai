@@ -1106,6 +1106,17 @@ select.form-control-lg:valid {
     padding: 0 24px 1px;
     text-align: center
 }
+.product__option-label-qty {
+    -moz-appearance: textfield;
+    display: flex;
+    /* text-align: center; */
+    align-items: center;
+    width: 30%;
+    color: #6c757d;
+    font-size: 1.5rem;
+    min-width: 88px;
+    /* padding: 0 24px 1px; */
+}
 
 .input-number__input::-webkit-inner-spin-button,
 .input-number__input::-webkit-outer-spin-button {
@@ -6634,7 +6645,7 @@ screen and (min-width:992px) and (-ms-high-contrast:active) {
 
     .product--layout--columnar .product__actions-item--addtocart {
         -ms-flex-positive: 1;
-        flex-grow: 1
+        flex-grow: 1;
     }
 
     .product--layout--columnar .product__actions-item--addtocart .btn {
@@ -10870,4 +10881,9 @@ screen and (-ms-high-contrast:active) {
 
 .website_name {
     font-size: 2rem;
+}
+
+.product__actions-item--addtocart {
+    padding-left: 0 !important;
+    margin-bottom: 10px;
 }

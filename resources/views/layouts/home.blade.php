@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ZaySai</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -105,7 +105,7 @@
                     </li>
                     <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
-                            <a href="#" class="mobile-links__item-link">About</a>
+                            <a href="/aboutUs" class="mobile-links__item-link">About</a>
                         </div>
                     </li>
                     <li class="mobile-links__item" data-collapse-item>
@@ -132,7 +132,7 @@
                 <div class="site-header__middle container">
                     <div class="site-header__logo">
                         <a href="/">
-                            <span class="website_name fs-2">ZaySai</span>
+                            <span class="website_name fs-2">ZaySai <i class="fas fa-store"></i></span>
                         </a>
                     </div>
 
@@ -194,7 +194,7 @@
                                         </li>
 
                                         <li class="nav-links__item">
-                                            <a href="about.html"><span>About</span></a>
+                                            <a href="/aboutUs"><span>About</span></a>
                                         </li>
 
                                         <li class="nav-links__item">
@@ -234,10 +234,14 @@
                                             <i class="footer-contacts__icon fas fa-globe-americas"></i>
                                             39St. Kyauktada, No.189, Yangon, Myanmar
                                         </li>
-                                        <li><i class="footer-contacts__icon far fa-envelope"></i> kaungmoeset@gmail.com
+                                        <li><i class="footer-contacts__icon far fa-envelope"></i> 
+                                            <a href="mailto:kaungmoeset@gmail.com">kaungmoeset@gmail.com</a>
                                         </li>
-                                        <li><i class="footer-contacts__icon fas fa-mobile-alt"></i> +95-9955667645,
-                                        +95-9454922433</li>
+                                        <li>
+                                            <i class="footer-contacts__icon fas fa-mobile-alt"></i> 
+                                            <a href="tel:+95-9955667645">+95-9955667645</a>,
+                                            <a href="tel:+95-9955667645">+95-9454922433</a>
+                                        </li>
                                         <li><i class="footer-contacts__icon far fa-clock"></i> Mon-Sun 8:00am - 8:00pm
                                         </li>
                                     </ul>
@@ -247,7 +251,7 @@
                                 <div class="site-footer__widget footer-links">
                                     <h5 class="footer-links__title">Information</h5>
                                     <ul class="footer-links__list">
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">About
+                                        <li class="footer-links__item"><a href="/aboutUs" class="footer-links__link">About
                                                 Us</a></li>
                                         <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
                                                 Information</a></li>

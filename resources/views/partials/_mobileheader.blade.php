@@ -6,7 +6,7 @@
                             <use xlink:href="/frontend/images/sprite.svg#menu-18x14"></use>
                         </svg></button>
                     <a class="mobile-header__logo" href="/">
-                        <span>ZaySai</span>
+                        <span>ZaySai <i class="fas fa-store"></i></span>
                     </a>
                     <div class="mobile-header__search">
                         <form class="mobile-header__search-form" action="#">
