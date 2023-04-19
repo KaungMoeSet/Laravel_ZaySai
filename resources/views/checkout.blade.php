@@ -14,126 +14,52 @@
                 <div class="col-12 col-lg-6 col-xl-7">
                     <div class="card mb-lg-0">
                         <div class="card-body">
-                            <h3 class="card-title">Delivery Information</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-first-name">Full name</label>
-                                    <input type="text" class="form-control" id="checkout-first-name"
-                                        placeholder="Enter your first and last name">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-region">Region</label>
-                                    <select type="text" class="form-control" id="checkout-region">
-                                        <option>Yangon</option>
-                                        <option>Magway</option>
-                                        <option>Sagaing</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-phone">Phone number</label>
-                                    <input type="text" class="form-control" id="checkout-phone"
-                                        placeholder="Please enter your phone number">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-city">City</label>
-                                    <select type="text" class="form-control" id="checkout-city">
-                                        <option>Yangon</option>
-                                        <option>Magway</option>
-                                        <option>Sagaing</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-house">Building / House No / Floor / Street</label>
-                                    <input type="text" class="form-control" id="checkout-house"
-                                        placeholder="Please Enter">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-township">Township</label>
-                                    <select type="text" class="form-control" id="checkout-township">
-                                        <option>Kyauktada</option>
-                                        <option>Sanchaung</option>
-                                        <option>Ahlone</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-landmark">Colony / Suburb / Locality / Landmark</label>
-                                    <input type="text" class="form-control" id="checkout-landmark"
-                                        placeholder="Please Enter">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="checkout-address">Township</label>
-                                    <input type="text" class="form-control" id="checkout-address"
-                                        placeholder="">
-                                </div>
-                            </div>
-                            {{-- <div class="form-group"><label for="checkout-company-name">Company Name <span
-                                        class="text-muted">(Optional)</span></label> <input type="text"
-                                    class="form-control" id="checkout-company-name" placeholder="Company Name">
-                            </div> --}}
-                            <div class="form-group"><label for="checkout-country">Country</label> <select
-                                    id="checkout-country" class="form-control">
-                                    <option>Select a country...</option>
-                                    <option>United States</option>
-                                    <option>Russia</option>
-                                    <option>Italy</option>
-                                    <option>France</option>
-                                    <option>Ukraine</option>
-                                    <option>Germany</option>
-                                    <option>Australia</option>
-                                </select></div>
-                            <div class="form-group"><label for="checkout-street-address">Street Address</label>
-                                <input type="text" class="form-control" id="checkout-street-address"
-                                    placeholder="Street Address">
-                            </div>
-                            <div class="form-group"><label for="checkout-address">Apartment, suite, unit etc.
-                                    <span class="text-muted">(Optional)</span></label> <input type="text"
-                                    class="form-control" id="checkout-address"></div>
-                            <div class="form-group"><label for="checkout-city">Town / City</label> <input type="text"
-                                    class="form-control" id="checkout-city"></div>
-                            <div class="form-group"><label for="checkout-state">State / County</label> <input type="text"
-                                    class="form-control" id="checkout-state"></div>
-                            <div class="form-group"><label for="checkout-postcode">Postcode / ZIP</label> <input
-                                    type="text" class="form-control" id="checkout-postcode"></div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6"><label for="checkout-email">Email
-                                        address</label> <input type="email" class="form-control" id="checkout-email"
-                                        placeholder="Email address"></div>
-                                <div class="form-group col-md-6"><label for="checkout-phone">Phone</label>
-                                    <input type="text" class="form-control" id="checkout-phone" placeholder="Phone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check"><span class="form-check-input input-check"><span
-                                            class="input-check__body"><input class="input-check__input" type="checkbox"
-                                                id="checkout-create-account"> <span class="input-check__box"></span> <svg
-                                                class="input-check__icon" width="9px" height="7px">
-                                                <use xlink:href="images/sprite.svg#check-9x7"></use>
-                                            </svg> </span></span><label class="form-check-label"
-                                        for="checkout-create-account">Create an account?</label></div>
-                            </div>
+                            <h4 class="card-title">Delivery Information</h4>
+                            @include('partials._addressBox')
                         </div>
                         <div class="card-divider"></div>
                         <div class="card-body">
-                            <h3 class="card-title">Shipping Details</h3>
+                            <h4 class="card-title">Shipping Details</h4>
                             <div class="form-group">
-                                <div class="form-check"><span class="form-check-input input-check"><span
-                                            class="input-check__body"><input class="input-check__input" type="checkbox"
-                                                id="checkout-different-address"> <span class="input-check__box"></span>
-                                            <svg class="input-check__icon" width="9px" height="7px">
-                                                <use xlink:href="images/sprite.svg#check-9x7"></use>
-                                            </svg> </span></span><label class="form-check-label"
-                                        for="checkout-different-address">Ship to a different address?</label>
-                                </div>
+                                ရန်ကုန်ကလွဲပြီးကျန်မြို့တွေကို ကားဂိတ်တင်ပေးပါတယ်။
                             </div>
-                            <div class="form-group"><label for="checkout-comment">Order notes <span
-                                        class="text-muted">(Optional)</span></label>
-                                <textarea id="checkout-comment" class="form-control" rows="4"></textarea>
+                            <div class="form-group">
+                                <table class="cart__table cart-table">
+                                    <thead class="cart-table__head">
+                                        <tr class="cart-table__row">
+                                            <th class="cart-table__column cart-table__column--image">Image</th>
+                                            <th class="cart-table__column cart-table__column--product">Product</th>
+                                            <th class="cart-table__column cart-table__column--price">Price</th>
+                                            <th class="cart-table__column cart-table__column--quantity">Quantity</th>
+                                            <th class="cart-table__column cart-table__column--remove"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cart-table__body">
+                                        <tr class="cart-table__row">
+                                            <td class="cart-table__column cart-table__column--image"><a href="#"><img
+                                                        src="/frontend/images/products/product-1.jpg" alt=""></a>
+                                            </td>
+                                            <td class="cart-table__column cart-table__column--product">
+                                                <span href="#" class="cart-table__product-name">Electric Planer
+                                                    Brandix KL370090G 300
+                                                    Watts</span>
+                                            </td>
+                                            <td class="cart-table__column cart-table__column--price" data-title="Price">
+                                                $699.00</td>
+                                            <td class="cart-table__column cart-table__column--quantity"
+                                                data-title="Quantity">
+                                                <div class="input-number">
+                                                    Qty: 1
+                                                </div>
+                                            </td>
+                                            <td class="cart-table__column cart-table__column--remove"><button type="button"
+                                                    class="btn btn-light btn-sm btn-svg-icon"><svg width="12px"
+                                                        height="12px">
+                                                        <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
+                                                    </svg></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -141,7 +67,217 @@
                 <div class="col-12 col-lg-6 col-xl-5 mt-4 mt-lg-0">
                     <div class="card mb-0">
                         <div class="card-body">
-                            <h3 class="card-title">Your Order</h3>
+                            <h4 class="card-title">Shipping & Billing</h4>
+                            <table class="checkout__totals">
+                                <tbody class="checkout__shippinhg-details">
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <b>Kaung Moe Set</b><br>
+                                            <span><small>189/ 39St/ Kyauktada township, Yangon</small></span>
+                                        </td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn text-primary edit-btn" data-toggle="modal"
+                                                data-target="#exampleModalCenter">
+                                                Edit
+                                            </button>
+
+                                            <!-- Edit Modal -->
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title mr-3" id="exampleModalCenterTitle">
+                                                                Shipping Address
+                                                            </h5>
+                                                            <h5 href="" class="modal-title pl-3 modal-new-address">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal"
+                                                                    data-target="#addNewAddress">
+                                                                    Add new address
+                                                                </button>
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table edit-table">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th scope="col">Full name</th>
+                                                                        <th scope="col">Address</th>
+                                                                        <th scope="col">Region</th>
+                                                                        <th scope="col">Phone Number</th>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Kaung Moe Set</td>
+                                                                        <td>Electric Planer Brandix KL370090G 300 Watts</td>
+                                                                        <td>Yangon - Yangon City - Sanchaung</td>
+                                                                        <td>09454922433</td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="payment-methods__item-radio input-radio">
+                                                                                <span class="input-radio__body">
+                                                                                    <input class="input-radio__input"
+                                                                                        name="checkout_payment_method"
+                                                                                        type="radio" checked="checked">
+                                                                                    <span
+                                                                                        class="input-radio__circle"></span>
+                                                                                </span>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Kaung Moe Set</td>
+                                                                        <td>Electric Planer Brandix KL370090G 300 Watts</td>
+                                                                        <td>Yangon - Yangon City - Sanchaung</td>
+                                                                        <td>09454922433</td>
+                                                                        <td class="text-secondary"><small>Default address</small></td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="payment-methods__item-radio input-radio">
+                                                                                <span class="input-radio__body">
+                                                                                    <input class="input-radio__input"
+                                                                                        name="checkout_payment_method"
+                                                                                        type="radio" checked="checked">
+                                                                                    <span
+                                                                                        class="input-radio__circle"></span>
+                                                                                </span>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                            {{-- <table class="cart__table cart-table">
+                                                                <thead class="cart-table__head">
+                                                                    <tr class="cart-table__row">
+                                                                        <th
+                                                                            class="cart-table__column cart-table__column--name">
+                                                                            Full name</th>
+                                                                        <th
+                                                                            class="cart-table__column cart-table__column--product">
+                                                                            Address</th>
+                                                                        <th
+                                                                            class="cart-table__column cart-table__column--price">
+                                                                            Region</th>
+                                                                        <th
+                                                                            class="cart-table__column cart-table__column--price">
+                                                                            Phone Number</th>
+                                                                        <th
+                                                                            class="cart-table__column cart-table__column--select">
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="cart-table__body">
+                                                                    <tr class="">
+                                                                        <td
+                                                                            class="cart-table__column cart-table__column--name">
+                                                                            <span>Kaung Moe Set</span>
+                                                                        </td>
+                                                                        <td
+                                                                            class="cart-table__column cart-table__column--product">
+                                                                            <span href="#"
+                                                                                class="cart-table__product-name">Electric
+                                                                                Planer
+                                                                                Brandix KL370090G 300
+                                                                                Watts</span>
+                                                                        </td>
+                                                                        <td class="cart-table__column cart-table__column--price"
+                                                                            data-title="Price">
+                                                                            $699.00</td>
+                                                                        <td class="cart-table__column cart-table__column--quantity"
+                                                                            data-title="Quantity">
+                                                                            <div class="input-number">
+                                                                                Qty: 1
+                                                                            </div>
+                                                                        </td>
+                                                                        <td
+                                                                            class="cart-table__column cart-table__column--remove">
+                                                                            <button type="button"
+                                                                                class="btn btn-light btn-sm btn-svg-icon"><svg
+                                                                                    width="12px" height="12px">
+                                                                                    <use
+                                                                                        xlink:href="/frontend/images/sprite.svg#cross-12">
+                                                                                    </use>
+                                                                                </svg></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table> --}}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Add new Address Modal -->
+                                            <div class="modal fade" id="addNewAddress" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalCenterTitle">
+                                                                Add new shipping Address
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @include('partials._addressBox')
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-phone-alt"></i>
+                                            09-454922433
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn text-primary edit-btn">
+                                                Edit
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-envelope"></i>
+                                            kaungmoeset@gmail.com
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn text-primary edit-btn">
+                                                Edit
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4 class="card-title">Order Summery</h4>
                             <table class="checkout__totals">
                                 <thead class="checkout__totals-header">
                                     <tr>
@@ -169,11 +305,7 @@
                                         <td>$5,877.00</td>
                                     </tr>
                                     <tr>
-                                        <th>Store Credit</th>
-                                        <td>$-20.00</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Shipping</th>
+                                        <th>Delivery Fee</th>
                                         <td>$25.00</td>
                                     </tr>
                                 </tbody>
@@ -184,74 +316,9 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <div class="payment-methods">
-                                <ul class="payment-methods__list">
-                                    <li class="payment-methods__item payment-methods__item--active"><label
-                                            class="payment-methods__item-header"><span
-                                                class="payment-methods__item-radio input-radio"><span
-                                                    class="input-radio__body"><input class="input-radio__input"
-                                                        name="checkout_payment_method" type="radio" checked="checked">
-                                                    <span class="input-radio__circle"></span> </span></span><span
-                                                class="payment-methods__item-title">Direct bank
-                                                transfer</span></label>
-                                        <div class="payment-methods__item-container">
-                                            <div class="payment-methods__item-description text-muted">Make your
-                                                payment directly into our bank account. Please use your Order ID
-                                                as the payment reference. Your order will not be shipped until
-                                                the funds have cleared in our account.</div>
-                                        </div>
-                                    </li>
-                                    <li class="payment-methods__item"><label class="payment-methods__item-header"><span
-                                                class="payment-methods__item-radio input-radio"><span
-                                                    class="input-radio__body"><input class="input-radio__input"
-                                                        name="checkout_payment_method" type="radio"> <span
-                                                        class="input-radio__circle"></span> </span></span><span
-                                                class="payment-methods__item-title">Check
-                                                payments</span></label>
-                                        <div class="payment-methods__item-container">
-                                            <div class="payment-methods__item-description text-muted">Please
-                                                send a check to Store Name, Store Street, Store Town, Store
-                                                State / County, Store Postcode.</div>
-                                        </div>
-                                    </li>
-                                    <li class="payment-methods__item"><label class="payment-methods__item-header"><span
-                                                class="payment-methods__item-radio input-radio"><span
-                                                    class="input-radio__body"><input class="input-radio__input"
-                                                        name="checkout_payment_method" type="radio"> <span
-                                                        class="input-radio__circle"></span> </span></span><span
-                                                class="payment-methods__item-title">Cash on
-                                                delivery</span></label>
-                                        <div class="payment-methods__item-container">
-                                            <div class="payment-methods__item-description text-muted">Pay with
-                                                cash upon delivery.</div>
-                                        </div>
-                                    </li>
-                                    <li class="payment-methods__item"><label class="payment-methods__item-header"><span
-                                                class="payment-methods__item-radio input-radio"><span
-                                                    class="input-radio__body"><input class="input-radio__input"
-                                                        name="checkout_payment_method" type="radio"> <span
-                                                        class="input-radio__circle"></span> </span></span><span
-                                                class="payment-methods__item-title">PayPal</span></label>
-                                        <div class="payment-methods__item-container">
-                                            <div class="payment-methods__item-description text-muted">Pay via
-                                                PayPal; you can pay with your credit card if you don’t have a
-                                                PayPal account.</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="checkout__agree form-group">
-                                <div class="form-check"><span class="form-check-input input-check"><span
-                                            class="input-check__body"><input class="input-check__input" type="checkbox"
-                                                id="checkout-terms"> <span class="input-check__box"></span> <svg
-                                                class="input-check__icon" width="9px" height="7px">
-                                                <use xlink:href="images/sprite.svg#check-9x7"></use>
-                                            </svg> </span></span><label class="form-check-label" for="checkout-terms">I
-                                        have read and agree to the website <a target="_blank"
-                                            href="terms-and-conditions.html">terms and
-                                            conditions</a>*</label></div>
-                            </div><button type="submit" class="btn btn-primary btn-xl btn-block">Place
-                                Order</button>
+                            <button type="submit" class="btn btn-primary btn-xl btn-block">
+                                Place Order
+                            </button>
                         </div>
                     </div>
                 </div>

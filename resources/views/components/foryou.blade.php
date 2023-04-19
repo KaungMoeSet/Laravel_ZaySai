@@ -33,9 +33,6 @@
                                     <button class="btn btn-primary product-card__addtocart" type="button">
                                         Add To Cart
                                     </button>
-                                    <button class="btn btn-secondary product-card__addtocart" type="button">
-                                        Buy Now
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -58,9 +55,6 @@
                                 <div class="product-card__buttons product-btn">
                                     <button class="btn btn-primary product-card__addtocart" type="button">
                                         Add To Cart
-                                    </button>
-                                    <button class="btn btn-secondary product-card__addtocart" type="button">
-                                        Buy Now
                                     </button>
                                 </div>
                             </div>

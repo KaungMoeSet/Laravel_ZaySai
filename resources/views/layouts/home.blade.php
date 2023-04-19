@@ -13,16 +13,25 @@
     <title>ZaySai</title>
     <link rel="icon" type="image/png" href="/frontend//frontend/images/favicon.png"><!-- fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i"><!-- css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="/frontend/owl-carousel-2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/frontend/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- js -->
     <script src="/frontend/jquery-3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
     <script src="/frontend/owl-carousel-2.3.4/owl.carousel.min.js"></script>
     <script src="/frontend/nouislider-12.1.0/nouislider.min.js"></script>
     <script src="/frontend/js/number.js"></script>
@@ -69,7 +78,8 @@
                 </button>
             </div>
             <div class="mobilemenu__content">
-                <ul class="mobile-links mobile-links--level--0" data-collapse data-collapse-opened-class="mobile-links__item--open">
+                <ul class="mobile-links mobile-links--level--0" data-collapse
+                    data-collapse-opened-class="mobile-links__item--open">
                     <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
                             <a href="index.html" class="mobile-links__item-link">Home</a>
@@ -138,7 +148,10 @@
 
                     <div class="site-header__search">
                         <div class="search">
-                            <form class="search__form" action="#"><input class="search__input" name="search" placeholder="Search in Shop" aria-label="Site search" type="text" autocomplete="off"> <button class="search__button" type="submit"><svg width="20px" height="20px">
+                            <form class="search__form" action="#"><input class="search__input" name="search"
+                                    placeholder="Search in Shop" aria-label="Site search" type="text"
+                                    autocomplete="off"> <button class="search__button" type="submit"><svg
+                                        width="20px" height="20px">
                                         <use xlink:href="/frontend/images/sprite.svg#search-20"></use>
                                     </svg></button>
                                 <div class="search__border"></div>
@@ -147,9 +160,15 @@
                     </div>
                     <div class="d-flex">
                         <a href="/cart" class="indicator__button"><span class="indicator__area">
-                                <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">3</span></i>
+                                <i class="fa-solid fa-cart-shopping px-2"><span
+                                        class="indicator__value rounded-pill">3</span></i>
 
                         </a>
+                        {{-- <a href="">
+                            <span class="indicator__area">
+                                <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                            </span>
+                        </a> --}}
                         <a href="/login" class="px-2 btn btn-outline-secondary fs-6 px-3 mx-1">Log in</a>
                         <a href="/register" class="px-2 btn btn-dark bg-dark text-light fs-6 px-3 mx-1">Sign up</a>
                     </div>
@@ -160,18 +179,24 @@
 
                             <div class="nav-panel__row">
 
-                                <div class="nav-panel__departments"><!-- .departments -->
+                                <div class="nav-panel__departments">
+                                    <!-- .departments -->
                                     <div class="departments" data-departments-fixed-by="">
                                         <div class="departments__body">
                                             <div class="departments__links-wrapper">
                                                 <ul class="departments__links">
-                                                    <li class="departments__item"><a href="#">Power Machinery</a></li>
-                                                    <li class="departments__item"><a href="#">Measurement</a></li>
-                                                    <li class="departments__item"><a href="#">Clothes & PPE</a></li>
-                                                    <li class="departments__item"><a href="#">Plumbing</a></li>
-                                                    <li class="departments__item"><a href="#">Storage & Organization</a>
+                                                    <li class="departments__item"><a href="#">Power
+                                                            Machinery</a></li>
+                                                    <li class="departments__item"><a href="#">Measurement</a>
                                                     </li>
-                                                    <li class="departments__item"><a href="#">Welding & Soldering</a>
+                                                    <li class="departments__item"><a href="#">Clothes & PPE</a>
+                                                    </li>
+                                                    <li class="departments__item"><a href="#">Plumbing</a></li>
+                                                    <li class="departments__item"><a href="#">Storage &
+                                                            Organization</a>
+                                                    </li>
+                                                    <li class="departments__item"><a href="#">Welding &
+                                                            Soldering</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -234,11 +259,11 @@
                                             <i class="footer-contacts__icon fas fa-globe-americas"></i>
                                             39St. Kyauktada, No.189, Yangon, Myanmar
                                         </li>
-                                        <li><i class="footer-contacts__icon far fa-envelope"></i> 
+                                        <li><i class="footer-contacts__icon far fa-envelope"></i>
                                             <a href="mailto:kaungmoeset@gmail.com">kaungmoeset@gmail.com</a>
                                         </li>
                                         <li>
-                                            <i class="footer-contacts__icon fas fa-mobile-alt"></i> 
+                                            <i class="footer-contacts__icon fas fa-mobile-alt"></i>
                                             <a href="tel:+95-9955667645">+95-9955667645</a>,
                                             <a href="tel:+95-9955667645">+95-9454922433</a>
                                         </li>
@@ -251,14 +276,18 @@
                                 <div class="site-footer__widget footer-links">
                                     <h5 class="footer-links__title">Information</h5>
                                     <ul class="footer-links__list">
-                                        <li class="footer-links__item"><a href="/aboutUs" class="footer-links__link">About
+                                        <li class="footer-links__item"><a href="/aboutUs"
+                                                class="footer-links__link">About
                                                 Us</a></li>
                                         {{-- <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
                                                 Information</a></li> --}}
-                                        <li class="footer-links__item"><a href="/privacyPolicy" class="footer-links__link">Privacy
+                                        <li class="footer-links__item"><a href="/privacyPolicy"
+                                                class="footer-links__link">Privacy
                                                 Policy</a></li>
-                                        <li class="footer-links__item"><a href="/faq" class="footer-links__link">FAQ</a></li>
-                                        <li class="footer-links__item"><a href="/contactUs" class="footer-links__link">Contact
+                                        <li class="footer-links__item"><a href="/faq"
+                                                class="footer-links__link">FAQ</a></li>
+                                        <li class="footer-links__item"><a href="/contactUs"
+                                                class="footer-links__link">Contact
                                                 Us</a></li>
                                     </ul>
                                 </div>
@@ -266,24 +295,37 @@
                             <div class="col-12 col-md-12 col-lg-4">
                                 <div class="site-footer__widget footer-newsletter">
                                     <h5 class="footer-newsletter__title">Newsletter</h5>
-                                    <div class="footer-newsletter__text">Praesent pellentesque volutpat ex, vitae auctor
+                                    <div class="footer-newsletter__text">Praesent pellentesque volutpat ex, vitae
+                                        auctor
                                         lorem pulvinar mollis felis at lacinia.</div>
-                                    <form action="#" class="footer-newsletter__form"><label class="sr-only" for="footer-newsletter-address">Email Address</label> <input type="text" class="footer-newsletter__form-input form-control" id="footer-newsletter-address" placeholder="Email Address..."> <button class="footer-newsletter__form-button btn btn-primary">Subscribe</button>
+                                    <form action="#" class="footer-newsletter__form"><label class="sr-only"
+                                            for="footer-newsletter-address">Email Address</label> <input
+                                            type="text" class="footer-newsletter__form-input form-control"
+                                            id="footer-newsletter-address" placeholder="Email Address..."> <button
+                                            class="footer-newsletter__form-button btn btn-primary">Subscribe</button>
                                     </form>
                                     <div class="footer-newsletter__text footer-newsletter__text--social">Follow us on
                                         social networks</div>
                                     <ul class="footer-newsletter__social-links">
-                                        <li class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
-                                            <a href="https://www.facebook.com/May-Madi-Online-Store-207867532689515/?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                        <li
+                                            class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
+                                            <a href="https://www.facebook.com/May-Madi-Online-Store-207867532689515/?mibextid=ZbWKwL"
+                                                target="_blank"><i class="fab fa-facebook-f"></i></a>
                                         </li>
-                                        <li class="footer-newsletter__social-link footer-newsletter__social-link--twitter">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                                        <li
+                                            class="footer-newsletter__social-link footer-newsletter__social-link--twitter">
+                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                                    class="fa-brands fa-telegram"></i></a>
                                         </li>
-                                        <li class="footer-newsletter__social-link footer-newsletter__social-link--instagram">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i class="fab fa-instagram"></i></a>
+                                        <li
+                                            class="footer-newsletter__social-link footer-newsletter__social-link--instagram">
+                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                                    class="fab fa-instagram"></i></a>
                                         </li>
-                                        <li class="footer-newsletter__social-link footer-newsletter__social-link--viber">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i class="fa-brands fa-viber"></i></a>
+                                        <li
+                                            class="footer-newsletter__social-link footer-newsletter__social-link--viber">
+                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                                    class="fa-brands fa-viber"></i></a>
                                         </li>
                                     </ul>
                                 </div>

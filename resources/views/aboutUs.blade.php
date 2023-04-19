@@ -25,15 +25,15 @@
                             <div class="about-us__teammates teammates">
                                 <div class="owl-carousel">
                                     <div class="teammates__item teammate">
-                                        <div class="teammate__name">Michael Russo</div>
+                                        <div class="teammate__name">Kaung Moe Set</div>
                                         <div class="teammate__position text-muted">Chief Executive Officer</div>
                                     </div>
                                     <div class="teammates__item teammate">
-                                        <div class="teammate__name">Katherine Miller</div>
+                                        <div class="teammate__name">Kaung Kaung</div>
                                         <div class="teammate__position text-muted">Marketing Officer</div>
                                     </div>
                                     <div class="teammates__item teammate">
-                                        <div class="teammate__name">Anthony Harris</div>
+                                        <div class="teammate__name">Moe Set</div>
                                         <div class="teammate__position text-muted">Finance Director</div>
                                     </div>
                                 </div>

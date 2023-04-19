@@ -45,7 +45,7 @@
                             </a>
                         </div>
                         <div class="indicator indicator--mobile">
-                            <a href="cart.html" class="indicator__button">
+                            <a href="/cart" class="indicator__button">
                                 <span class="indicator__area">
                                     <svg width="20px" height="20px">
                                         <use xlink:href="/frontend/images/sprite.svg#cart-20"></use>
@@ -55,9 +55,10 @@
                             </a>
                         </div>
                         <div class="indicator indicator--mobile">
-                            <a href="">
+                            <a href="/login">
                                 <span class="indicator__area">
-                                    <i class="fas fa-user-circle" style="font-size:1.5rem; color:#3D464D"></i>
+                                    <i class="fas fa-sign-in-alt mobile_header_icon"></i>
+                                    {{-- <i class="fas fa-user-circle mobile_header_icon"></i> --}}
                                 </span>
                             </a>
                         </div>

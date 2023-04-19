@@ -63,3 +63,7 @@ Route::get('/checkout', function () {
 Route::get('/trackOrder', function () {
     return view('trackOrder');
 });
+
+Route::get('/profile', function() {
+    return view('profile');
+});
