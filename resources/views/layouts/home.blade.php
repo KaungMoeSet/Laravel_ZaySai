@@ -82,7 +82,7 @@
                     data-collapse-opened-class="mobile-links__item--open">
                     <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
-                            <a href="index.html" class="mobile-links__item-link">Home</a>
+                            <a href="/" class="mobile-links__item-link">Home</a>
                         </div>
                     </li>
                     <li class="mobile-links__item" data-collapse-item>

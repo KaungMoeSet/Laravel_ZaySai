@@ -10,6 +10,10 @@
                         <h3 class="card-title">Register</h3>
                         <form>
                             <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
                                 <label>Email address</label>
                                 <input type="email" class="form-control" placeholder="Enter email">
                             </div>
