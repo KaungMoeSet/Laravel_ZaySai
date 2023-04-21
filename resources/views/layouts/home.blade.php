@@ -130,8 +130,8 @@
     <!-- mobilemenu / end -->
 
     <!-- site -->
-    <!-- mobile site__header -->
     <div class="site">
+        <!-- mobile site__header -->
         @include('partials._mobileheader')
         <!-- mobile site__header / end -->
 
@@ -339,7 +339,8 @@
                     </div>
                 </div>
             </div>
-        </footer><!-- site__footer / end -->
+        </footer>
+        <!-- site__footer / end -->
     </div><!-- site / end -->
 </body>
 

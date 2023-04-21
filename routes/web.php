@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('pages.login');
 });
 
 Route::get('/register', function () {
-    return view('register');
+    return view('pages.register');
 });
 
 Route::controller(ProductController::class)->group(function () {
@@ -33,11 +34,11 @@ Route::controller(ProductController::class)->group(function () {
 });
 
 Route::get('/contactUs', function () {
-    return view('contactUs');
+    return view('pages.contactUs');
 });
 
 Route::get('/aboutUs', function () {
-    return view('aboutUs');
+    return view('pages.aboutUs');
 });
 
 Route::get('/product', function () {
@@ -45,25 +46,29 @@ Route::get('/product', function () {
 });
 
 Route::get('/faq', function () {
-    return view('faq');
+    return view('pages.faq');
 });
 
 Route::get('/privacyPolicy', function () {
-    return view('privacyPolicy');
+    return view('pages.privacyPolicy');
 });
 
 Route::get('/cart', function () {
-    return view('cart');
+    return view('customer.cart');
 });
 
 Route::get('/checkout', function () {
-    return view('checkout');
+    return view('customer.checkout');
 });
 
 Route::get('/trackOrder', function () {
-    return view('trackOrder');
+    return view('pages.trackOrder');
 });
 
 Route::get('/profile', function() {
-    return view('profile');
+    return view('customer.profile');
 });
+
+Route::get('/category/create/{name}', [CategoryController::class, 'create']);
+
+Route::get('/category/subCategory/create/{name}', [CategoryController::class, 'create']);

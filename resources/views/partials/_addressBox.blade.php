@@ -8,6 +8,7 @@
         <div class="form-group col-md-6">
             <label for="checkout-region">Region</label>
             <select type="text" class="form-control" id="checkout-region">
+                <option value="" disabled selected>Please choose your region</option>
                 <option>Yangon</option>
                 <option>Magway</option>
                 <option>Sagaing</option>
@@ -22,6 +23,7 @@
         <div class="form-group col-md-6">
             <label for="checkout-city">City</label>
             <select type="text" class="form-control" id="checkout-city">
+                <option value="" disabled selected>Please choose your city</option>
                 <option>Yangon</option>
                 <option>Magway</option>
                 <option>Sagaing</option>
@@ -36,6 +38,7 @@
         <div class="form-group col-md-6">
             <label for="checkout-township">Township</label>
             <select type="text" class="form-control" id="checkout-township">
+                <option value="" disabled selected>Please choose your township</option>
                 <option>Kyauktada</option>
                 <option>Sanchaung</option>
                 <option>Ahlone</option>
