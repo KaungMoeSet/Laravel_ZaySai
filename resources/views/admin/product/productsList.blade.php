@@ -1,5 +1,5 @@
 @extends('admin.layout.admin')
-
+@section('title', 'Prodcut List')
 @section('content')
     <section class="content-container">
         <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
                 <div class="row mb-2 align-items-center">
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left inline w-100">
-                            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
                             <li class="breadcrumb-item active">Products</li>
                         </ol>
                         <h1>Products</h1>

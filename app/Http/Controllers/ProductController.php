@@ -36,6 +36,18 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->hasFile('course_img')) 
+        {
+            if ($request->file('course_img')->isValid()) {
+                $validated  = $request->validate(['course_img' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',]);
+                $extension  = $request->course_img->extension();
+                $randomName = rand() . "." . $extension;
+                $request->course_img->storeAs('/public/img/', $randomName);
+            }
+        }
+
+        
+
     }
 
     /**

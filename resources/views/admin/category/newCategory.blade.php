@@ -1,5 +1,5 @@
 @extends('admin.layout.admin')
-
+@section('title', 'Add New Category')
 @section('content')
     @if (session('success_message'))
         <script>
@@ -19,7 +19,7 @@
                 <div class="row mb-2 align-items-center">
                     <div class="col-8">
                         <ol class="breadcrumb float-sm-left inline w-100">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('category') }}">Categories</a></li>
                             <li class="breadcrumb-item active">
                                 New Category
@@ -53,7 +53,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input type="text" name="category_name" class="form-control">
+                                                <input type="text" name="category_name" class="form-control" value="{{ old('category_name')}}">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -63,7 +63,7 @@
                                                     <div class="col-md-12">
                                                         <div class="card card-outline card-info">
                                                             <div class="card-body">
-                                                                <textarea id="summernote" name="description">
+                                                                <textarea id="summernote" name="description" value="{{ old('description')}}">
                                                             Write description here
                                                                 </textarea>
                                                             </div>

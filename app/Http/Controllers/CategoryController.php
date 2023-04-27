@@ -27,8 +27,9 @@ class CategoryController extends Controller
     {
         //
         $categories = Category::all();
-        $categoryAction = 'newCategory';
+        // $isNewCategory = true;
         return view('admin.category.newCategory', compact('categories'));
+        // return view('admin.category.category', compact('categories', 'isNewCategory'));
     }
 
     /**
@@ -75,7 +76,10 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($id);
+        // $isNewCategory = false;
+        // $ismainCategory = true;
         return view('admin.category.editCategory', compact('category'));
+        // return view('admin.category.category', compact('category', 'isNewCategory', 'ismainCategory'));
     }
 
     /**

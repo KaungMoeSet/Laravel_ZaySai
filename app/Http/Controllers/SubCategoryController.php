@@ -48,7 +48,9 @@ class SubCategoryController extends Controller
         //
         $subCategory = SubCategory::find($id);
         $categories  = Category::all();
+        // $ismainCategory = false;
         return view('admin.category.editSubCategory', compact('subCategory', 'categories'));
+        // return view('admin.category.editSubCategory', compact('subCategory', 'categories', 'ismainCategory'));
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('admin.layout.admin')
-
+@section('title', 'Add New Product')
 @section('content')
     <section class="content-container">
         <section class="content-header">
@@ -7,8 +7,8 @@
                 <div class="row mb-2 align-items-center">
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-left inline w-100">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/admin/products">Products</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('product')}}">Products</a></li>
                             <li class="breadcrumb-item active">New Product</li>
                         </ol>
                         <h1 class="content-title">New Product</h1>
@@ -19,7 +19,8 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="">
+                <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <!-- SELECT2 EXAMPLE -->
                     <div class="row">
                         <div class="col-md-8 col-12">
@@ -33,7 +34,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input class="form-control select2" style="width: 100%;">
+                                                <input class="form-control select2" name="product_name" value="{{ old('product_name')}}">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -44,7 +45,7 @@
                                                         <div class="card card-outline card-info">
                                                             <!-- /.card-header -->
                                                             <div class="card-body">
-                                                                <textarea id="summernote">
+                                                                <textarea id="summernote" name="description" value="{{ old('description')}}">
                                                                 </textarea>
                                                             </div>
                                                         </div>

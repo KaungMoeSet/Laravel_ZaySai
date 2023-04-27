@@ -1,5 +1,5 @@
 @extends('admin.layout.admin')
-
+@section('title', 'Category List')
 @section('content')
     @if (session("success_message"))
         <script>
