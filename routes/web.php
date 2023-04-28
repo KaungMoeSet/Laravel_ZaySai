@@ -81,6 +81,7 @@ Route::resource('admin', AdminController::class);
 
 // Products
 Route::resource('product', ProductController::class);
+Route::get('/get-subCategoires/{id}',[ProductController::class, 'getSubCategories']);
 
 // Categories
 Route::resource('subCategory', SubCategoryController::class);

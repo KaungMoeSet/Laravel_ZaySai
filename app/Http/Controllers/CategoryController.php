@@ -58,7 +58,7 @@ class CategoryController extends Controller
         // return view('admin.newCategory')->with([
         //     'message'=>'Data added successfully!',
         //     "categories"=>Category::all() ]);
-        return redirect()->back()->with('success_message', $request->input('category_name').' is added successfully!');
+        return redirect()->route('category.index')->with('success_message', $request->input('category_name').' is added successfully!');
     }
 
     /**

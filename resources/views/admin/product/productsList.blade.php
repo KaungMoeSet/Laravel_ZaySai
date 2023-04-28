@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right ">
-                            <a href="{{url('product/create')}}" class="btn btn-primary">New Product</a>
+                            <a href="{{ url('product/create') }}" class="btn btn-primary">New Product</a>
                         </ol>
                     </div>
                 </div>
@@ -40,6 +40,7 @@
                                             <th>Category</th>
                                             <th>Buying Price</th>
                                             <th>Selling Price</th>
+                                            <th>Quantity</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -48,10 +49,15 @@
                                         @foreach ($products as $product)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $product['image'] }}</td>
-                                                <td>{{ $procut['name'] }}</td>
+                                                <td>
+                                                    @foreach ($product['images'] as $image)
+                                                        <img src="{{ asset('images/' . $image) }}" alt="Image">
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $product['name'] }}</td>
                                                 <td>{{ $product['buying_price'] }}</td>
                                                 <td>{{ $product['selling_price'] }}</td>
+                                                <td>{{ $product['quantity']}}</td>
                                                 <td class="d-flex justify-content-end ">
                                                     <a href="{{ url('product/' . $prodct->id . '/edit') }}">
                                                         <button type="submit" class="btn btn-warning px-2 mx-2 edit_btn">
