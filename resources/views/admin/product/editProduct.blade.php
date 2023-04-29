@@ -19,9 +19,9 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <!-- SELECT2 EXAMPLE -->
                     <div class="row">
                         <div class="col-md-8 col-12">
@@ -36,7 +36,7 @@
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input class="form-control select2" name="product_name"
-                                                    value="{{ old('product_name') }}">
+                                                    value="{{ $product->name }}">
                                                 <span class="help-inline">
                                                     @error('product_name')
                                                         {{ $message }}
@@ -52,8 +52,8 @@
                                                         <div class="card card-outline card-info">
                                                             <!-- /.card-header -->
                                                             <div class="card-body">
-                                                                <textarea id="summernote" name="product_description" >
-                                                                    {{ old('product_description') }}
+                                                                <textarea id="summernote" name="product_description">
+                                                                    {{ $product->description }}
                                                                 </textarea>
                                                                 <span class="help-inline">
                                                                     @error('product_description')
@@ -83,7 +83,7 @@
                                             <div class="form-group">
                                                 <label>Buying Price</label>
                                                 <input type="number" name="product_buying_price"
-                                                    class="form-control select2" value="{{ old('product_buying_price') }}">
+                                                    class="form-control select2" value="{{ $product->buying_price }}">
                                                 <span class="help-inline">
                                                     @error('product_buying_price')
                                                         {{ $message }}
@@ -95,7 +95,7 @@
                                             <div class="form-group">
                                                 <label>Selling Price</label>
                                                 <input type="number" name="product_selling_price"
-                                                    class="form-control select2" value="{{ old('product_selling_price') }}">
+                                                    class="form-control select2" value="{{ $product->selling_price }}">
                                                 <span class="help-inline">
                                                     @error('product_selling_price')
                                                         {{ $message }}
@@ -122,7 +122,7 @@
                                                     <option value="" disabled selected>Choose your category</option>
                                                     @foreach ($mainCategories as $mainCategory)
                                                         <option value="{{ $mainCategory->id }}"
-                                                            {{ old('main_category') == "$mainCategory->id" ? 'selected' : '' }}>
+                                                            {{ $product->sub_category->category_id == $mainCategory->id ? 'selected' : '' }}>
                                                             {{ $mainCategory->name }}
                                                         </option>
                                                     @endforeach
@@ -134,7 +134,19 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-12" id="sub-category-div" style="display:none;">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="sub-catg">Category</label>
+                                                <select class="form-control" name="sub_category" id="sub-catg">
+                                                    <option value="" disabled>Choose your category</option>
+                                                    @foreach ($subCategories as $subCategory)
+                                                        <option value="{{ $subCategory }}"
+                                                            {{ $product->sub_category_id == $subCategory->id ? 'selected' : '' }}>
+                                                            {{ $subCategory->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.row -->
@@ -150,13 +162,41 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Product Image</label>
-                                                <input type="file" class="form-control" name="product_images[]" value="{{ old('product_images') }}"
-                                                    multiple>
-                                                <span class="help-inline">
-                                                    @error('product_images')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </span>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="w-min">Image</th>
+                                                            <th class="w-min"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <img src="" alt="">
+                                                                    {{-- <img src="{{ asset('storage/img/' . $product_image->image_name) }}" width="40" height="40" alt=""> --}}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div>
+                                                                    <a class="btn btn-danger">
+                                                                        <i class="fa-solid fa-xmark"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                                <div>
+                                                    <input type="file" class="form-control" name="product_images[]"
+                                                        value="{{ old('product_images') }}" multiple>
+                                                    <span class="help-inline">
+                                                        @error('product_images')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +211,8 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Product Quantity</label>
-                                                <input type="number" name="product_quantity" class="form-control select2" value="{{ old('product_quantity') }}">
+                                                <input type="number" name="product_quantity"
+                                                    class="form-control select2" value="{{ $product->quantity }}">
                                                 <span class="help-inline">
                                                     @error('product_quantity')
                                                         {{ $message }}

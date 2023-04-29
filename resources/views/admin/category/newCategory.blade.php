@@ -1,18 +1,6 @@
 @extends('admin.layout.admin')
 @section('title', 'Add New Category')
 @section('content')
-    @if (session('success_message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: "{{ session('success_message') }}",
-                showConfirmButton: false,
-                timer: 3000,
-                toast: true
-            })
-        </script>
-    @endif
     <section class="content-container">
         <section class="content-header">
             <div class="container-fluid">

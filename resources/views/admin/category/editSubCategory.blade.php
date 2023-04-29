@@ -83,7 +83,7 @@
                                                     <select id="my-select" name="insert_option" class="form-control">
                                                         <option value="">None</option>
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category['id'] }}" name="parent_category" {{ $subCategory->category_id == $category->id ? 'selected': '' }}>
+                                                            <option value="{{ $category['id'] }}" {{ $subCategory->category_id == $category->id ? 'selected': '' }}>
                                                                 {{$category->name}}
                                                             </option>
                                                         @endforeach

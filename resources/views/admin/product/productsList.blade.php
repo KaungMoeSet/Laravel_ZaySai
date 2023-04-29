@@ -1,6 +1,18 @@
 @extends('admin.layout.admin')
 @section('title', 'Prodcut List')
 @section('content')
+    @if (session('success_message'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: "{{ session('success_message') }}",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            })
+        </script>
+    @endif
     <section class="content-container">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -50,16 +62,21 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>
-                                                    @foreach ($product['images'] as $image)
-                                                        <img src="{{ asset('images/' . $image) }}" alt="Image">
+                                                    @foreach ($product_images as $product_image)
+                                                        @if ($product->id == $product_image->product_id)
+                                                            <img src="{{ asset('storage/img/' . $product_image->image_name) }}"
+                                                                width="100px" height="100px" alt="Image">
+                                                        @endif
                                                     @endforeach
+
                                                 </td>
-                                                <td>{{ $product['name'] }}</td>
-                                                <td>{{ $product['buying_price'] }}</td>
-                                                <td>{{ $product['selling_price'] }}</td>
-                                                <td>{{ $product['quantity']}}</td>
+                                                <td>{{ $product->name }}</td>
+                                                <td> {{ $product->sub_category->name }} </td>
+                                                <td>$ {{ $product->buying_price }}</td>
+                                                <td>$ {{ $product->selling_price }}</td>
+                                                <td>{{ $product->quantity }}</td>
                                                 <td class="d-flex justify-content-end ">
-                                                    <a href="{{ url('product/' . $prodct->id . '/edit') }}">
+                                                    <a href="{{ url('product/' . $product->id . '/edit') }}">
                                                         <button type="submit" class="btn btn-warning px-2 mx-2 edit_btn">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </button>

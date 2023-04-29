@@ -16,7 +16,7 @@ $(document).ready(function () {
                                     <div class="form-group">
                                         <label for="sub-catg">Category</label>
                                             <div>
-                                              <select class="form-control" name="sub-category" id="sub-catg">
+                                              <select class="form-control" name="sub_category" id="sub-catg">
                                                 <option value="" disabled>Choose your category</option>`);
                     $.each(data, function (key, value) {
                         // console.log(key, value);

@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->integer('buying_price');
             $table->integer('selling_price');
             $table->integer('quantity');
-            $table->string('images')->nullable();
             $table->longText('description');
             $table->timestamps();
         });

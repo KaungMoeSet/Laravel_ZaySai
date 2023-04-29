@@ -76,10 +76,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($id);
-        // $isNewCategory = false;
-        // $ismainCategory = true;
         return view('admin.category.editCategory', compact('category'));
-        // return view('admin.category.category', compact('category', 'isNewCategory', 'ismainCategory'));
     }
 
     /**
