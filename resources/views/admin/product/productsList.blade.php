@@ -82,10 +82,12 @@
                                                         </button>
                                                     </a>
 
-                                                    <form action="{{ url('product/' . $product->id) }}" method="POST">
+                                                    <form action="{{ url('product/' . $product->id) }}"
+                                                        id="delete-form{{ $product->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger px-2">
+                                                        <button type="button" onclick="confirmDelete({{ $product->id }})"
+                                                            class="btn btn-danger px-2">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                     </form>

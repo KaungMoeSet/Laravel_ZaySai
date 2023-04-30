@@ -99,7 +99,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $mainCategories = Category::all();
         $subCategories = SubCategory::all();
-        return view('admin.product.editProduct', compact('product', 'mainCategories', 'subCategories'));
+        $images = ProductImage::all();
+        return view('admin.product.editProduct', compact('product', 'mainCategories', 'subCategories', 'images'));
     }
 
     /**
@@ -108,6 +109,35 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // dd($request);
+        $product = Product::find($id);
+        $product->name            = $request->input('product_name');
+        $product->sub_category_id = $request->input('sub_category');
+        $product->buying_price    = $request->input('product_buying_price');
+        $product->selling_price   = $request->input('product_selling_price');
+        $product->quantity        = $request->input('product_quantity');
+        $product->description     = $request->input('product_description');
+        $product->save();
+
+        if($request->hasFile('product_images')) {
+            $product_images = $request->file('product_images');
+        foreach ($product_images as $product_image) {
+            $extension = $product_image->extension();
+            $randomName = rand() . "." . $extension;
+            $product_image->storeAs('/public/img/', $randomName);
+
+            $image = new ProductImage();
+            $image->product_id = $product->id;
+            $image->image_name = $randomName;
+            // dd($randomName);
+            // dd($product_image);
+            $product->images()->createMany([
+                ['image_name' => $randomName, 'product_id' => $product->id],
+            ]);
+        }
+        }
+
+        return redirect()->route('product.index')->with('success_message', $request->input('product_name') . ' is Updated Successfully!');
     }
 
     /**
@@ -119,7 +149,7 @@ class ProductController extends Controller
         $product = Product::find($id)->name;
         Product::find($id)->delete();
 
-        return redirect()->back()->with('success_message', $product.' is deleted successfully!');
+        return redirect()->back()->with('success_message', $product . ' is deleted successfully!');
     }
 
     /**

@@ -33,3 +33,54 @@ $(document).ready(function () {
         }
     });
 });
+
+function imageDelete(event, id) {
+    event.preventDefault();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/productImage/" + id,
+                type: "DELETE",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Handle successful deletion
+                    // Remove the deleted row from the table
+                    console.log("Image deleted");
+                    $("#delete-form" + id).closest("tr").remove();
+                    window.location.reload();
+                },
+                error: function (xhr) {
+                    // Handle error
+                    window.location.reload();
+                    // console.log(xhr.responseText);
+                },
+            });
+            // document.getElementById('delete-form' + id).submit();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your file is safe :)',
+                'error'
+            )
+        }
+    });
+}

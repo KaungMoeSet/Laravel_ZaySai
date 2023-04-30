@@ -1,6 +1,18 @@
 @extends('admin.layout.admin')
 @section('title', 'Add New Product')
 @section('content')
+    @if (session('success_message'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: "{{ session('success_message') }}",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            })
+        </script>
+    @endif
     <section class="content-container">
         <section class="content-header">
             <div class="container-fluid">
@@ -9,9 +21,9 @@
                         <ol class="breadcrumb float-sm-left inline w-100">
                             <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('product') }}">Products</a></li>
-                            <li class="breadcrumb-item active">New Product</li>
+                            <li class="breadcrumb-item active">Update Product</li>
                         </ol>
-                        <h1 class="content-title">New Product</h1>
+                        <h1 class="content-title">Update Product</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -19,7 +31,8 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('product.update', $product->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <!-- SELECT2 EXAMPLE -->
@@ -140,7 +153,7 @@
                                                 <select class="form-control" name="sub_category" id="sub-catg">
                                                     <option value="" disabled>Choose your category</option>
                                                     @foreach ($subCategories as $subCategory)
-                                                        <option value="{{ $subCategory }}"
+                                                        <option value="{{ $subCategory->id }}"
                                                             {{ $product->sub_category_id == $subCategory->id ? 'selected' : '' }}>
                                                             {{ $subCategory->name }}
                                                         </option>
@@ -160,9 +173,9 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="form-group">
+                                            <div class="form-group table-responsive">
                                                 <label>Product Image</label>
-                                                <table class="table">
+                                                <table class="table" id="image-table">
                                                     <thead>
                                                         <tr>
                                                             <th class="w-min">Image</th>
@@ -170,21 +183,30 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div>
-                                                                    <img src="" alt="">
-                                                                    {{-- <img src="{{ asset('storage/img/' . $product_image->image_name) }}" width="40" height="40" alt=""> --}}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div>
-                                                                    <a class="btn btn-danger">
-                                                                        <i class="fa-solid fa-xmark"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach ($images as $product_image)
+                                                            @if ($product->id == $product_image->product_id)
+                                                                <tr class="list-item">
+                                                                    <td>
+                                                                        <div>
+                                                                            <img src="" alt="">
+                                                                            <img src="{{ asset('storage/img/' . $product_image->image_name) }}"
+                                                                                width="100px" height="100px"
+                                                                                alt="Image">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div>
+                                                                            <button type="button" id="delete-form"
+                                                                                onclick="imageDelete(event, {{ $product_image->id }})"
+                                                                                class="delete btn btn-danger px-2">
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+
                                                     </tbody>
 
                                                 </table>
@@ -227,10 +249,9 @@
 
                         <div class="col-12 container">
                             <div class="row justify-content-end">
-                                <a href="{{ url('admin') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
+                                <a href="{{ url('product') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
 
-                                <input type="submit" onclick="saveSuccess()" value="Save"
-                                    class="btn btn-warning col-1 mx-2">
+                                <input type="submit" value="Update" class="btn btn-warning col-1 mx-2">
                             </div>
                         </div>
                     </div>
@@ -238,5 +259,8 @@
                 <!-- /.card -->
         </section>
     </section>
+    <script>
+        $('#image-table tr.list-item').first().find('.delete').prop('disabled', true);
+    </script>
     <script src="{{ asset('adminFrontEnd/js/product.js') }}"></script>
 @endsection

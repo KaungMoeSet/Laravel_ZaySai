@@ -186,7 +186,7 @@
 
                         <div class="col-12 container">
                             <div class="row justify-content-end">
-                                <a href="{{ url('admin') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
+                                <a href="{{ url('product') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
 
                                 <input type="submit" onclick="saveSuccess()" value="Save"
                                     class="btn btn-warning col-1 mx-2">

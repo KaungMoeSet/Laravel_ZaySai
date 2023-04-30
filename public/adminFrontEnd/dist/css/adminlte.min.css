@@ -55841,14 +55841,24 @@ a.text-muted:hover {
 /*# sourceMappingURL=adminlte.min.css.map */
 .content-title {
     margin-bottom: 1.5rem !important;
-  }
-  .content-container {
-    padding: 0 2rem 2rem 2rem
-  }
+}
 
-  .help-inline {
+.content-container {
+    padding: 0 2rem 2rem 2rem
+}
+
+.help-inline {
     color: red;
     font-size: .9rem;
     font-weight: bold;
-  }
+}
+
 /* padding: 0 20px 0 50px; */
+
+#image-table tbody td:nth-child(2) {
+    width: 20%;
+}
+
+#image-table tbody tr:first-child {
+    width: 80%;
+}

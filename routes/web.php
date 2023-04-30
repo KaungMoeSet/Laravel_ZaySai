@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,10 @@ Route::resource('admin', AdminController::class);
 // Products
 Route::resource('product', ProductController::class);
 Route::get('/get-subCategoires/{id}',[ProductController::class, 'getSubCategories']);
+
+//Product Image
+Route::resource('productImage', ProductImageController::class);
+// Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
 
 // Categories
 Route::resource('subCategory', SubCategoryController::class);
