@@ -54,6 +54,8 @@
         gtag('js', new Date());
         gtag('config', 'UA-97489509-6');
     </script>
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>

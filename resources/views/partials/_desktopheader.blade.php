@@ -11,9 +11,8 @@
             <div class="site-header__search">
                 <div class="search">
                     <form class="search__form" action="#"><input class="search__input" name="search"
-                            placeholder="Search in Shop" aria-label="Site search" type="text"
-                            autocomplete="off"> <button class="search__button" type="submit"><svg
-                                width="20px" height="20px">
+                            placeholder="Search in Shop" aria-label="Site search" type="text" autocomplete="off">
+                        <button class="search__button" type="submit"><svg width="20px" height="20px">
                                 <use xlink:href="/frontend/images/sprite.svg#search-20"></use>
                             </svg></button>
                         <div class="search__border"></div>
@@ -26,13 +25,40 @@
                                 class="indicator__value rounded-pill">3</span></i>
 
                 </a>
+                @auth
+                    {{-- <a href="">
+                        <span class="indicator__area">
+                            <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                        </span>
+                    </a> --}}
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @else
+                    <a href="/login" class="px-2 btn btn-outline-secondary fs-6 px-3 mx-1">Log in</a>
+                    <a href="/register" class="px-2 btn btn-dark bg-dark text-light fs-6 px-3 mx-1">Sign up</a>
+                @endauth
                 {{-- <a href="">
                     <span class="indicator__area">
                         <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
                     </span>
                 </a> --}}
-                <a href="/login" class="px-2 btn btn-outline-secondary fs-6 px-3 mx-1">Log in</a>
-                <a href="/register" class="px-2 btn btn-dark bg-dark text-light fs-6 px-3 mx-1">Sign up</a>
+
             </div>
         </div>
         <div class="site-header__nav-panel">

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +23,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', function () {
+Route::get('/login2', function () {
     return view('pages.login');
 });
 
-Route::get('/register', function () {
+Route::get('/register2', function () {
     return view('pages.register');
 });
 
@@ -91,3 +92,7 @@ Route::resource('productImage', ProductImageController::class);
 // Categories
 Route::resource('subCategory', SubCategoryController::class);
 Route::resource('category', CategoryController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

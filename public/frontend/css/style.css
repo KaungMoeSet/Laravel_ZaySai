@@ -648,10 +648,10 @@ h6 {
 .btn-primary,
 .btn-primary.disabled,
 .btn-primary:disabled {
-    border-color: #ffd333;
-    background: #ffd333;
-    color: #3d464d;
-    fill: #3d464d
+    border-color: #ffd333 !important;
+    background: #ffd333 !important;
+    color: #3d464d !important;
+    fill: #3d464d !important
 }
 
 .btn-primary.disabled .fake-svg-icon,
@@ -4502,7 +4502,7 @@ screen and (-ms-high-contrast:active) {
 }
 
 .nav-links__item.active a{
-    color: inherit; 
+    color: inherit;
 }
 
 .nav-links__item.active a span {
@@ -10931,6 +10931,10 @@ screen and (-ms-high-contrast:active) {
 }
 
 .mobile_header_icon {
-    font-size:1.5rem; 
+    font-size:1.5rem;
     color:#3D464D
+}
+
+a{
+    text-decoration: none !important;
 }
