@@ -31,13 +31,16 @@
                             <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
                         </span>
                     </a> --}}
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" style="list-style: none">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/profile">
+                                My Profile
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -102,8 +105,8 @@
                                     <a href="/"><span>Home</span></a>
                                 </li>
 
-                                <li class="nav-links__item {{ request()->is('products') ? 'active' : '' }}">
-                                    <a href="/products"><span>All Products</span></a>
+                                <li class="nav-links__item {{ request()->is('/allProducts') ? 'active' : '' }}">
+                                    <a href="/allProducts"><span>All Products</span></a>
                                 </li>
 
                                 <li class="nav-links__item {{ request()->is('aboutUs') ? 'active' : '' }}">

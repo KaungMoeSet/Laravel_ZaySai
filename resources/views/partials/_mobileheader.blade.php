@@ -2,7 +2,8 @@
     <div class="mobile-header mobile-header--sticky mobile-header--stuck">
         <div class="mobile-header__panel">
             <div class="container">
-                <div class="mobile-header__body"><button class="mobile-header__menu-button"><svg width="18px" height="14px">
+                <div class="mobile-header__body"><button class="mobile-header__menu-button"><svg width="18px"
+                            height="14px">
                             <use xlink:href="/frontend/images/sprite.svg#menu-18x14"></use>
                         </svg></button>
                     <a class="mobile-header__logo" href="/">
@@ -10,13 +11,16 @@
                     </a>
                     <div class="mobile-header__search">
                         <form class="mobile-header__search-form" action="#">
-                            <input class="mobile-header__search-input" name="search" placeholder="Search in Shop" aria-label="Site search" type="text" autocomplete="off">
-                            <button class="mobile-header__search-button mobile-header__search-button--submit" type="submit">
+                            <input class="mobile-header__search-input" name="search" placeholder="Search in Shop"
+                                aria-label="Site search" type="text" autocomplete="off">
+                            <button class="mobile-header__search-button mobile-header__search-button--submit"
+                                type="submit">
                                 <svg width="20px" height="20px">
                                     <use xlink:href="/frontend/images/sprite.svg#search-20"></use>
                                 </svg>
                             </button>
-                            <button class="mobile-header__search-button mobile-header__search-button--close" type="button">
+                            <button class="mobile-header__search-button mobile-header__search-button--close"
+                                type="button">
                                 <svg width="20px" height="20px">
                                     <use xlink:href="/frontend/images/sprite.svg#cross-20"></use>
                                 </svg>
@@ -57,8 +61,11 @@
                         <div class="indicator indicator--mobile">
                             <a href="/login">
                                 <span class="indicator__area">
-                                    <i class="fas fa-sign-in-alt mobile_header_icon"></i>
-                                    {{-- <i class="fas fa-user-circle mobile_header_icon"></i> --}}
+                                    @auth
+                                        <i class="fas fa-user-circle mobile_header_icon"></i>
+                                    @else
+                                        <i class="fas fa-sign-in-alt mobile_header_icon"></i>
+                                    @endauth
                                 </span>
                             </a>
                         </div>

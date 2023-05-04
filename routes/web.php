@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
@@ -23,19 +25,19 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login2', function () {
+Route::get('/login', function () {
     return view('pages.login');
 });
 
-Route::get('/register2', function () {
+Route::get('/register', function () {
     return view('pages.register');
 });
 
-Route::controller(ProductController::class)->group(function () {
-    Route::get('/products', 'index');
-    //single product
-    Route::get('/products/{product}', 'show');
-});
+// Route::controller(ProductController::class)->group(function () {
+//     Route::get('/allProducts', 'index');
+//     //single product
+//     Route::get('/products/{product}', 'show');
+// });
 
 Route::get('/contactUs', function () {
     return view('pages.contactUs');
@@ -45,8 +47,8 @@ Route::get('/aboutUs', function () {
     return view('pages.aboutUs');
 });
 
-Route::get('/product', function () {
-    return view('product');
+Route::get('/allProducts', function () {
+    return view('products');
 });
 
 Route::get('/faq', function () {
@@ -82,16 +84,27 @@ Route::get('/category/subCategory/create/{name}', [CategoryController::class, 'c
 Route::resource('admin', AdminController::class);
 
 // Products
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)->middleware('auth');
 Route::get('/get-subCategoires/{id}',[ProductController::class, 'getSubCategories']);
 
-//Product Image
-Route::resource('productImage', ProductImageController::class);
+// Product Image
+Route::resource('productImage', ProductImageController::class)->middleware('auth');
 // Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
 
 // Categories
-Route::resource('subCategory', SubCategoryController::class);
-Route::resource('category', CategoryController::class);
+Route::resource('subCategory', SubCategoryController::class)->middleware('auth');
+Route::resource('category', CategoryController::class)->middleware('auth');
+
+// Payments
+Route::resource('paymentMethod', PaymentMethodController::class)->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

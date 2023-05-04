@@ -32,9 +32,12 @@
                 <li class="nav-item {{ request()->is('product') ? 'menu-is-opening menu-open' : 
                                         ( request()->is('product/create') ? 'menu-is-opening menu-open' : 
                                         ( request()->is('category') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('category/create') ? 'menu-is-opening menu-open' : ''))) }}">
+                                        ( request()->is('category/create') ? 'menu-is-opening menu-open' : 
+                                        ( request()->is('paymentMethod') ? 'menu-is-opening menu-open' : 
+                                        ( request()->is('paymentMethod/create') ? 'menu-is-opening menu-open' : ''))))) }}">
                     <a href="#" class="nav-link {{ request()->is('product') ? 'active' : 
-                                                    ( request()->is('category') ? 'active' : '' ) }}">
+                                                    ( request()->is('category') ? 'active' : 
+                                                        ( request()->is('paymentMethod') ? 'active' : '' ) ) }}">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Catalog
@@ -52,6 +55,12 @@
                             <a href="{{url('category')}}" class="nav-link {{ request()->is('category') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('paymentMethod')}}" class="nav-link {{ request()->is('paymentMethod') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Payment Method List</p>
                             </a>
                         </li>
                     </ul>
