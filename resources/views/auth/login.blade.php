@@ -4,7 +4,7 @@
     <div class="block">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-8 d-flex my-3">
+                <div class="col-md-8 col-12 d-flex my-3">
                     <div class="card flex-grow-1 mb-md-0">
                         <div class="card-body">
                             <h3 class="card-title">Login</h3>
@@ -50,7 +50,7 @@
                                                 name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <span class="input-check__box"></span>
                                             <svg class="input-check__icon" width="9px" height="7px">
-                                                <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                                {{-- <use xlink:href="images/sprite.svg#check-9x7"></use> --}}
                                             </svg>
                                         </span>
                                         <label class="form-check-label" for="remember">

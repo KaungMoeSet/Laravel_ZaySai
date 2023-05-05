@@ -8,10 +8,10 @@
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url('/frontend/images/slides/slide-1-full.jpg')"></div>
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url('/frontend/images/slides/slide-1-mobile.jpg')"></div>
                             <div class="block-slideshow__slide-content">
-                                <div class="block-slideshow__slide-title">Big choice of<br>Plumbing products
+                                <div class="block-slideshow__slide-title">Big choice of Plumbing products
                                 </div>
                                 <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis
+                                    consectetur adipiscing elit. Etiam pharetra laoreet dui quis
                                     molestie.</div>
                                 <div class="block-slideshow__slide-button"><span class="btn btn-primary btn-lg">Shop Now</span></div>
                             </div>
@@ -19,10 +19,10 @@
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url('/frontend/images/slides/slide-2-full.jpg')"></div>
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url('/frontend/images/slides/slide-2-mobile.jpg')"></div>
                             <div class="block-slideshow__slide-content">
-                                <div class="block-slideshow__slide-title">Screwdrivers<br>Professional Tools
+                                <div class="block-slideshow__slide-title">Screwdrivers Professional Tools
                                 </div>
                                 <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis
+                                    consectetur adipiscing elit. Etiam pharetra laoreet dui quis
                                     molestie.</div>
                                 <div class="block-slideshow__slide-button"><span class="btn btn-primary btn-lg">Shop Now</span></div>
                             </div>
@@ -30,9 +30,9 @@
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url('/frontend/images/slides/slide-3-full.jpg')"></div>
                             <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url('/frontend/images/slides/slide-3-mobile.jpg')"></div>
                             <div class="block-slideshow__slide-content">
-                                <div class="block-slideshow__slide-title">One more<br>Unique header</div>
+                                <div class="block-slideshow__slide-title">One more Unique header</div>
                                 <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis
+                                    consectetur adipiscing elit. Etiam pharetra laoreet dui quis
                                     molestie.</div>
                                 <div class="block-slideshow__slide-button"><span class="btn btn-primary btn-lg">Shop Now</span></div>
                             </div>

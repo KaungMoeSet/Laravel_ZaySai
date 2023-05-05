@@ -67,13 +67,12 @@ class DeliveryFeeSeeder extends Seeder
                         'start_date' => now(),
                     ]);
                 }
-            } else {
-                DB::table('delivery_fees')->insert([
-                    'city_id' => $city->id,
-                    'fee' => $defaultFee,
-                    'start_date' => now(),
-                ]);
-            }
+            } 
         }
+
+        // DB::table('delivery_fees')->insert([
+        //     'fee' => $defaultFee,
+        //     'start_date' => now(),
+        // ]);
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +12,6 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('admin.dashboard');
     }
 
     /**
@@ -23,7 +20,6 @@ class AdminController extends Controller
     public function create()
     {
         //
-        return view('admin.createAdminAcc');
     }
 
     /**
@@ -32,19 +28,6 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $admin = Admin::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return redirect('/home');
     }
 
     /**

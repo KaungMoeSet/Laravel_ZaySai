@@ -59,15 +59,34 @@
                             </a>
                         </div>
                         <div class="indicator indicator--mobile">
-                            <a href="/login">
-                                <span class="indicator__area">
-                                    @auth
+                            @auth
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                                </a>
+        
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile">
+                                        My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+        
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @else
+                                <a href="/login">
+                                    <span class="indicator__area">
                                         <i class="fas fa-user-circle mobile_header_icon"></i>
-                                    @else
-                                        <i class="fas fa-sign-in-alt mobile_header_icon"></i>
-                                    @endauth
-                                </span>
-                            </a>
+                                    </span>
+                                </a>
+                            @endauth
                         </div>
                     </div>
                 </div>

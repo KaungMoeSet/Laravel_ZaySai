@@ -10936,5 +10936,13 @@ screen and (-ms-high-contrast:active) {
 }
 
 a{
-    text-decoration: none !important;
+    font-weight: bold;
+    color: #3D464D;
+    text-decoration: none;
+}
+
+
+.profile-list,
+.profile-list li {
+    list-style: none;
 }

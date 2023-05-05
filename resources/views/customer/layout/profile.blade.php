@@ -7,7 +7,7 @@
             <div class="block col-4">
                 <div class="page-header">
                     <div class="page-header__container container">
-                        <div class="page-header__title">
+                        <div class="page-header__title col-12">
                             <h4>Hello, Kaung Moe Set</h4>
                         </div>
                     </div>
@@ -18,7 +18,7 @@
 
                             <!-- sidebar menu start -->
                             <nav class="ttr-sidebar-navi">
-                                <ul>
+                                <ul class="profile-list">
                                     <li>
                                         <a href="#" class="ttr-material-button">
                                             <span class="ttr-label">Manage My Account</span>
@@ -73,13 +73,7 @@
 
             </div>
             <div class="block col-7">
-                <div class="page-header">
-                    <div class="page-header__container container">
-                        <div class="page-header__title">
-                            <h4>My Profile</h4>
-                        </div>
-                    </div>
-                </div>
+                @yield('content1')
             </div>
         </div>
 

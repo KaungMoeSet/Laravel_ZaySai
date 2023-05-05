@@ -2,10 +2,37 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
+
+    protected $guard = 'admin';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    // public function validateCredentials(UserContract $user, array $credentials)
+    // {
+    //     $plain = $credentials['password'];
+
+    //     return $this->hasher->check($plain, $user->getAuthPassword());
+    // }
+
 }

@@ -32,7 +32,8 @@
                         </span>
                     </a> --}}
                     <li class="nav-item dropdown" style="list-style: none">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
                             {{ Auth::user()->name }}
                         </a>
@@ -42,7 +43,7 @@
                                 My Profile
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
@@ -76,8 +77,7 @@
                                 <div class="departments__body">
                                     <div class="departments__links-wrapper">
                                         <ul class="departments__links">
-                                            <li class="departments__item"><a href="#">Power
-                                                    Machinery</a></li>
+                                            <li class="departments__item"><a href="#">Power Machinery</a></li>
                                             <li class="departments__item"><a href="#">Measurement</a>
                                             </li>
                                             <li class="departments__item"><a href="#">Clothes & PPE</a>
@@ -88,6 +88,50 @@
                                             </li>
                                             <li class="departments__item"><a href="#">Welding &
                                                     Soldering</a>
+                                            </li>
+                                            <li class="departments__item">
+                                                <a href="#"> Building Supplies
+                                                    <svg class="departments__link-arrow" width="6px" height="9px">
+                                                        <use
+                                                            xlink:href="/frontend/images/sprite.svg#arrow-rounded-right-6x9">
+                                                        </use>
+                                                    </svg>
+                                                </a>
+                                                <div class="departments__megamenu departments__megamenu--sm">
+                                                    <!-- .megamenu -->
+                                                    <div class="megamenu megamenu--departments">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <ul class="megamenu__links megamenu__links--level--0">
+                                                                    <li
+                                                                        class="megamenu__item megamenu__item--with-submenu">
+                                                                        <ul
+                                                                            class="megamenu__links megamenu__links--level--1">
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Screwdrivers</a>
+                                                                            </li>
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Handsaws</a>
+                                                                            </li>
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Knives</a>
+                                                                            </li>
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Axes</a>
+                                                                            </li>
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Multitools</a>
+                                                                            </li>
+                                                                            <li class="megamenu__item">
+                                                                                <a href="#">Paint Tools</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .megamenu / end -->
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>

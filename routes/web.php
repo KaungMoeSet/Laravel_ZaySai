@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HeroCarouselController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\HeroCarousel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -71,41 +73,62 @@ Route::get('/trackOrder', function () {
     return view('pages.trackOrder');
 });
 
-Route::get('/profile', function() {
-    return view('customer.profile');
+Route::get('/profile', function () {
+    return view('customer.myProfile');
 });
 
 Route::get('/category/create/{name}', [CategoryController::class, 'create']);
 
 Route::get('/category/subCategory/create/{name}', [CategoryController::class, 'create']);
 
-
-// Admin
-Route::resource('admin', AdminController::class);
-
-// Products
-Route::resource('product', ProductController::class)->middleware('auth');
-Route::get('/get-subCategoires/{id}',[ProductController::class, 'getSubCategories']);
-
-// Product Image
-Route::resource('productImage', ProductImageController::class)->middleware('auth');
-// Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
-
-// Categories
-Route::resource('subCategory', SubCategoryController::class)->middleware('auth');
-Route::resource('category', CategoryController::class)->middleware('auth');
-
-// Payments
-Route::resource('paymentMethod', PaymentMethodController::class)->middleware('auth');
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register.submit');
+});
 
-Auth::routes();
+Route::middleware(['auth.user'])->group(function () {
+    // User routes here
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);
+
+// Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
+
+    // Admin
+    Route::resource('admin', AdminController::class);
+
+    // Products
+    Route::resource('product', ProductController::class);
+    Route::get('/get-subCategoires/{id}', [ProductController::class, 'getSubCategories']);
+
+    // Product Image
+    Route::resource('productImage', ProductImageController::class);
+    // Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
+
+    // Categories
+    Route::resource('subCategory', SubCategoryController::class);
+    Route::resource('category', CategoryController::class);
+
+    // Payments
+    Route::resource('paymentMethod', PaymentMethodController::class);
+
+    // Hero Carousel
+    Route::resource('heroCarousel', HeroCarouselController::class);
+// });
+
+Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
+    Route::view('/login', 'auth.login', ['url' => 'admin']);
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/create', 'Admin\AdminController@create')->name('admin.create');
+    Route::post('/admin', 'Admin\AdminController@store')->name('admin.store');
+});

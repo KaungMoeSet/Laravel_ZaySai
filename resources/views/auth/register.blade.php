@@ -4,7 +4,7 @@
     <div class="block">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-8 d-flex my-3">
+                <div class="col-md-8 col-12 d-flex my-3">
                     <div class="card flex-grow-1 mb-0">
                         <div class="card-body">
                             <h3 class="card-title">Register</h3>

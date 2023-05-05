@@ -9,9 +9,31 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel d-flex">
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <li class="nav-item dropdown" style="list-style: none">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                        {{-- {{ auth('admin')->user()->name }} --}}
+                    </a>
+
+
+                    <div class="dropdown-menu dropdown-menu-end z-2" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile">
+                            My Profile
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
             </div>
         </div>
 
@@ -22,22 +44,39 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{url('admin')}}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                    <a href="{{ url('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('product') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('product/create') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('category') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('category/create') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('paymentMethod') ? 'menu-is-opening menu-open' : 
-                                        ( request()->is('paymentMethod/create') ? 'menu-is-opening menu-open' : ''))))) }}">
-                    <a href="#" class="nav-link {{ request()->is('product') ? 'active' : 
-                                                    ( request()->is('category') ? 'active' : 
-                                                        ( request()->is('paymentMethod') ? 'active' : '' ) ) }}">
+                <li
+                    class="nav-item {{ request()->is('product')
+                        ? 'menu-is-opening menu-open'
+                        : (request()->is('product/create')
+                            ? 'menu-is-opening menu-open'
+                            : (request()->is('category')
+                                ? 'menu-is-opening menu-open'
+                                : (request()->is('category/create')
+                                    ? 'menu-is-opening menu-open'
+                                    : (request()->is('paymentMethod')
+                                        ? 'menu-is-opening menu-open'
+                                        : (request()->is('paymentMethod/create')
+                                            ? 'menu-is-opening menu-open'
+                                            : (request()->is('heroCarousel')
+                                                ? 'menu-is-opening menu-open'
+                                                : (request()->is('heroCarousel/create')
+                                                    ? 'menu-is-opening menu-open'
+                                                    : ''))))))) }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('product')
+                            ? 'active'
+                            : (request()->is('category')
+                                ? 'active'
+                                : (request()->is('paymentMethod')
+                                    ? 'active'
+                                    : '')) }}">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Catalog
@@ -46,21 +85,31 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{url('product')}}" class="nav-link {{ request()->is('product') ? 'active' : '' }}">
+                            <a href="{{ url('product') }}"
+                                class="nav-link {{ request()->is('product') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('category')}}" class="nav-link {{ request()->is('category') ? 'active' : '' }}">
+                            <a href="{{ url('category') }}"
+                                class="nav-link {{ request()->is('category') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('paymentMethod')}}" class="nav-link {{ request()->is('paymentMethod') ? 'active' : '' }}">
+                            <a href="{{ url('paymentMethod') }}"
+                                class="nav-link {{ request()->is('paymentMethod') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Payment Method List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('heroCarousel') }}"
+                                class="nav-link {{ request()->is('heroCarousel') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hero Carousel List</p>
                             </a>
                         </li>
                     </ul>
