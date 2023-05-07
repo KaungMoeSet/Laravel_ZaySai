@@ -24,7 +24,8 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form method="POST" action="{{route('subCategory.update',$subCategory->id)}}" enctype="multipart/form-data" class="">
+                <form method="POST" action="{{ route('subCategory.update', $subCategory->id) }}"
+                    enctype="multipart/form-data" class="">
                     @csrf
                     @method('PUT')
                     <!-- SELECT2 EXAMPLE -->
@@ -42,7 +43,12 @@
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input type="text" name="category_name" class="form-control"
-                                                    value="{{ $subCategory['name']}}" >
+                                                    value="{{ $subCategory['name'] }}">
+                                                <span class="help-inline">
+                                                    @error('category_name')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -55,6 +61,11 @@
                                                                 <textarea id="summernote" name="description">
                                                                     {{ $subCategory['description'] }}
                                                                 </textarea>
+                                                                <span class="help-inline">
+                                                                    @error('description')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,14 +91,20 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="my-select">My Select</label>
-                                                    <select id="my-select" name="insert_option" class="form-control">
-                                                        <option value="">None</option>
-                                                        @foreach ($categories as $category)
-                                                            <option value="{{ $category['id'] }}" {{ $subCategory->category_id == $category->id ? 'selected': '' }}>
-                                                                {{$category->name}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                <select id="my-select" name="insert_option" class="form-control">
+                                                    <option value="">None</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category['id'] }}"
+                                                            {{ $subCategory->category_id == $category->id ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="help-inline">
+                                                    @error('insert_option')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +117,7 @@
 
                         <div class="col-12 container ">
                             <div class="row justify-content-end">
-                                <a href="{{ url('subCategory')}}" class="btn btn-secondary col-1 mx-2">Cancel</a>
+                                <a href="{{ url('subCategory') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
 
                                 <input type="submit" value="Update" class="btn btn-warning col-1 mx-2">
                             </div>

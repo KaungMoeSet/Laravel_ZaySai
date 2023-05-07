@@ -42,6 +42,11 @@
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input type="text" name="category_name" class="form-control" value="{{ old('category_name')}}">
+                                                <span class="help-inline">
+                                                    @error('category_name')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -54,6 +59,11 @@
                                                                 <textarea id="summernote" name="description" value="{{ old('description')}}">
                                                             Write description here
                                                                 </textarea>
+                                                                <span class="help-inline">
+                                                                    @error('description')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,6 +96,11 @@
                                                             {{ $category['name'] }}</option>
                                                     @endforeach
                                                 </select>
+                                                <span class="help-inline">
+                                                    @error('insert_option')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -94,8 +109,6 @@
                                 <!-- /.card-body -->
                             </div>
                         </div>
-
-
                         <div class="col-12 container ">
                             <div class="row justify-content-end">
                                 <a href="{{ url('admin') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>

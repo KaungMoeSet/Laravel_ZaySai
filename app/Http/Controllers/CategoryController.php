@@ -38,6 +38,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'category_name' => 'required',
+            'description'   => 'required'
+        ]);
+
         $insertOption = $request->input('insert_option');
         // dd($insertOption);
 
@@ -58,7 +63,7 @@ class CategoryController extends Controller
         // return view('admin.newCategory')->with([
         //     'message'=>'Data added successfully!',
         //     "categories"=>Category::all() ]);
-        return redirect()->route('category.index')->with('success_message', $request->input('category_name').' is added successfully!');
+        return redirect()->route('category.index')->with('success_message', $request->input('category_name') . ' is added successfully!');
     }
 
     /**
@@ -85,6 +90,11 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'category_name' => 'required',
+            'description'   => 'required'
+        ]);
+
         $category              = Category::find($id);
         $category->name        = $request->input('category_name');
         $category->description = $request->input('description');
@@ -102,6 +112,6 @@ class CategoryController extends Controller
         $category = Category::find($id)->name;
         Category::find($id)->delete();
 
-        return redirect()->back()->with('success_message', $category.' is deleted successfully!');
+        return redirect()->back()->with('success_message', $category . ' is deleted successfully!');
     }
 }

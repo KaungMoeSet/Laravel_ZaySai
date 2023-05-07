@@ -110,6 +110,16 @@ class ProductController extends Controller
     {
         //
         // dd($request);
+        $request->validate([
+            'product_name'          => 'required',
+            'product_description'   => 'required',
+            'product_buying_price'  => 'required|numeric|min:0',
+            'product_selling_price' => 'required|numeric|min:0',
+            'main_category'         => 'required',
+            'sub_category'          => 'required',
+            'product_quantity'      => 'required',
+        ]);
+
         $product = Product::find($id);
         $product->name            = $request->input('product_name');
         $product->sub_category_id = $request->input('sub_category');

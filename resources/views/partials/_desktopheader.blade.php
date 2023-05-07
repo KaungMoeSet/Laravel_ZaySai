@@ -20,11 +20,14 @@
                 </div>
             </div>
             <div class="d-flex">
-                <a href="/cart" class="indicator__button"><span class="indicator__area">
-                        <i class="fa-solid fa-cart-shopping px-2"><span
-                                class="indicator__value rounded-pill">3</span></i>
+                @auth
+                    <a href="/cart" class="indicator__button">
+                        <span class="indicator__area">
+                            <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">0
+                                </span></i>
+                    </a>
+                @endauth
 
-                </a>
                 @auth
                     {{-- <a href="">
                         <span class="indicator__area">
@@ -77,61 +80,38 @@
                                 <div class="departments__body">
                                     <div class="departments__links-wrapper">
                                         <ul class="departments__links">
-                                            <li class="departments__item"><a href="#">Power Machinery</a></li>
-                                            <li class="departments__item"><a href="#">Measurement</a>
-                                            </li>
-                                            <li class="departments__item"><a href="#">Clothes & PPE</a>
-                                            </li>
-                                            <li class="departments__item"><a href="#">Plumbing</a></li>
-                                            <li class="departments__item"><a href="#">Storage &
-                                                    Organization</a>
-                                            </li>
-                                            <li class="departments__item"><a href="#">Welding &
-                                                    Soldering</a>
-                                            </li>
+                                            {{-- <li class="departments__item"><a href="#">Power Machinery</a></li> --}}
                                             <li class="departments__item">
-                                                <a href="#"> Building Supplies
-                                                    <svg class="departments__link-arrow" width="6px" height="9px">
-                                                        <use
-                                                            xlink:href="/frontend/images/sprite.svg#arrow-rounded-right-6x9">
-                                                        </use>
-                                                    </svg>
-                                                </a>
-                                                <div class="departments__megamenu departments__megamenu--sm">
-                                                    <!-- .megamenu -->
-                                                    <div class="megamenu megamenu--departments">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <ul class="megamenu__links megamenu__links--level--0">
-                                                                    <li
-                                                                        class="megamenu__item megamenu__item--with-submenu">
-                                                                        <ul
-                                                                            class="megamenu__links megamenu__links--level--1">
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Screwdrivers</a>
-                                                                            </li>
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Handsaws</a>
-                                                                            </li>
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Knives</a>
-                                                                            </li>
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Axes</a>
-                                                                            </li>
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Multitools</a>
-                                                                            </li>
-                                                                            <li class="megamenu__item">
-                                                                                <a href="#">Paint Tools</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
+                                                @foreach ($categories as $category)
+                                                    <a href="#"> {{ $category->name }}
+                                                        <svg class="departments__link-arrow" width="6px"
+                                                            height="9px">
+                                                            <use
+                                                                xlink:href="/frontend/images/sprite.svg#arrow-rounded-right-6x9">
+                                                            </use>
+                                                        </svg>
+                                                    </a>
+                                                    <div class="departments__megamenu departments__megamenu--sm">
+                                                        <!-- .megamenu -->
+                                                        <div class="megamenu megamenu--departments">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <ul class="megamenu__links megamenu__links--level--0">
+                                                                        <li class="megamenu__item megamenu__item--with-submenu">
+                                                                            <ul class="megamenu__links megamenu__links--level--1">
+                                                                                @foreach ($category->subCategories as $subCategory)
+                                                                                    <li class="megamenu__item">
+                                                                                        <a href="#">{{ $subCategory->name }}</a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- .megamenu / end -->
-                                                </div>
+                                                        </div><!-- .megamenu / end -->
+                                                    </div>
+                                                @endforeach
                                             </li>
                                         </ul>
                                     </div>

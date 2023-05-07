@@ -58,18 +58,6 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>link</label>
-                                                <input type="text" class="form-control select2" name="link"
-                                                    value="{{ old('link') }}">
-                                                <span class="help-inline">
-                                                    @error('link')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
                                                 <label>Hero Carousel Image</label>
                                                 <input name="photo" type="file" class="form-control-file"
                                                     value="{{ old('photo') }}">
@@ -91,7 +79,7 @@
 
                         <div class="col-md-8 col-12">
                             <div class="row justify-content-end">
-                                <a href="{{ url('paymentMethod') }}" class="btn btn-secondary col-2 mx-2 px-2">Cancel</a>
+                                <a href="{{ url('heroCarousel') }}" class="btn btn-secondary col-2 mx-2 px-2">Cancel</a>
 
                                 <input type="submit" onclick="saveSuccess()" value="Save"
                                     class="btn btn-warning col-2 mx-2">

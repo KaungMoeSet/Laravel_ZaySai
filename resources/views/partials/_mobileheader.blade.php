@@ -64,7 +64,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
                                 </a>
-        
+
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/profile">
                                         My Profile
@@ -74,7 +74,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-        
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -83,7 +83,7 @@
                             @else
                                 <a href="/login">
                                     <span class="indicator__area">
-                                        <i class="fas fa-user-circle mobile_header_icon"></i>
+                                        <i class="fa-solid fa-right-to-bracket mobile_header_icon"></i>
                                     </span>
                                 </a>
                             @endauth

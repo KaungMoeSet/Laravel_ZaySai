@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        $categories = Category::all();
+        //
+        $cart = $request->session()->get('cart');
 
-        return view('index', compact('products', 'categories'));
+        return view('cart.index', compact('cart'));
     }
 
     /**
@@ -41,9 +41,6 @@ class HomeController extends Controller
     public function show(string $id)
     {
         //
-        $product = Product::find($id);
-
-        return view('product', compact('product'));
     }
 
     /**
@@ -70,11 +67,21 @@ class HomeController extends Controller
         //
     }
 
-    public function allProducts()
+    public function addToCart(Request $request)
     {
-        $products = Product::all();
-        $categories = Category::all();
+        $productId = $request->input('product_id');
+        $product = Product::find($productId);
 
-        return view('products', compact('products','categories'));
+        if (!$product) {
+            abort(404);
+        }
+
+        $cart = new Cart();
+        $cart->add($product);
+        
+        // Save the cart in the session
+        $request->session()->put('cart', $cart);
+
+        return redirect()->route('cart.index');
     }
 }

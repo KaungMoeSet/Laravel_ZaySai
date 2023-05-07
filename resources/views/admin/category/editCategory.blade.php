@@ -24,7 +24,8 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form method="POST" action="{{route('category.update',$category->id)}}" enctype="multipart/form-data" class="">
+                <form method="POST" action="{{ route('category.update', $category->id) }}" enctype="multipart/form-data"
+                    class="">
                     @csrf
                     @method('PUT')
                     <!-- SELECT2 EXAMPLE -->
@@ -42,7 +43,12 @@
                                             <div class="form-group">
                                                 <label>Name</label>
                                                 <input type="text" name="category_name" class="form-control"
-                                                    value="{{ $category['name']}}" >
+                                                    value="{{ $category->name }}">
+                                                <span class="help-inline">
+                                                    @error('category_name')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -53,8 +59,13 @@
                                                         <div class="card card-outline card-info">
                                                             <div class="card-body">
                                                                 <textarea id="summernote" name="description">
-                                                                    {{ $category['description'] }}
+                                                                    {{ $category->description }}
                                                                 </textarea>
+                                                                <span class="help-inline">
+                                                                    @error('description')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,10 +91,10 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="my-select">My Select</label>
-                                                    <select name="my-select" name="insert_option" class="form-control">
-                                                        <option value="" selected disabled>This is main Category
-                                                        </option>
-                                                    </select>
+                                                <select name="my-select" name="insert_option" class="form-control">
+                                                    <option value="" selected disabled>This is main Category
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +107,7 @@
 
                         <div class="col-12 container ">
                             <div class="row justify-content-end">
-                                <a href="{{ url('category')}}" class="btn btn-secondary col-1 mx-2">Cancel</a>
+                                <a href="{{ url('category') }}" class="btn btn-secondary col-1 mx-2">Cancel</a>
 
                                 <input type="submit" value="Update" class="btn btn-warning col-1 mx-2">
                             </div>

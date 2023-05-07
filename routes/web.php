@@ -3,11 +3,13 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HeroCarouselController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Models\HeroCarousel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::resource('/', HomeController::class);
 
 Route::get('/login', function () {
     return view('pages.login');
@@ -49,8 +49,10 @@ Route::get('/aboutUs', function () {
     return view('pages.aboutUs');
 });
 
-Route::get('/allProducts', function () {
-    return view('products');
+Route::get('/allProducts', [HomeController::class, 'allProducts']);
+Route::resource('home', HomeController::class);
+Route::get('/oneProduct', function() {
+    return view('product');
 });
 
 Route::get('/faq', function () {
@@ -83,7 +85,7 @@ Route::get('/category/subCategory/create/{name}', [CategoryController::class, 'c
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
@@ -95,32 +97,35 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth.user'])->group(function () {
     // User routes here
+    // Route::resource('cart', CartController::class);
 });
 
 Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);
 
 // Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
 
-    // Admin
-    Route::resource('admin', AdminController::class);
+// Admin
+Route::resource('admin', AdminController::class);
 
-    // Products
-    Route::resource('product', ProductController::class);
-    Route::get('/get-subCategoires/{id}', [ProductController::class, 'getSubCategories']);
+// Products
+Route::resource('product', ProductController::class);
+Route::get('/get-subCategoires/{id}', [ProductController::class, 'getSubCategories']);
 
-    // Product Image
-    Route::resource('productImage', ProductImageController::class);
-    // Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
+// Product Image
+Route::resource('productImage', ProductImageController::class);
+// Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
 
-    // Categories
-    Route::resource('subCategory', SubCategoryController::class);
-    Route::resource('category', CategoryController::class);
+// Categories
+Route::resource('subCategory', SubCategoryController::class);
+Route::resource('category', CategoryController::class);
 
-    // Payments
-    Route::resource('paymentMethod', PaymentMethodController::class);
+// Payments
+Route::resource('paymentMethod', PaymentMethodController::class);
 
-    // Hero Carousel
-    Route::resource('heroCarousel', HeroCarouselController::class);
+// Hero Carousel
+Route::resource('heroCarousel', HeroCarouselController::class);
+
+Route::resource('user', UserController::class);
 // });
 
 Route::prefix('admin')->middleware(['guest:admin'])->group(function () {

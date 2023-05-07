@@ -1,5 +1,5 @@
 @extends('admin.layout.admin')
-@section('title', 'Hero List')
+@section('title', 'User Accounts List')
 @section('content')
     @if (session('success_message'))
         <script>
@@ -21,14 +21,9 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left inline w-100">
                             <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Hero Carousel</li>
+                            <li class="breadcrumb-item active">User Accounts</li>
                         </ol>
-                        <h1>Hero Carousel</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right ">
-                            <a href="{{ url('heroCarousel/create') }}" class="btn btn-primary">New Hero</a>
-                        </ol>
+                        <h1>User Accounts</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -47,35 +42,25 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Account Name</th>
+                                            <th>email</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1; ?>
-                                        @foreach ($heroes as $hero)
+                                        @foreach ($users as $user)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>
-                                                    <img src="{{ asset('storage/img/' . $hero->image) }}"
-                                                        width="100px" height="100px">
-                                                </td>
-                                                <td>{{ $hero->title }}</td>
-                                                <td>$ {{ $hero->description }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td> {{ $user->email }} </td>
                                                 <td class="d-flex justify-content-end ">
-                                                    <a href="{{ url('heroCarousel/' . $hero->id . '/edit') }}">
-                                                        <button type="submit" class="btn btn-warning px-2 mx-2 edit_btn">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </a>
-
-                                                    <form action="{{ url('heroCarousel/' . $hero->id) }}"
-                                                        id="delete-form{{ $hero->id }}" method="POST">
+                                                    <form action="{{ url('user/' . $user->id) }}"
+                                                        id="delete-form{{ $user->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" onclick="confirmDelete({{ $hero->id }})"
+                                                        <button type="button"
+                                                            onclick="confirmDelete({{ $user->id }})"
                                                             class="btn btn-danger px-2">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>

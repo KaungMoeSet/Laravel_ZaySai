@@ -59,6 +59,12 @@ class SubCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'category_name' => 'required',
+            'description'   => 'required',
+            'insert_option' => 'required'
+        ]);
+
         $subCategory              = SubCategory::find($id);
         $subCategory->name        = $request->input('category_name');
         $subCategory->description = $request->input('description');

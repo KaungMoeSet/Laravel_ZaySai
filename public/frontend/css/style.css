@@ -2190,7 +2190,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 .product-card__name {
-    font-size: 15px;
+    font-size: 20px;
     line-height: 19px;
     -ms-flex-positive: 1;
     flex-grow: 1

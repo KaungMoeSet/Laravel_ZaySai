@@ -9,31 +9,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel d-flex">
+        <div class="user-panel d-flex justify-content-center">
             <div class="info">
-                <li class="nav-item dropdown" style="list-style: none">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
-                        {{-- {{ auth('admin')->user()->name }} --}}
-                    </a>
-
-
-                    <div class="dropdown-menu dropdown-menu-end z-2" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/profile">
-                            My Profile
-                        </a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
+                <a href="/admin">
+                    <h2 class="website_name">ZaySai <i class="fas fa-store"></i></h2>
+                    </li>
             </div>
         </div>
 
@@ -110,6 +90,37 @@
                                 class="nav-link {{ request()->is('heroCarousel') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hero Carousel List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ request()->is('user')
+                        ? 'menu-is-opening menu-open'
+                        : (request()->is('admin')
+                            ? 'menu-is-opening menu-open'
+                            : '') }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('user') ? 'active' : (request()->is('admin') ? 'menu-is-opening menu-open' : '') }}">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Account
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('user') }}"
+                                class="nav-link {{ request()->is('user') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User Account List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('adminAcc') }}"
+                                class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Admin Account List</p>
                             </a>
                         </li>
                     </ul>

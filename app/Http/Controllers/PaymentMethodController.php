@@ -34,11 +34,18 @@ class PaymentMethodController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'acc_name'  => 'required',
+            'acc_no'    => 'required',
+            'acc_type'  => 'required',
+            'bank_name' => 'required'
+        ]);
+
         $paymentMethod = new PaymentMethod();
-        $paymentMethod->acc_name = $request->input("acc_name");
-        $paymentMethod->acc_number = $request->input("acc_no");
-        $paymentMethod->acc_type = $request->input("acc_type");
-        $paymentMethod->bank_name = $request->input("bank_name");
+        $paymentMethod->acc_name = $request->input('acc_name');
+        $paymentMethod->acc_number = $request->input('acc_no');
+        $paymentMethod->acc_type = $request->input('acc_type');
+        $paymentMethod->bank_name = $request->input('bank_name');
 
         $paymentMethod->save();
         return redirect()->route('paymentMethod.index')->with('success_message', $request->input('acc_name') . ' is added successfully!');
@@ -69,6 +76,13 @@ class PaymentMethodController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'acc_name'  => 'required',
+            'acc_no'    => 'required',
+            'acc_type'  => 'required',
+            'bank_name' => 'required'
+        ]);
+        
         $paymentMethod = PaymentMethod::find($id);
         $paymentMethod->acc_name = $request->input("acc_name");
         $paymentMethod->acc_number = $request->input("acc_no");
