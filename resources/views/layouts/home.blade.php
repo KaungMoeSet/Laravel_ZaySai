@@ -45,6 +45,8 @@
     <!-- font - stroyka -->
     <link rel="stylesheet" href="{{asset('/frontend/fonts/stroyka/stroyka.css')}}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97489509-6"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 

@@ -17,9 +17,8 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        $product_images = ProductImage::all();
 
-        return view('admin.product.productsList', compact('products', 'product_images'));
+        return view('admin.product.productsList', compact('products'));
     }
 
     /**

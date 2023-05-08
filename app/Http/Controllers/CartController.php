@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -14,9 +15,25 @@ class CartController extends Controller
     public function index(Request $request)
     {
         //
-        $cart = $request->session()->get('cart');
+        $cart = $request->session()->get('cart', []);
 
-        return view('cart.index', compact('cart'));
+        if (empty($cart)) {
+            // return redirect()->route('products.index')->with('status', 'No items in your cart!!');
+        }
+
+        $cart_data = [];
+
+        foreach ($cart as $id => $item) {
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                $product->quantity = $item['quantity'];
+                $cart_data[]       = $product;
+            }
+        }
+
+        $categories = Category::all();
+
+        return view('customer.cart', compact('cart_data', 'categories'));
     }
 
     /**
@@ -54,10 +71,28 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, int $quantity)
     {
-        //
+        $cart = $request->session()->get('cart', []);
+
+        if ($quantity <= 0) {
+            unset($cart[$id]);
+        } else {
+            $product = Product::find($id);
+            if ($product) {
+                $cart[$id] = [
+                    'product_id' => $product->id,
+                    'quantity'   => $quantity,
+                ];
+            }
+        }
+
+        $request->session()->put('cart', $cart);
+
+        return redirect()->route('cart.index');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -67,21 +102,35 @@ class CartController extends Controller
         //
     }
 
-    public function addToCart(Request $request)
+    public function add(Request $request, string $id)
     {
-        $productId = $request->input('product_id');
-        $product = Product::find($productId);
+        $quantity = $request->input('quantity', 1);
 
-        if (!$product) {
+        $this->addToCart($id, $quantity);
+
+        return redirect()->back();
+    }
+
+    public function addToCart(string $id, int $quantity = 1)
+    {
+        $cart = Session::get('cart', []);
+
+        $product = Product::find($id);
+
+        if ($product) {
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+            } else {
+                $cart[$id] = [
+                    'product_id' => $id,
+                    'quantity'   => $quantity,
+                ];
+            }
+
+            Session::put('cart', $cart);
+        } else {
+            // Handle the case where the product is not found
             abort(404);
         }
-
-        $cart = new Cart();
-        $cart->add($product);
-        
-        // Save the cart in the session
-        $request->session()->put('cart', $cart);
-
-        return redirect()->route('cart.index');
     }
 }

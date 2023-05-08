@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products   = Product::all();
         $categories = Category::all();
 
         return view('index', compact('products', 'categories'));
@@ -42,8 +42,10 @@ class HomeController extends Controller
     {
         //
         $product = Product::find($id);
+        $categories = Category::all();
+        $quantity = 1;
 
-        return view('product', compact('product'));
+        return view('product', compact('product', 'categories', 'quantity'));
     }
 
     /**
@@ -72,9 +74,23 @@ class HomeController extends Controller
 
     public function allProducts()
     {
-        $products = Product::all();
+        $products   = Product::all();
         $categories = Category::all();
 
-        return view('products', compact('products','categories'));
+        return view('products', compact('products', 'categories'));
+    }
+
+    public function showAboutUsPage()
+    {
+        $categories = Category::all();
+
+        return view('pages.aboutUs', compact('categories'));
+    }
+
+    public function showContactUsPage()
+    {
+        $categories = Category::all();
+
+        return view('pages.contactUs', compact('categories'));
     }
 }

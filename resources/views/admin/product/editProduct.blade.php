@@ -183,8 +183,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($images as $product_image)
-                                                            @if ($product->id == $product_image->product_id)
+                                                        @foreach ($product->images as $product_image)
                                                                 <tr class="list-item">
                                                                     <td>
                                                                         <div>
@@ -204,7 +203,6 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                            @endif
                                                         @endforeach
 
                                                     </tbody>

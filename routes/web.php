@@ -1,18 +1,21 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HeroCarouselController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PaymentMethodController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductImageController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\UserController;
 use App\Models\HeroCarousel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\HeroCarouselController;
+use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,13 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/', HomeController::class);
 
-Route::get('/login', function () {
-    return view('pages.login');
-});
-
-Route::get('/register', function () {
-    return view('pages.register');
-});
+Route::get('/login', [LoginController::class, 'showLoginForm']);
 
 // Route::controller(ProductController::class)->group(function () {
 //     Route::get('/allProducts', 'index');
@@ -41,17 +38,16 @@ Route::get('/register', function () {
 //     Route::get('/products/{product}', 'show');
 // });
 
-Route::get('/contactUs', function () {
-    return view('pages.contactUs');
-});
+Route::get('/contactUs', [HomeController::class, 'showContactUsPage']);
 
-Route::get('/aboutUs', function () {
-    return view('pages.aboutUs');
-});
+Route::get('/aboutUs', [HomeController::class, 'showAboutUsPage']);
 
 Route::get('/allProducts', [HomeController::class, 'allProducts']);
-Route::resource('home', HomeController::class);
-Route::get('/oneProduct', function() {
+
+Route::resource('products', HomeController::class);
+// Route::get('/allProducts/{id}', [HomeController::class, 'show']);
+
+Route::get('/oneProduct', function () {
     return view('product');
 });
 
@@ -63,9 +59,7 @@ Route::get('/privacyPolicy', function () {
     return view('pages.privacyPolicy');
 });
 
-Route::get('/cart', function () {
-    return view('customer.cart');
-});
+
 
 Route::get('/checkout', function () {
     return view('customer.checkout');
@@ -85,19 +79,25 @@ Route::get('/category/subCategory/create/{name}', [CategoryController::class, 'c
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-    Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register.submit');
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 });
 
 Route::middleware(['auth.user'])->group(function () {
     // User routes here
-    // Route::resource('cart', CartController::class);
+    Route::resource('cart', CartController::class);
+
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.addProduct');
+
+    Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+    Route::get('cart/{id}/{quantity}', [CartController::class, 'update'])->name('cart.update');
 });
 
 Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);
@@ -130,7 +130,7 @@ Route::resource('user', UserController::class);
 
 Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
     Route::view('/login', 'auth.login', ['url' => 'admin']);
-    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
+    Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 });
 
 Route::middleware(['auth:admin'])->group(function () {

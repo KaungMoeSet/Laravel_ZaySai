@@ -11,62 +11,36 @@
                             <div class="product-gallery__featured">
                                 <div class="owl-carousel" id="product-image">
                                     @foreach ($product->images as $images)
-                                        {{-- <a href="" target="_blank"> --}}
                                         <img src="{{ asset('storage/img/' . $images->image_name) }}" alt="">
-                                        {{-- </a> --}}
                                     @endforeach
-                                    {{-- <a href="/frontend/images/products/product-16.html" target="_blank">
-                                        <img src="/frontend/images/products/product-16.jpg" alt="">
-                                    </a>
-                                    <a href="/frontend/images/products/product-16-1.html" target="_blank">
-                                        <img src="/frontend/images/products/product-16-1.jpg" alt="">
-                                    </a><a href="/frontend/images/products/product-16-2.html" target="_blank"><img
-                                            src="/frontend/images/products/product-16-2.jpg" alt=""> </a><a
-                                        href="/frontend/images/products/product-16-3.html" target="_blank"><img
-                                            src="/frontend/images/products/product-16-3.jpg" alt=""> </a><a
-                                        href="/frontend/images/products/product-16-4.html" target="_blank"><img
-                                            src="/frontend/images/products/product-16-4.jpg" alt=""></a> --}}
                                 </div>
                             </div>
                             <div class="product-gallery__carousel">
                                 <div class="owl-carousel" id="product-carousel">
                                     @foreach ($product->images as $images)
-                                        {{-- <a href="#" class="product-gallery__carousel-item"> --}}
                                         <img class="product-gallery__carousel-image"
                                             src="{{ asset('storage/img/' . $images->image_name) }}" alt="">
-                                        {{-- </a> --}}
                                     @endforeach
-                                    {{-- <a href="#" class="product-gallery__carousel-item">
-                                        <img class="product-gallery__carousel-image"
-                                            src="/frontend/images/products/product-16-1.jpg" alt="">
-                                    </a>
-                                    <a href="#" class="product-gallery__carousel-item">
-                                        <img class="product-gallery__carousel-image"
-                                            src="/frontend/images/products/product-16-2.jpg" alt="">
-                                    </a>
-                                    <a href="#" class="product-gallery__carousel-item">
-                                        <img class="product-gallery__carousel-image"
-                                            src="/frontend/images/products/product-16-3.jpg" alt="">
-                                    </a>
-                                    <a href="#" class="product-gallery__carousel-item">
-                                        <img class="product-gallery__carousel-image"
-                                            src="/frontend/images/products/product-16-4.jpg" alt="">
-                                    </a> --}}
                                 </div>
                             </div>
                         </div>
                     </div><!-- .product__gallery / end -->
                     <!-- .product__info -->
                     <div class="product__info">
-                        <div class="product__wishlist-compare"><button type="button"
-                                class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right"
-                                title="Wishlist"><svg width="16px" height="16px">
+                        <div class="product__wishlist-compare">
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip"
+                                data-placement="right" title="Wishlist">
+                                <svg width="16px" height="16px">
                                     <use xlink:href="/frontend/images/sprite.svg#wishlist-16"></use>
-                                </svg></button> <button type="button" class="btn btn-sm btn-light btn-svg-icon"
-                                data-toggle="tooltip" data-placement="right" title="Compare"><svg width="16px"
-                                    height="16px">
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip"
+                                data-placement="right" title="Compare">
+                                <svg width="16px" height="16px">
                                     <use xlink:href="/frontend/images/sprite.svg#compare-16"></use>
-                                </svg></button></div>
+                                </svg>
+                            </button>
+                        </div>
                         <h1 class="product__name">{{ $product->name }}</h1>
                         <div class="product__description">{{ $product->description }}</div>
                         <ul class="product__meta">
@@ -78,7 +52,9 @@
                     <!-- .product__sidebar -->
                     <div class="product__sidebar">
                         <div class="product__prices">Ks {{ $product->selling_price }}</div><!-- .product__options -->
-                        <form class="product__options">
+                        <form method="POST" action="{{ route('cart.addProduct' , $product->id) }}" class="product__options">
+                            @csrf
+
                             <div class="form-group product__option">
                                 <div class="product__actions">
                                     <label class="product__option-label-qty" for="product-quantity">Quantity</label>
@@ -86,29 +62,26 @@
                                         <div class="input-number product__quantity">
                                             <input id="product-quantity"
                                                 class="input-number__input form-control form-control-lg" type="number"
-                                                min="1" value="1">
+                                                min="1" value="1" name="quantity">
                                             <div class="input-number__add"></div>
                                             <div class="input-number__sub"></div>
                                         </div>
                                     </div>
-
                                 </div>
+
                                 <div class="product__actions my-3 align-start" style="">
                                     <div class="product__actions-item--addtocart col-12 col-md-5 ">
-                                        <button class="btn btn-secondary btn-lg btn-block" type="button">
+                                        <a class="btn btn-secondary btn-lg btn-block" type="button">
                                             Buy Now
+                                        </a>
+                                    </div>
+                                    <div class="product__actions-item--addtocart col-12 col-md-5">
+                                        <button type="submit"
+                                            class="btn btn-primary btn-lg btn-block">
+                                            <input type="text" name="id" value="{{ $product->id }}" hidden>
+                                            Add To Cart
                                         </button>
                                     </div>
-                                    {{-- <form action="{{ route('cart.store') }}" method="POST"> --}}
-                                        @csrf
-                                        <div class="product__actions-item--addtocart col-12 col-md-5">
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <button class="btn btn-primary btn-lg btn-block"
-                                                type="submit">
-                                                Add To Cart
-                                            </button>
-                                        </div>
-                                    {{-- </form> --}}
                                 </div>
                         </form><!-- .product__options / end -->
                     </div>

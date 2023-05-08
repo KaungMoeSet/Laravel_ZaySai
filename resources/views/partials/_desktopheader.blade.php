@@ -23,8 +23,19 @@
                 @auth
                     <a href="/cart" class="indicator__button">
                         <span class="indicator__area">
-                            <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">0
-                                </span></i>
+                            @php
+                                $cart = session('cart');
+                                $totalQuantity = 0;
+                            @endphp
+
+                            @foreach ($cart as $item)
+                                @php
+                                    $totalQuantity += $item['quantity'];
+                                @endphp
+                            @endforeach
+                            <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">@if (session('cart') == null)0 @else{{ $totalQuantity }}@endif
+                                </span>
+                            </i>
                     </a>
                 @endauth
 
@@ -96,12 +107,16 @@
                                                         <div class="megamenu megamenu--departments">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <ul class="megamenu__links megamenu__links--level--0">
-                                                                        <li class="megamenu__item megamenu__item--with-submenu">
-                                                                            <ul class="megamenu__links megamenu__links--level--1">
+                                                                    <ul
+                                                                        class="megamenu__links megamenu__links--level--0">
+                                                                        <li
+                                                                            class="megamenu__item megamenu__item--with-submenu">
+                                                                            <ul
+                                                                                class="megamenu__links megamenu__links--level--1">
                                                                                 @foreach ($category->subCategories as $subCategory)
                                                                                     <li class="megamenu__item">
-                                                                                        <a href="#">{{ $subCategory->name }}</a>
+                                                                                        <a
+                                                                                            href="#">{{ $subCategory->name }}</a>
                                                                                     </li>
                                                                                 @endforeach
                                                                             </ul>

@@ -62,11 +62,9 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>
-                                                    @foreach ($product_images as $product_image)
-                                                        @if ($product->id == $product_image->product_id)
-                                                            <img src="{{ asset('storage/img/' . $product_image->image_name) }}"
+                                                    @foreach ($product->images as $image)
+                                                            <img src="{{ asset('storage/img/' . $image->image_name) }}"
                                                                 width="100px" height="100px" alt="Image">
-                                                        @endif
                                                     @endforeach
 
                                                 </td>

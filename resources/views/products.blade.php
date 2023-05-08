@@ -46,14 +46,14 @@
                                                 <div class="product-card__badge product-card__badge--new">New</div>
                                             </div>
                                             <div class="product-card__image">
-                                                <a href="{{ route('home.show', $product->id) }}">
+                                                <a href="{{ route('products.show', $product->id) }}">
                                                     <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
                                                         alt="">
                                                 </a>
                                             </div>
                                             <div class="product-card__info">
                                                 <div class="product-card__name">
-                                                    <a href="{{ route('home.show', $product->id) }}">
+                                                    <a href="{{ route('products.show', $product->id) }}">
                                                         {{ $product->name }}
                                                     </a>
                                                 </div>
@@ -64,22 +64,20 @@
                                                     <span style="color: #3D464D">Price : </span></span> Ks
                                                     {{ $product->selling_price }}
                                                 </div>
-                                                {{-- <form action="{{ route('cart.store') }}" method="POST"> --}}
-                                                    @csrf
+                                                
                                                     <div class="product-card__buttons product-btn">
-                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                        <button class="btn btn-primary product-card__addtocart"
-                                                            type="submit">
+                                                        <a href="{{ route('cart.add', $product->id) }}"
+                                                            class="btn btn-primary product-card__addtocart">
                                                             Add To Cart
-                                                        </button>
+                                                        </a>
                                                     </div>
-                                                {{-- </form> --}}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
 
-                                <div class="products-list__item">
+                                {{-- <div class="products-list__item">
                                     <div class="product-card"><button class="product-card__quickview" type="button"><svg
                                                 width="16px" height="16px">
                                                 <use xlink:href="/frontend/images/sprite.svg#quickview-16"></use>
@@ -100,8 +98,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="products-list__item">
+                                </div> --}}
+                                {{-- <div class="products-list__item">
                                     <div class="product-card"><button class="product-card__quickview" type="button"><svg
                                                 width="16px" height="16px">
                                                 <use xlink:href="/frontend/images/sprite.svg#quickview-16"></use>
@@ -128,7 +126,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

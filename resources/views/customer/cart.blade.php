@@ -22,69 +22,47 @@
                     </tr>
                 </thead>
                 <tbody class="cart-table__body">
-                    <tr class="cart-table__row">
-                        <td class="cart-table__column cart-table__column--image"><a href="#"><img
-                                    src="/frontend/images/products/product-1.jpg" alt=""></a></td>
-                        <td class="cart-table__column cart-table__column--product"><a href="#"
-                                class="cart-table__product-name">Electric Planer Brandix KL370090G 300 Watts</a>
-                        </td>
-                        <td class="cart-table__column cart-table__column--price" data-title="Price">$699.00</td>
-                        <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                            <div class="input-number"><input class="form-control input-number__input" type="number"
-                                    min="1" value="2">
-                                <div class="input-number__add"></div>
-                                <div class="input-number__sub"></div>
-                            </div>
-                        </td>
-                        <td class="cart-table__column cart-table__column--total" data-title="Total">$1,398.00
-                        </td>
-                        <td class="cart-table__column cart-table__column--remove"><button type="button"
-                                class="btn btn-light btn-sm btn-svg-icon"><svg width="12px" height="12px">
-                                    <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
-                                </svg></button></td>
-                    </tr>
-                    <tr class="cart-table__row">
-                        <td class="cart-table__column cart-table__column--image"><a href="#"><img
-                                    src="/frontend/images/products/product-2.jpg" alt=""></a></td>
-                        <td class="cart-table__column cart-table__column--product"><a href="#"
-                                class="cart-table__product-name">Undefined Tool IRadix DPS3000SY 2700 watts</a>
-                        </td>
-                        <td class="cart-table__column cart-table__column--price" data-title="Price">$849.00</td>
-                        <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                            <div class="input-number"><input class="form-control input-number__input" type="number"
-                                    min="1" value="1">
-                                <div class="input-number__add"></div>
-                                <div class="input-number__sub"></div>
-                            </div>
-                        </td>
-                        <td class="cart-table__column cart-table__column--total" data-title="Total">$849.00</td>
-                        <td class="cart-table__column cart-table__column--remove"><button type="button"
-                                class="btn btn-light btn-sm btn-svg-icon"><svg width="12px" height="12px">
-                                    <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
-                                </svg></button></td>
-                    </tr>
-                    <tr class="cart-table__row">
-                        <td class="cart-table__column cart-table__column--image"><a href="#"><img
-                                    src="/frontend/images/products/product-5.jpg" alt=""></a></td>
-                        <td class="cart-table__column cart-table__column--product"><a href="#"
-                                class="cart-table__product-name">Brandix Router Power Tool 2017ERXPK</a>
-                        </td>
-                        <td class="cart-table__column cart-table__column--price" data-title="Price">$1,210.00
-                        </td>
-                        <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                            <div class="input-number"><input class="form-control input-number__input" type="number"
-                                    min="1" value="3">
-                                <div class="input-number__add"></div>
-                                <div class="input-number__sub"></div>
-                            </div>
-                        </td>
-                        <td class="cart-table__column cart-table__column--total" data-title="Total">$3,630.00
-                        </td>
-                        <td class="cart-table__column cart-table__column--remove"><button type="button"
-                                class="btn btn-light btn-sm btn-svg-icon"><svg width="12px" height="12px">
-                                    <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
-                                </svg></button></td>
-                    </tr>
+                    @foreach ($cart_data as $product)
+                        {{-- <h1> {{ $product->name }} </h1> --}}
+                        <tr class="cart-table__row">
+                            <td class="cart-table__column cart-table__column--image">
+                                <a href="{{ route('products.show', $product->id) }}">
+                                    <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                        alt="">
+                                </a>
+                            </td>
+                            <td class="cart-table__column cart-table__column--product">
+                                <a href="{{ route('products.show', $product->id) }}" class="cart-table__product-name">
+                                    {{ $product->name }}
+                                </a>
+                            </td>
+                            <td class="cart-table__column cart-table__column--price" data-title="Price">
+                                Ks {{ $product->selling_price }}
+                            </td>
+                            <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
+                                <div class="input-number">
+                                    <a href="{{ route('cart.update', [$product->id, $product->quantity + 1]) }}"
+                                        class="input-number__add"></a>
+                                    <input type="text" value="{{ $product->quantity }}" name="quantity"
+                                        class="input-number__input" min="1" readonly>
+                                    <a href="{{ route('cart.update', [$product->id, $product->quantity - 1]) }}"
+                                        class="input-number__sub"></a>
+
+                                </div>
+                            </td>
+                            <td class="cart-table__column cart-table__column--total" data-product-id="{{ $product->id }}"
+                                data-title="Total">
+                                {{ $product->quantity * $product->selling_price }}
+                            </td>
+                            <td class="cart-table__column cart-table__column--remove">
+                                <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                                    <svg width="12px" height="12px">
+                                        <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="cart__actions">
