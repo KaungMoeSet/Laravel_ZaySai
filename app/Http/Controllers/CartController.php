@@ -104,9 +104,12 @@ class CartController extends Controller
 
     public function add(Request $request, string $id)
     {
-        $quantity = $request->input('quantity', 1);
-
-        $this->addToCart($id, $quantity);
+        $quantity = $request->input('quantity');
+        if ($quantity) {
+            $this->addToCart($id, $quantity);
+        }else {
+            $this->addToCart($id, $quantity = 1);
+        }
 
         return redirect()->back();
     }
@@ -119,7 +122,12 @@ class CartController extends Controller
 
         if ($product) {
             if (isset($cart[$id])) {
-                $cart[$id]['quantity']++;
+                if ($quantity === 1) {
+                    $cart[$id]['quantity']++;
+                } else {
+                    // dd($quantity);
+                    $cart[$id]['quantity'] += $quantity;
+                }
             } else {
                 $cart[$id] = [
                     'product_id' => $id,
@@ -133,4 +141,19 @@ class CartController extends Controller
             abort(404);
         }
     }
+
+    public function remove($id)
+    {
+        dd($id);
+        $cart = session('cart');
+
+        // Remove the item with the given id from the cart
+        unset($cart[$id]);
+
+        // Save the updated cart back to the session
+        session(['cart' => $cart]);
+
+        return redirect()->back();
+    }
+
 }

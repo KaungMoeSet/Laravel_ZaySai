@@ -119,7 +119,7 @@
                                             <div class="form-group">
                                                 <label for="main_category">Main Category</label>
                                                 <select id="main_category" name="main_category" class="form-control">
-                                                    <option value="" disabled selected>Choose your category</option>
+                                                    <option value="" selected>Choose your category</option>
                                                     @foreach ($mainCategories as $mainCategory)
                                                         <option value="{{ $mainCategory->id }}"
                                                             {{ old('main_category') == "$mainCategory->id" ? 'selected' : '' }}>
@@ -190,7 +190,7 @@
 
                                 <input type="submit" onclick="saveSuccess()" value="Save"
                                     class="btn btn-warning col-1 mx-2">
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Models\HeroCarousel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,8 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\HeroCarouselController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentMethodController;
 
 /*
@@ -59,12 +62,6 @@ Route::get('/privacyPolicy', function () {
     return view('pages.privacyPolicy');
 });
 
-
-
-Route::get('/checkout', function () {
-    return view('customer.checkout');
-});
-
 Route::get('/trackOrder', function () {
     return view('pages.trackOrder');
 });
@@ -93,11 +90,21 @@ Route::middleware(['auth.user'])->group(function () {
     // User routes here
     Route::resource('cart', CartController::class);
 
-    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.addProduct');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
     Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
     Route::get('cart/{id}/{quantity}', [CartController::class, 'update'])->name('cart.update');
+
+    Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+    Route::resource('checkout', CheckoutController::class);
+    Route::get('/checkout/cities/{region}', [CheckoutController::class, 'getCitiesByRegion'])->name('checkout.getCitiesByRegion');
+    Route::get('/checkout/townships/{city}', [CheckoutController::class, 'getTownships'])->name('checkout.getTownships');
+
+    Route::resource('address', AddressController::class);
+
+    Route::resource('order', OrderController::class);
 });
 
 Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);
@@ -134,6 +141,6 @@ Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/create', 'Admin\AdminController@create')->name('admin.create');
-    Route::post('/admin', 'Admin\AdminController@store')->name('admin.store');
+    Route::resource('/admin/create', AdminController::class);
+    // Route::post('/admin', 'Admin\AdminController@store')->name('admin.store');
 });

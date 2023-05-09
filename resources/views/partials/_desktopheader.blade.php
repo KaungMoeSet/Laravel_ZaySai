@@ -28,11 +28,13 @@
                                 $totalQuantity = 0;
                             @endphp
 
-                            @foreach ($cart as $item)
-                                @php
-                                    $totalQuantity += $item['quantity'];
-                                @endphp
-                            @endforeach
+                            @if ($cart)
+                                @foreach ($cart as $item)
+                                    @php
+                                        $totalQuantity += $item['quantity'];
+                                    @endphp
+                                @endforeach
+                            @endif
                             <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">@if (session('cart') == null)0 @else{{ $totalQuantity }}@endif
                                 </span>
                             </i>
@@ -40,11 +42,6 @@
                 @endauth
 
                 @auth
-                    {{-- <a href="">
-                        <span class="indicator__area">
-                            <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
-                        </span>
-                    </a> --}}
                     <li class="nav-item dropdown" style="list-style: none">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +16,6 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
-
-        return view('admin.account.userAccountlist', compact('users') );
     }
 
     /**
@@ -24,6 +24,7 @@ class UserController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -37,7 +38,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Order $order)
     {
         //
     }
@@ -45,7 +46,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Order $order)
     {
         //
     }
@@ -53,7 +54,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -61,11 +62,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Order $order)
     {
         //
-        $user = User::find($id)->name;
-        User::find($id)->delete();
-        return redirect()->back()->with('success_message', $user . ' is deleted successfully!');
     }
 }

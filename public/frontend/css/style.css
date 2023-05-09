@@ -2191,7 +2191,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .product-card__name {
     font-size: 20px;
-    line-height: 19px;
+    line-height: 30px;
     -ms-flex-positive: 1;
     flex-grow: 1
 }
@@ -10945,4 +10945,9 @@ a{
 .profile-list,
 .profile-list li {
     list-style: none;
+}
+
+.help-inline {
+    color: red;
+    font-size: .9rem;
 }

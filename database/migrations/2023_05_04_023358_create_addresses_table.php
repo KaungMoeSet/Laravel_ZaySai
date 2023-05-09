@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->integer('phoneNumber');
             $table->string('building');
-            $table->string('landmark');
+            $table->string('landmark')->nullable();
             $table->string('address');
-            $table->unsignedBigInteger('township_id');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('township_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

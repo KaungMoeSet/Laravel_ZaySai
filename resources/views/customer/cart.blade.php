@@ -22,6 +22,10 @@
                     </tr>
                 </thead>
                 <tbody class="cart-table__body">
+                    @php
+                        $subTotal = 0;
+                        $itemsCount = 0;
+                    @endphp
                     @foreach ($cart_data as $product)
                         {{-- <h1> {{ $product->name }} </h1> --}}
                         <tr class="cart-table__row">
@@ -55,21 +59,31 @@
                                 {{ $product->quantity * $product->selling_price }}
                             </td>
                             <td class="cart-table__column cart-table__column--remove">
-                                <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                                <form method="POST" action="{{ route('cart.remove', $product->id) }}">
+                                    @csrf
+                                    <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                                        <svg width="12px" height="12px">
+                                            <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                                {{-- <a href="{{ route('cart.remove', $product->id) }}"  class="btn btn-light btn-sm btn-svg-icon">
                                     <svg width="12px" height="12px">
                                         <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
                                     </svg>
-                                </button>
+                                </a> --}}
                             </td>
                         </tr>
+
+                        @php
+                            $itemsCount++;
+                            $subTotal += $product->quantity * $product->selling_price;
+                        @endphp
                     @endforeach
                 </tbody>
             </table>
             <div class="cart__actions">
-                {{-- <div class="cart__buttons"> --}}
-                <a href="/" class="btn btn-primary text-end">Continue Shopping</a>
-                {{-- <a href="#" class="btn btn-primary cart__update-button">Update Cart</a> --}}
-                {{-- </div> --}}
+                <a href="{{ url('/allProducts') }}" class="btn btn-primary text-end">Continue Shopping</a>
             </div>
             <div class="row justify-content-end pt-5">
                 <div class="col-12 col-md-7 col-lg-6 col-xl-5">
@@ -79,25 +93,26 @@
                             <table class="cart__totals">
                                 <thead class="cart__totals-header">
                                     <tr>
-                                        <th>Subtotal</th>
-                                        <td>$5,877.00</td>
+                                        <th>Subtotal ({{ $itemsCount }} items)</th>
+                                        <td>{{ $subTotal }}</td>
                                     </tr>
                                 </thead>
-                                <tbody class="cart__totals-body">
+                                {{-- <tbody class="cart__totals-body">
                                     <tr>
                                         <th>Shipping</th>
                                         <td>$25.00
                                         </td>
                                     </tr>
-                                </tbody>
+                                </tbody> --}}
                                 <tfoot class="cart__totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td>$5,902.00</td>
+                                        <td>Ks {{ $subTotal }}</td>
                                     </tr>
                                 </tfoot>
-                            </table><a class="btn btn-primary btn-xl btn-block cart__checkout-button"
-                                href="/checkout">Proceed to checkout</a>
+                            </table>
+                            <a class="btn btn-primary btn-xl btn-block cart__checkout-button"
+                                href="{{ route('checkout.create') }}">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>

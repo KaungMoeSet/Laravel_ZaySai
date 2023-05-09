@@ -52,7 +52,7 @@
                     <!-- .product__sidebar -->
                     <div class="product__sidebar">
                         <div class="product__prices">Ks {{ $product->selling_price }}</div><!-- .product__options -->
-                        <form method="POST" action="{{ route('cart.addProduct' , $product->id) }}" class="product__options">
+                        <form method="POST" action="{{ route('cart.add', $product->id) }}" class="product__options">
                             @csrf
 
                             <div class="form-group product__option">
@@ -76,8 +76,7 @@
                                         </a>
                                     </div>
                                     <div class="product__actions-item--addtocart col-12 col-md-5">
-                                        <button type="submit"
-                                            class="btn btn-primary btn-lg btn-block">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
                                             <input type="text" name="id" value="{{ $product->id }}" hidden>
                                             Add To Cart
                                         </button>

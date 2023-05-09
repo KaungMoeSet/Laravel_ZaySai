@@ -36,12 +36,6 @@
                                 @foreach ($products as $product)
                                     <div class="products-list__item">
                                         <div class="product-card">
-                                            <button class="product-card__quickview" type="button">
-                                                <svg width="16px" height="16px">
-                                                    <use xlink:href="/frontend/images/sprite.svg#quickview-16"></use>
-                                                </svg>
-                                                <span class="fake-svg-icon"></span>
-                                            </button>
                                             <div class="product-card__badges-list">
                                                 <div class="product-card__badge product-card__badge--new">New</div>
                                             </div>
