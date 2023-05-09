@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('phoneNumber');
+            $table->string('phoneNumber');
             $table->string('building');
             $table->string('landmark')->nullable();
             $table->string('address');

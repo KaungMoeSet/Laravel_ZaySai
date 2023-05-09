@@ -13,4 +13,9 @@ class Township extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

@@ -51,14 +51,7 @@ class AddressController extends Controller
         $address->user_id     = $user->id;
 
         // dd($address);
-        if ($request->input('township') == "Yangon") {
-            $request->validate([
-                'township' => 'required'
-            ]);
-            $address->township_id = $request->input('township');
-        }else {
-            $address->township_id = $request->input('city');
-        }
+        $address->township_id = $request->input('township');
         $address->save();
 
         return redirect()->route('checkout.create')->with('success_message', 'Address is added successfully!');

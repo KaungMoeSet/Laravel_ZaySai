@@ -13,4 +13,9 @@ class Address extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function township()
+    {
+        return $this->belongsTo(Township::class);
+    }
 }
