@@ -66,9 +66,7 @@ Route::get('/trackOrder', function () {
     return view('pages.trackOrder');
 });
 
-Route::get('/profile', function () {
-    return view('customer.myProfile');
-});
+
 
 Route::get('/category/create/{name}', [CategoryController::class, 'create']);
 
@@ -106,6 +104,8 @@ Route::middleware(['auth.user'])->group(function () {
     Route::resource('address', AddressController::class);
 
     Route::resource('order', OrderController::class);
+
+    Route::get('/profile', [UserController::class, 'showMyProfile']);
 });
 
 Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);

@@ -74,7 +74,7 @@ class HomeController extends Controller
 
     public function allProducts()
     {
-        $products   = Product::all();
+        $products   = Product::paginate(10);
         $categories = Category::all();
 
         return view('products', compact('products', 'categories'));

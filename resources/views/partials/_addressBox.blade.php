@@ -36,7 +36,7 @@
                 <input type="text" class="form-control" id="checkout-phone"
                     placeholder="Please enter your phone number" name="phoneNumber" value="{{ old('phoneNumber') }}">
                 @error('phoneNumber')
-                    <span class="help-inline">
+                    <span class="h  elp-inline">
                         {{ $message }}
                     </span>
                 @enderror

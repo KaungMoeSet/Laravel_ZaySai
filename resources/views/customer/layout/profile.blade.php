@@ -8,7 +8,7 @@
                 <div class="page-header">
                     <div class="page-header__container container">
                         <div class="page-header__title col-12">
-                            <h4>Hello, Kaung Moe Set</h4>
+                            <h4>Hello, {{ Auth::user()->name }}</h4>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,8 @@
                         {{ $shippingAddress->phoneNumber }}
                     </td>
                     <td>
-                        <button type="button" class="btn text-primary edit-btn">
+                        <button type="button" class="btn text-primary edit-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter">
                             Edit
                         </button>
                     </td>
@@ -43,7 +44,8 @@
                 {{ $user->email }}
             </td>
             <td>
-                <button type="button" class="btn text-primary edit-btn">
+                <button type="button" class="btn text-primary edit-btn" data-toggle="modal"
+                data-target="#exampleModalCenter">
                     Edit
                 </button>
             </td>

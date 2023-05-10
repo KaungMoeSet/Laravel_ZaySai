@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -67,5 +68,12 @@ class UserController extends Controller
         $user = User::find($id)->name;
         User::find($id)->delete();
         return redirect()->back()->with('success_message', $user . ' is deleted successfully!');
+    }
+
+    public function showMyProfile()
+    {
+        $categories = Category::all();
+
+        return view('customer.myProfile', compact('categories'));
     }
 }

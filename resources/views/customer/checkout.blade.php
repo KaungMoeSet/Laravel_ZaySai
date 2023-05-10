@@ -112,6 +112,9 @@
                                         <tr>
                                             <td>{{ $product->name }} × {{ $product->quantity }}</td>
                                             <td>Ks {{ $product->quantity * $product->selling_price }}</td>
+
+                                            <input type="text" value="{{ $product->id }}" name="productName" hidden>
+                                            <input type="text" value="{{ $product->quantity }}" name="productName" hidden>
                                         </tr>
                                         @php
                                             $subTotal += $product->quantity * $product->selling_price;
@@ -159,6 +162,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            {{-- <input type="text" value=""> --}}
                             <button type="submit" class="btn btn-primary btn-xl btn-block"
                                 {{ $user->addresses->isEmpty() ? 'disabled' : ($subTotal == 0 ? 'disabled' : '') }}>
                                 Place Order
