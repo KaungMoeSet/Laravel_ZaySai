@@ -25,11 +25,9 @@
             <div class="row">
                 <div class="col-12 col-lg-6 col-xl-7">
                     <div class="card mb-lg-0">
-                        <div class="card-body">
-                            @if ($user->addresses->isEmpty())
-                                @include('partials._addressBox')
-                            @endif
-                        </div>
+                        @if ($user->addresses->isEmpty())
+                            @include('partials._addressBox')
+                        @endif
                         <div class="card-divider"></div>
                         <div class="card-body">
                             <h4 class="card-title">Shipping Details</h4>
@@ -48,29 +46,43 @@
                                         </tr>
                                     </thead>
                                     <tbody class="cart-table__body">
-                                        <tr class="cart-table__row">
-                                            <td class="cart-table__column cart-table__column--image"><a href="#"><img
-                                                        src="/frontend/images/products/product-1.jpg" alt=""></a>
-                                            </td>
-                                            <td class="cart-table__column cart-table__column--product">
-                                                <span href="#" class="cart-table__product-name">Electric Planer
-                                                    Brandix KL370090G 300
-                                                    Watts</span>
-                                            </td>
-                                            <td class="cart-table__column cart-table__column--price" data-title="Price">
-                                                $699.00</td>
-                                            <td class="cart-table__column cart-table__column--quantity"
-                                                data-title="Quantity">
-                                                <div class="input-number">
-                                                    Qty: 1
-                                                </div>
-                                            </td>
-                                            <td class="cart-table__column cart-table__column--remove"><button type="button"
-                                                    class="btn btn-light btn-sm btn-svg-icon"><svg width="12px"
-                                                        height="12px">
-                                                        <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
-                                                    </svg></button></td>
-                                        </tr>
+                                        @foreach ($cart_data as $product)
+                                            <tr class="cart-table__row">
+                                                <td class="cart-table__column cart-table__column--image">
+                                                    <a href="{{ route('products.show', $product->id) }}">
+                                                        <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                            alt="">
+                                                    </a>
+                                                </td>
+                                                <td class="cart-table__column cart-table__column--product">
+                                                    <span href="#" class="cart-table__product-name">Electric Planer
+                                                        {{ $product->name }}
+                                                    </span>
+                                                </td>
+                                                <td class="cart-table__column cart-table__column--price" data-title="Price">
+                                                    Ks {{ $product->selling_price }}
+                                                </td>
+                                                <td class="cart-table__column cart-table__column--quantity"
+                                                    data-title="Quantity">
+                                                    <div class="input-number">
+                                                        Qty: {{ $product->quantity }}
+                                                    </div>
+                                                </td>
+                                                <td class="cart-table__column cart-table__column--remove">
+                                                    <form method="POST"
+                                                        action="{{ route('checkout.destroy', $product->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-light btn-sm btn-svg-icon">
+                                                            <svg width="12px" height="12px">
+                                                                <use xlink:href="/frontend/images/sprite.svg#cross-12">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -93,38 +105,62 @@
                                     </tr>
                                 </thead>
                                 <tbody class="checkout__totals-products">
-                                    <tr>
-                                        <td>Electric Planer Brandix KL370090G 300 Watts × 2</td>
-                                        <td>$1,398.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Undefined Tool IRadix DPS3000SY 2700 watts × 1</td>
-                                        <td>$849.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brandix Router Power Tool 2017ERXPK × 3</td>
-                                        <td>$3,630.00</td>
-                                    </tr>
+                                    @php
+                                        $subTotal = 0;
+                                    @endphp
+                                    @foreach ($cart_data as $product)
+                                        <tr>
+                                            <td>{{ $product->name }} × {{ $product->quantity }}</td>
+                                            <td>Ks {{ $product->quantity * $product->selling_price }}</td>
+                                        </tr>
+                                        @php
+                                            $subTotal += $product->quantity * $product->selling_price;
+                                        @endphp
+                                    @endforeach
                                 </tbody>
                                 <tbody class="checkout__totals-subtotals">
                                     <tr>
                                         <th>Subtotal</th>
-                                        <td>$5,877.00</td>
+                                        <td>Ks {{ $subTotal }}</td>
                                     </tr>
                                     <tr>
                                         <th>Delivery Fee</th>
-                                        <td>$25.00</td>
+                                        <td>
+                                            @php
+                                                if (!$user->addresses->isEmpty()) {
+                                                    $defaultAddress = $user->addresses->where('setDefault', true)->first();
+                                                    if ($defaultAddress->township) {
+                                                        $deliFee = $defaultAddress->township->deliFees->first()->fee;
+                                                    } else {
+                                                        $deliFee = 3000;
+                                                    }
+                                                } else {
+                                                    $deliFee = 0;
+                                                }
+                                            @endphp
+                                            Ks {{ $deliFee }}
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot class="checkout__totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td>$5,882.00</td>
+                                        <td>
+                                            @php
+                                                $total = 0;
+                                            @endphp
+                                            @foreach ($cart_data as $product)
+                                                @php
+                                                    $total += $product->quantity * $product->selling_price;
+                                                @endphp
+                                            @endforeach
+                                            {{ $total + $deliFee }}
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
                             <button type="submit" class="btn btn-primary btn-xl btn-block"
-                                {{ $user->addresses->isEmpty() ? 'disabled' : '' }}>
+                                {{ $user->addresses->isEmpty() ? 'disabled' : ($subTotal == 0 ? 'disabled' : '') }}>
                                 Place Order
                             </button>
                         </div>

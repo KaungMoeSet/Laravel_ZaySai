@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('city_id')->nullable();
             $table->unsignedBigInteger('township_id')->nullable();
             $table->decimal('fee', 8, 2);
-            $table->date('start_date');
+            $table->date('start_date')->useCurrent();
             $table->date('end_date')->nullable();
             $table->timestamps();
         

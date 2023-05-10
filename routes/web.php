@@ -101,6 +101,7 @@ Route::middleware(['auth.user'])->group(function () {
     Route::resource('checkout', CheckoutController::class);
     Route::get('/checkout/cities/{region}', [CheckoutController::class, 'getCitiesByRegion'])->name('checkout.getCitiesByRegion');
     Route::get('/checkout/townships/{city}', [CheckoutController::class, 'getTownships'])->name('checkout.getTownships');
+    Route::post('/checkout/update-addresses', [CheckoutController::class, 'updateShippingAddress'])->name('checkout.update-addresses');
 
     Route::resource('address', AddressController::class);
 

@@ -18,4 +18,9 @@ class Township extends Model
     {
         return $this->hasOne(Address::class);
     }
+
+    public function deliFees()
+    {
+        return $this->hasMany(DeliveryFees::class);
+    }
 }

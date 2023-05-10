@@ -34,12 +34,12 @@ class AddressController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name'        => 'required',
-            'phoneNumber' => 'required',
-            'building'    => 'required',
-            'region'      => 'required',
-            'city'        => 'required',
-            'full_address'     => 'required',
+            'name'         => 'required',
+            'phoneNumber'  => 'required',
+            'building'     => 'required',
+            'region'       => 'required',
+            'city'         => 'required',
+            'full_address' => 'required',
         ]);
 
         $address              = new Address();
@@ -50,11 +50,19 @@ class AddressController extends Controller
         $address->address     = $request->input('full_address');
         $address->user_id     = $user->id;
 
+        $existingAddresses = $user->addresses;
+        if ($existingAddresses->isEmpty()) {
+            $address->setDefault = true;
+        }else {
+            $address->setDefault = false;
+        }
+
         // dd($address);
         $address->township_id = $request->input('township');
+        $address->city_id     = $request->input('city');
         $address->save();
 
-        return redirect()->route('checkout.create')->with('success_message', 'Address is added successfully!');
+        return redirect()->route('checkout')->with('success_message', 'Address is added successfully!');
     }
 
     /**

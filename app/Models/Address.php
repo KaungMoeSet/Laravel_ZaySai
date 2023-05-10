@@ -18,4 +18,9 @@ class Address extends Model
     {
         return $this->belongsTo(Township::class);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DeliveryFees extends Model
 {
     use HasFactory;
+
+    public function townShip()
+    {
+        return $this->belongsTo(Township::class);
+    }
 }

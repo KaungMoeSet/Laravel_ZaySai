@@ -144,7 +144,7 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        dd($id);
+        // dd($id);
         $cart = session('cart');
 
         // Remove the item with the given id from the cart

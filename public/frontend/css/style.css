@@ -866,6 +866,7 @@ h6 {
 }
 
 .card-title {
+    text-align: start;
     margin-bottom: 1.75rem
 }
 

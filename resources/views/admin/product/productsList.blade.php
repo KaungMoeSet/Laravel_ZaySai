@@ -70,8 +70,8 @@
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td> {{ $product->sub_category->name }} </td>
-                                                <td>$ {{ $product->buying_price }}</td>
-                                                <td>$ {{ $product->selling_price }}</td>
+                                                <td>Ks {{ $product->buying_price }}</td>
+                                                <td>Ks {{ $product->selling_price }}</td>
                                                 <td>{{ $product->quantity }}</td>
                                                 <td class="d-flex justify-content-end ">
                                                     <a href="{{ url('product/' . $product->id . '/edit') }}">

@@ -61,7 +61,7 @@
                             <td class="cart-table__column cart-table__column--remove">
                                 <form method="POST" action="{{ route('cart.remove', $product->id) }}">
                                     @csrf
-                                    <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                                    <button type="submit" class="btn btn-light btn-sm btn-svg-icon">
                                         <svg width="12px" height="12px">
                                             <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
                                         </svg>
@@ -97,13 +97,6 @@
                                         <td>{{ $subTotal }}</td>
                                     </tr>
                                 </thead>
-                                {{-- <tbody class="cart__totals-body">
-                                    <tr>
-                                        <th>Shipping</th>
-                                        <td>$25.00
-                                        </td>
-                                    </tr>
-                                </tbody> --}}
                                 <tfoot class="cart__totals-footer">
                                     <tr>
                                         <th>Total</th>
@@ -111,8 +104,11 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <a class="btn btn-primary btn-xl btn-block cart__checkout-button"
-                                href="{{ route('checkout.create') }}">Proceed to checkout</a>
+                            <a class="btn btn-primary btn-xl btn-block cart__checkout-button {{ $subTotal == 0 ? 'disabled' : '' }}"
+                                href="{{ route('checkout.index') }}">
+                                Proceed to checkout
+                            </a>
+                            {{-- {{ $itemsCount == 0 ? 'disabled': ''}} --}}
                         </div>
                     </div>
                 </div>
