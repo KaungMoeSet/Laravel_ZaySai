@@ -32,6 +32,7 @@ class OrderController extends Controller
         $defaultAddress = $user->addresses->where('setDefault', true)->first();
 
         $cart_data = [];
+        $delifee = session('cart.delifee');
 
         foreach ($cart as $id => $item) {
             $product = Product::find($item['product_id']);
@@ -43,7 +44,7 @@ class OrderController extends Controller
 
         $categories = Category::all();
 
-        return view('customer.order', compact('categories', 'paymentMethods', 'cart_data', 'defaultAddress'));
+        return view('customer.order', compact('categories', 'paymentMethods', 'cart_data', 'defaultAddress', 'user'));
     }
 
     /**

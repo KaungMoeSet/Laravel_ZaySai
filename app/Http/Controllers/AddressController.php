@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\DeliveryFees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,7 +54,7 @@ class AddressController extends Controller
         $existingAddresses = $user->addresses;
         if ($existingAddresses->isEmpty()) {
             $address->setDefault = true;
-        }else {
+        } else {
             $address->setDefault = false;
         }
 
@@ -62,7 +63,7 @@ class AddressController extends Controller
         $address->city_id     = $request->input('city');
         $address->save();
 
-        return redirect()->route('checkout')->with('success_message', 'Address is added successfully!');
+        return redirect()->route('checkout.index')->with('success_message', 'Address is added successfully!');
     }
 
     /**

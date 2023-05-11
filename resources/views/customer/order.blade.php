@@ -56,20 +56,35 @@
                                             <th>Your Account Name </th>
                                             <td>
                                                 <input name="accountName" type="text" class="form_input"
-                                                    value="{{ old('photo') }}">
+                                                    value="{{ old('accountName') }}">
+                                                @error('accountName')
+                                                    <span class="help-inline">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Your Account Number </th>
                                             <td>
-                                                <input name="accountName" type="text" class="form_input"
-                                                    value="{{ old('photo') }}">
+                                                <input name="accountNumber" type="text" class="form_input"
+                                                    value="{{ old('accountNumber') }}">
+                                                @error('accountName')
+                                                    <span class="help-inline">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Payment Screenshot </th>
                                             <td>
-                                                <input name="accountName" type="file" value="{{ old('photo') }}">
+                                                <input name="accountName" type="file" value="{{ old('photo') }}"  class="form-control-file">
+                                                @error('photo')
+                                                    <span class="help-inline">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </td>
                                         </tr>
                                     </tbody>
@@ -95,7 +110,28 @@
                                                 Subtotal ( {{ $itemQty }} itms and shipping fee included)
                                             </td>
                                             <td>
-                                                
+                                                @php
+                                                    $total = 0;
+                                                    if (!$user->addresses->isEmpty()) {
+                                                        $defaultAddress = $user->addresses->where('setDefault', true)->first();
+                                                        if ($defaultAddress->township) {
+                                                            $deliFee = $defaultAddress->township->deliFees->first()->fee;
+                                                        } else {
+                                                            $deliFee = 3000;
+                                                        }
+                                                    } else {
+                                                        $deliFee = 0;
+                                                    }
+                                                @endphp
+                                                @foreach ($cart_data as $product)
+                                                    @php
+                                                        $total += $product->quantity * $product->selling_price;
+                                                    @endphp
+                                                @endforeach
+                                                <input type="text" name="totalAmt" class="form_input"
+                                                    style="text-align: end; width: 90%; border: none; background-color: transparent; outline: none;"
+                                                    value="{{ $total + $deliFee }}" readonly> Ks
+                                                {{-- Ks {{  }} --}}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -103,6 +139,7 @@
                                         <tr>
                                             <th>Total Amount</th>
                                             <td>
+
                                             </td>
                                         </tr>
                                     </tfoot>

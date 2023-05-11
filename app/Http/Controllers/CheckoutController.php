@@ -8,6 +8,7 @@ use regions;
 use App\Models\City;
 use App\Models\Region;
 use App\Models\Category;
+use App\Models\DeliveryFees;
 use App\Models\Township;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +39,6 @@ class CheckoutController extends Controller
                 $cart_data[]       = $product;
             }
         }
-
-        $categories = Category::all();
 
         return view('customer.checkout', compact('cart_data', 'categories', 'user', 'regions'));
     }
@@ -115,15 +114,6 @@ class CheckoutController extends Controller
         return response()->json($townships);
     }
 
-    public function saveShippingAddress(Request $request)
-    {
-        $addressId       = $request->input('address_id');
-        $shippingAddress = Address::find($addressId);
-
-        
-        return view('customer.checkout', compact('shippingAddress'));
-    }
-
     public function updateShippingAddress(Request $request)
     {
         $user = Auth::user();
@@ -143,5 +133,4 @@ class CheckoutController extends Controller
 
         return redirect()->back()->with('success_message', 'Shipping address updated successfully');
     }
-
 }
