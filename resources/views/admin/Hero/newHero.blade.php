@@ -49,11 +49,11 @@
                                                 <label>Description</label>
                                                 <input type="text" name="description" class="form-control select2"
                                                     value="{{ old('description') }}">
-                                                <span class="help-inline">
-                                                    @error('description')
+                                                @error('description')
+                                                    <span class="help-inline">
                                                         {{ $message }}
-                                                    @enderror
-                                                </span>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -61,7 +61,7 @@
                                                 <label>Hero Carousel Image</label>
                                                 <input name="photo" type="file" class="form-control-file"
                                                     value="{{ old('photo') }}">
-                                                @error('bank_name')
+                                                @error('photo')
                                                     <span class="help-inline">
                                                         {{ $message }}
                                                     </span>

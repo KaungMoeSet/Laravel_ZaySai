@@ -90,85 +90,82 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 col-xl-5 mt-4 mt-lg-0">
-                    <div class="card mb-0">
-                        <div class="card-body">
-                            @if (!$user->addresses->isEmpty())
-                                @include('partials._shippingAddress')
-                            @endif
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                @if (!$user->addresses->isEmpty())
+                                    @include('partials._shippingAddress')
+                                @endif
 
-                            <h4 class="card-title">Order Summery</h4>
-                            <table class="checkout__totals">
-                                <thead class="checkout__totals-header">
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="checkout__totals-products">
-                                    @php
-                                        $subTotal = 0;
-                                    @endphp
-                                    @foreach ($cart_data as $product)
+                                <h4 class="card-title">Order Summery</h4>
+                                <table class="checkout__totals">
+                                    <thead class="checkout__totals-header">
                                         <tr>
-                                            <td>{{ $product->name }} × {{ $product->quantity }}</td>
-                                            <td>Ks {{ $product->quantity * $product->selling_price }}</td>
-
-                                            <input type="text" value="{{ $product->id }}" name="productName" hidden>
-                                            <input type="text" value="{{ $product->quantity }}" name="productName" hidden>
+                                            <th>Product</th>
+                                            <th>Total</th>
                                         </tr>
+                                    </thead>
+                                    <tbody class="checkout__totals-products">
                                         @php
-                                            $subTotal += $product->quantity * $product->selling_price;
+                                            $subTotal = 0;
                                         @endphp
-                                    @endforeach
-                                </tbody>
-                                <tbody class="checkout__totals-subtotals">
-                                    <tr>
-                                        <th>Subtotal</th>
-                                        <td>Ks {{ $subTotal }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Delivery Fee</th>
-                                        <td>
+                                        @foreach ($cart_data as $product)
+                                            <tr>
+                                                <td>{{ $product->name }} × {{ $product->quantity }}</td>
+                                                <td>Ks {{ $product->quantity * $product->selling_price }}</td>
+                                            </tr>
                                             @php
-                                                if (!$user->addresses->isEmpty()) {
-                                                    $defaultAddress = $user->addresses->where('setDefault', true)->first();
-                                                    if ($defaultAddress->township) {
-                                                        $deliFee = $defaultAddress->township->deliFees->first()->fee;
-                                                    } else {
-                                                        $deliFee = 3000;
-                                                    }
-                                                } else {
-                                                    $deliFee = 0;
-                                                }
+                                                $subTotal += $product->quantity * $product->selling_price;
                                             @endphp
-                                            Ks {{ $deliFee }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot class="checkout__totals-footer">
-                                    <tr>
-                                        <th>Total</th>
-                                        <td>
-                                            @php
-                                                $total = 0;
-                                            @endphp
-                                            @foreach ($cart_data as $product)
+                                        @endforeach
+                                    </tbody>
+                                    <tbody class="checkout__totals-subtotals">
+                                        <tr>
+                                            <th>Subtotal</th>
+                                            <td>Ks {{ $subTotal }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Fee</th>
+                                            <td>
                                                 @php
-                                                    $total += $product->quantity * $product->selling_price;
+                                                    if (!$user->addresses->isEmpty()) {
+                                                        $defaultAddress = $user->addresses->where('setDefault', true)->first();
+                                                        if ($defaultAddress->township) {
+                                                            $deliFee = $defaultAddress->township->deliFees->first()->fee;
+                                                        } else {
+                                                            $deliFee = 3000;
+                                                        }
+                                                    } else {
+                                                        $deliFee = 0;
+                                                    }
                                                 @endphp
-                                            @endforeach
-                                            {{ $total + $deliFee }}
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            {{-- <input type="text" value=""> --}}
-                            <button type="submit" class="btn btn-primary btn-xl btn-block"
-                                {{ $user->addresses->isEmpty() ? 'disabled' : ($subTotal == 0 ? 'disabled' : '') }}>
-                                Place Order
-                            </button>
+                                                Ks {{ $deliFee }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot class="checkout__totals-footer">
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>
+                                                @php
+                                                    $total = 0;
+                                                @endphp
+                                                @foreach ($cart_data as $product)
+                                                    @php
+                                                        $total += $product->quantity * $product->selling_price;
+                                                    @endphp
+                                                @endforeach
+                                                {{ $total + $deliFee }}
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                {{-- <input type="text" value=""> --}}
+                                <a type="button" class="btn btn-primary btn-xl btn-block" href="{{ url('order/create') }}"
+                                    {{ $user->addresses->isEmpty() ? 'disabled' : ($subTotal == 0 ? 'disabled' : '') }}>
+                                    Place Order
+                                </a>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

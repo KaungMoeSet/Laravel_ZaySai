@@ -34,9 +34,31 @@
             </div>
         </li>
 
+        <li class="nav-item dropdown" style="list-style: none">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/profile">
+                    My Profile
+                </a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </li>
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown pr-2">
+        {{-- <li class="nav-item dropdown pr-2">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
                 <span class="badge badge-warning navbar-badge">15</span>
@@ -61,6 +83,6 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
+        </li> --}}
     </ul>
 </nav>

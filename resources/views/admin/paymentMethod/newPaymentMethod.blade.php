@@ -74,9 +74,9 @@
                                                 <label>Bank Name</label>
                                                 <select id="bank_name" name="bank_name" class="form-control">
                                                     <option value="" disabled selected>Choose your Bank</option>
-                                                    @for ($i = 0; $i < count($bankNames); $i++)
-                                                        <option value="{{ $bankNames[$i] }}">
-                                                            {{ $bankNames[$i] }}
+                                                    @for ($i = 0; $i < count($payNames); $i++)
+                                                        <option value="{{ $payNames[$i] }}">
+                                                            {{ $payNames[$i] }}
                                                         </option>
                                                     @endfor
                                                 </select>
@@ -85,6 +85,18 @@
                                                         {{ $message }}
                                                     @enderror
                                                 </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Logo Image</label>
+                                                <input name="logo" type="file" class="form-control-file"
+                                                    value="{{ old('logo') }}">
+                                                @error('logo')
+                                                    <span class="help-inline">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

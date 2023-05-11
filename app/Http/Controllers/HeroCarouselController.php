@@ -124,9 +124,18 @@ class HeroCarouselController extends Controller
     public function destroy(string $id)
     {
         //
-        $hero = HeroCarousel::find($id)->title;
+        $hero = HeroCarousel::find($id);
+        $heroTitle = $hero->title;
+        $heroImage = $hero->image;
+        // dd($productImage);
+
+        $path = "public/img/{$heroImage}";
+        if(Storage::exists($path)) {
+            Storage::delete($path);
+        }
+
         HeroCarousel::find($id)->delete();
 
-        return redirect()->back()->with('success_message', $hero . ' is deleted successfully!');
+        return redirect()->back()->with('success_message', $heroTitle . ' is deleted successfully!');
     }
 }

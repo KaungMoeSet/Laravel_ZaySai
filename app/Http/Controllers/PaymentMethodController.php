@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentMethodController extends Controller
 {
@@ -24,8 +25,8 @@ class PaymentMethodController extends Controller
     public function create()
     {
         //
-        $bankNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank'];
-        return view('admin.paymentMethod.newPaymentMethod', compact('bankNames'));
+        $payNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
+        return view('admin.paymentMethod.newPaymentMethod', compact('payNames'));
     }
 
     /**
@@ -38,14 +39,27 @@ class PaymentMethodController extends Controller
             'acc_name'  => 'required',
             'acc_no'    => 'required',
             'acc_type'  => 'required',
-            'bank_name' => 'required'
+            'bank_name' => 'required',
+            'logo'     => 'required'
         ]);
+
+        if ($request->hasFile('logo')) {
+            if ($request->file('logo')->isValid()) {
+                $validated  = $request->validate([
+                    'logo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension  = $request->logo->extension();
+                $randomName = rand() . "." . $extension;
+                $request->logo->storeAs('/public/img/', $randomName);
+            }
+        }
 
         $paymentMethod = new PaymentMethod();
         $paymentMethod->acc_name = $request->input('acc_name');
         $paymentMethod->acc_number = $request->input('acc_no');
         $paymentMethod->acc_type = $request->input('acc_type');
         $paymentMethod->bank_name = $request->input('bank_name');
+        $paymentMethod->image = $randomName;
 
         $paymentMethod->save();
         return redirect()->route('paymentMethod.index')->with('success_message', $request->input('acc_name') . ' is added successfully!');
@@ -66,8 +80,8 @@ class PaymentMethodController extends Controller
     {
         //
         $paymentMethod = PaymentMethod::find($id);
-        $bankNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank'];
-        return view('admin.paymentMethod.editPaymentMethod', compact('paymentMethod', 'bankNames'));
+        $payNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
+        return view('admin.paymentMethod.editPaymentMethod', compact('paymentMethod', 'payNames'));
     }
 
     /**
@@ -80,10 +94,32 @@ class PaymentMethodController extends Controller
             'acc_name'  => 'required',
             'acc_no'    => 'required',
             'acc_type'  => 'required',
-            'bank_name' => 'required'
+            'bank_name' => 'required',
+            'logo'     => 'required'
         ]);
         
         $paymentMethod = PaymentMethod::find($id);
+
+        if ($request->hasFile('image')) {
+            if ($request->file('image')->isValid()) {
+                $validated = $request->validate([
+                    'image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension = $request->image->extension();
+                $randomName = rand() . "." . $extension;
+                $request->image->storeAs('/public/img/', $randomName);
+
+                $path = "public/img/{$paymentMethod->image}";
+                if (Storage::exists($path)) {
+                    Storage::delete($path);
+                }
+
+                $paymentMethod->image = $randomName;
+            }
+        } else {
+            $paymentMethod->image = $paymentMethod->image;
+        }
+
         $paymentMethod->acc_name = $request->input("acc_name");
         $paymentMethod->acc_number = $request->input("acc_no");
         $paymentMethod->acc_type = $request->input("acc_type");
@@ -99,9 +135,17 @@ class PaymentMethodController extends Controller
     public function destroy(string $id)
     {
         //
-        $paymentMethod = PaymentMethod::find($id)->name;
+        $paymentMethod = PaymentMethod::find($id);
+        $paymentMethodName = $paymentMethod->name;
+        $paymentMethodLogo = $paymentMethod->image;
+
+        $path = "public/img/{$paymentMethodLogo}";
+        if(Storage::exists($path)) {
+            Storage::delete($path);
+        }
+
         PaymentMethod::find($id)->delete();
 
-        return redirect()->back()->with('success_message', $paymentMethod . ' is deleted successfully!');
+        return redirect()->back()->with('success_message', $paymentMethodName . ' is deleted successfully!');
     }
 }

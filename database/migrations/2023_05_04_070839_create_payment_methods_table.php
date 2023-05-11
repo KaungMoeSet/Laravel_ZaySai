@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('acc_number');
             $table->string('acc_type');
             $table->string('bank_name');
+            $table->string('image');
             $table->timestamps();
         });
     }

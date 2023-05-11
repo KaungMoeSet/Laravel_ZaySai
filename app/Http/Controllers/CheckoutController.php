@@ -119,6 +119,8 @@ class CheckoutController extends Controller
     {
         $addressId       = $request->input('address_id');
         $shippingAddress = Address::find($addressId);
+
+        
         return view('customer.checkout', compact('shippingAddress'));
     }
 

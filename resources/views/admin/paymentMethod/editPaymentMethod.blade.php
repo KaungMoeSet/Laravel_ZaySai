@@ -74,10 +74,10 @@
                                                 <label>Bank Name</label>
                                                 <select id="bank_name" name="bank_name" class="form-control">
                                                     <option value="" disabled>Choose your Bank</option>
-                                                    @for ($i = 0; $i < count($bankNames); $i++)
-                                                        <option value="{{ $bankNames[$i] }}"
-                                                            {{ $bankNames[$i] == $paymentMethod->bank_name ? 'selected' : '' }}>
-                                                            {{ $bankNames[$i] }}
+                                                    @for ($i = 0; $i < count($payNames); $i++)
+                                                        <option value="{{ $payNames[$i] }}"
+                                                            {{ $payNames[$i] == $paymentMethod->bank_name ? 'selected' : '' }}>
+                                                            {{ $payNames[$i] }}
                                                         </option>
                                                     @endfor
                                                 </select>

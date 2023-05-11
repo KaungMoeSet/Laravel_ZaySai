@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\PaymentMethod;
+use App\Models\Product;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,24 @@ class OrderController extends Controller
     public function create()
     {
         //
+        $paymentMethods = PaymentMethod::all();
+        $cart           = session()->get('cart', []);
+        $user           = Auth::user();
+        $defaultAddress = $user->addresses->where('setDefault', true)->first();
 
+        $cart_data = [];
+
+        foreach ($cart as $id => $item) {
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                $product->quantity = $item['quantity'];
+                $cart_data[]       = $product;
+            }
+        }
+
+        $categories = Category::all();
+
+        return view('customer.order', compact('categories', 'paymentMethods', 'cart_data', 'defaultAddress'));
     }
 
     /**

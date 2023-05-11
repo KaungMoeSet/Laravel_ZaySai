@@ -47,6 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Logo</th>
                                             <th>Account Name</th>
                                             <th>Account Number</th>
                                             <th>Account Type</th>
@@ -58,6 +59,10 @@
                                         <?php $no = 1; ?>
                                         @foreach ($paymentMethods as $paymentMethod)
                                             <tr>
+                                                <td>
+                                                    <img src="{{ asset('storage/img/' . $paymentMethod->image) }}"
+                                                        width="100px" height="100px">
+                                                </td>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $paymentMethod->acc_name }}</td>
                                                 <td> {{ $paymentMethod->acc_number }} </td>
