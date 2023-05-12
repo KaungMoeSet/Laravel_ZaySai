@@ -14,12 +14,13 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('sub_category_id');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('buying_price');
             $table->integer('selling_price');
             $table->integer('quantity');
             $table->longText('description');
             $table->timestamps();
+
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

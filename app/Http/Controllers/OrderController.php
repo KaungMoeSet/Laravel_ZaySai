@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class OrderController extends Controller
 {
@@ -32,7 +34,7 @@ class OrderController extends Controller
         $defaultAddress = $user->addresses->where('setDefault', true)->first();
 
         $cart_data = [];
-        $delifee = session('cart.delifee');
+        $delifee   = session('cart.delifee');
 
         foreach ($cart as $id => $item) {
             $product = Product::find($item['product_id']);
@@ -53,6 +55,39 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        $cart = session()->get('cart', []);
+        $user = Auth::user();
+
+        $request->validate([
+            'account'           => 'required',
+            'paymentScreenshot' => 'required',
+        ]);
+
+        if ($request->hasFile('paymentScreenshot') && $request->file('paymentScreenshot')->isValid()) {
+            $validated  = $request->validate([
+                'paymentScreenshot' => 'mimes:jpg,jpeg,png,gif|max:2048',
+            ]);
+            $extension  = $request->paymentScreenshot->extension();
+            $randomName = rand() . "." . $extension;
+            $request->paymentScreenshot->storeAs('/public/img/', $randomName);
+        }
+
+        $order              = new Order();
+        $order->customer_id = $user->id;
+        // $orderNumber = Hash::make($user->id . $product->id . Carbon::now());
+
+        $payment            = new Payment();
+        $payment->account = $request->input('account');
+        $payment->payment_screenshot = $randomName;
+        $payment->save();
+
+
+        
+
+        $categories = Category::all();
+
+        return view('customer.orderConfirmed', compact('categories'));
     }
 
     /**

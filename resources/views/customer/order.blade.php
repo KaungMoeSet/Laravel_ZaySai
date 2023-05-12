@@ -36,7 +36,7 @@
                                                 <td>
                                                     {{ $paymentMethod->acc_name }}
                                                 </td>
-                                                <td class="text-warning" style="text-shadow: 1px .5px .3px rgb(96, 96, 96)">
+                                                <td class="" style="text-shadow: 1px .5px .3px #FFD333">
                                                     {{ $paymentMethod->acc_number }}
                                                 </td>
                                             </tr>
@@ -52,35 +52,47 @@
                                 <h4 class="card-title">Your Payment Info</h4>
                                 <table class="checkout__totals">
                                     <tbody class="checkout__totals-subtotals">
-                                        <tr>
-                                            <th>Your Account Name </th>
+                                        {{-- <tr>
+                                            <th>Payment/Bank Type</th>
                                             <td>
-                                                <input name="accountName" type="text" class="form_input"
-                                                    value="{{ old('accountName') }}">
-                                                @error('accountName')
-                                                    <span class="help-inline">
+                                                <select id="my-select" name="bank_name" class="form-control">
+                                                    <option value="" disabled selected>Choose payment bank type</option>
+                                                    @foreach ($paymentMethods as $paymentMethod)
+                                                        <option>
+                                                            {{ $paymentMethod->bank_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="help-inline">
+                                                    @error('bank_name')
                                                         {{ $message }}
-                                                    </span>
-                                                @enderror
+                                                    @enderror
+                                                </span>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
-                                            <th>Your Account Number </th>
+                                            <th>Account Number</th>
                                             <td>
-                                                <input name="accountNumber" type="text" class="form_input"
-                                                    value="{{ old('accountNumber') }}">
-                                                @error('accountName')
-                                                    <span class="help-inline">
+                                                <select id="my-select" name="account" class="form-control">
+                                                    <option value="" disabled selected>Choose account number</option>
+                                                    @foreach ($paymentMethods as $paymentMethod)
+                                                        <option value="{{ $paymentMethod->id }}">
+                                                              {{ $paymentMethod->bank_name }} - {{  $paymentMethod->acc_number }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="help-inline">
+                                                    @error('account')
                                                         {{ $message }}
-                                                    </span>
-                                                @enderror
+                                                    @enderror
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Payment Screenshot </th>
                                             <td>
-                                                <input name="accountName" type="file" value="{{ old('photo') }}"  class="form-control-file">
-                                                @error('photo')
+                                                <input name="paymentScreenshot" type="file" value="{{ old('paymentScreenshot') }}"  class="form-control-file">
+                                                @error('paymentScreenshot')
                                                     <span class="help-inline">
                                                         {{ $message }}
                                                     </span>
@@ -144,9 +156,9 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <a type="submit" class="btn btn-primary btn-xl btn-block">
+                                <button type="submit" class="btn btn-primary btn-xl btn-block">
                                     Confirm Order
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

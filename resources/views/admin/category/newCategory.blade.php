@@ -92,7 +92,7 @@
                                                 <select id="my-select" name="insert_option" class="form-control">
                                                     <option value="">None</option>
                                                     @foreach ($categories as $category)
-                                                        <option value="{{ $category['id'] }}" name="parent_category">
+                                                        <option value="{{ $category['id'] }}">
                                                             {{ $category['name'] }}</option>
                                                     @endforeach
                                                 </select>

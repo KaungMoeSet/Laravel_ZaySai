@@ -23,4 +23,9 @@ class Address extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

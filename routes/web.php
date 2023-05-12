@@ -19,6 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,10 @@ Route::get('/trackOrder', function () {
     return view('pages.trackOrder');
 });
 
-
+Route::get('/orderConfirmed', function() {
+    $categories = Category::all();
+    return view('customer.orderConfirmed', compact('categories'));
+});
 
 Route::get('/category/create/{name}', [CategoryController::class, 'create']);
 

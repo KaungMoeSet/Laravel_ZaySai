@@ -94,7 +94,7 @@
                                 <thead class="cart__totals-header">
                                     <tr>
                                         <th>Subtotal ({{ $itemsCount }} items)</th>
-                                        <td>{{ $subTotal }}</td>
+                                        <td>Ks {{ $subTotal }}</td>
                                     </tr>
                                 </thead>
                                 <tfoot class="cart__totals-footer">

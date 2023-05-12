@@ -28,6 +28,10 @@ class Admin extends Authenticatable
         return $this->password;
     }
 
+    public function paymentConfirm()
+    {
+        return $this->hasMany(PaymentConfirm::class);
+    }
     // public function validateCredentials(UserContract $user, array $credentials)
     // {
     //     $plain = $credentials['password'];
