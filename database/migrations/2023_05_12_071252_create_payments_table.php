@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->string('account');
+            $table->unsignedBigInteger('payment_method_id');
             $table->string('payment_screenshot');
-            $table->date('paid_date')->useCurrent();
-            $table->date('user_cancel_date')->nullable();
-            $table->boolean('is_user_cancel')->default(false);
+            $table->timestamp('paid_at')->nullable();
 
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
             $table->index('order_id');
         });
     }

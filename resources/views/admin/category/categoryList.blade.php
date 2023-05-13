@@ -46,7 +46,7 @@
                             <h3 class="card-title">Parent Categories</h3>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table table-head-fixed text-nowrap table-bordered table-striped table-hover">
+                            <table id="example1" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -88,7 +88,7 @@
                             <h3 class="card-title">Sub Categories</h3>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="subCateg" class="table table-head-fixed text-nowrap table-bordered table-striped table-hover">
+                            <table id="subCateg" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>

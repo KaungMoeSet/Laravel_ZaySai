@@ -16,14 +16,15 @@ return new class extends Migration
             $table->string('order_number');
 
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('shippingAddress_id');
-            $table->enum('order_status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');
+            $table->unsignedBigInteger('address_id');
+            $table->decimal('deli_fee', 8, 2);
+            $table->enum('order_status', ['pending', 'processing', 'delivered'])->default('pending');
 
-            $table->timestamp('orderDate')->useCurrent();
+            $table->timestamp('order_date')->useCurrent();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users');
-            $table->foreign('shippingAddress_id')->references('id')->on('addresses');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

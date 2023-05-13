@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentConfirm;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\PaymentConfirm;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentConfirmController extends Controller
 {
@@ -13,6 +15,9 @@ class PaymentConfirmController extends Controller
     public function index()
     {
         //
+        $paymentConfirms = PaymentConfirm::all();
+
+        return view('admin.order.paymentConfirm', compact('paymentConfirms'));
     }
 
     /**
@@ -34,9 +39,12 @@ class PaymentConfirmController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PaymentConfirm $paymentConfirm)
+    public function show(string $id)
     {
         //
+        $paymentConfirm = PaymentConfirm::find($id);
+
+        return view('admin.order.paymentConfirmDetail', compact('paymentConfirm'));
     }
 
     /**
@@ -61,5 +69,39 @@ class PaymentConfirmController extends Controller
     public function destroy(PaymentConfirm $paymentConfirm)
     {
         //
+    }
+
+    public function accept(string $id)
+    {
+        $now = Carbon::now('Asia/Yangon');
+
+        $paymentConfirm = PaymentConfirm::find($id);
+
+        $paymentConfirm->confirm_status = 'accepted';
+        $paymentConfirm->confirm_cancel_date = $now;
+        $paymentConfirm->reject_reason = '';
+
+        $paymentConfirm->admin_id = Auth::guard('admin')->user()->id;
+
+        $paymentConfirm->save();
+
+        return redirect()->route('paymentConfirm.index')->with('success_message', 'Payment accepted successfully!');
+    }
+
+    public function reject(string $id)
+    {
+        $now = Carbon::now('Asia/Yangon');
+
+        $paymentConfirm = PaymentConfirm::find($id);
+
+        $paymentConfirm->confirm_status = 'rejected';
+        $paymentConfirm->confirm_cancel_date = $now;
+        $paymentConfirm->reject_reason = 'သင့်ရဲ့ အချက်အလက်မှားယွင်းနေပါတယ်';
+
+        $paymentConfirm->admin_id = Auth::guard('admin')->user()->id;
+
+        $paymentConfirm->save();
+
+        return redirect()->route('paymentConfirm.index')->with('success_message', 'Payment rejected!');
     }
 }

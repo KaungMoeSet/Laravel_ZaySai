@@ -16,14 +16,14 @@
                         <div class="cart-title">
                             <h2>
                                 <i class="fa-regular fa-circle-check text-success"></i>
-                                <span class="text-success"> Thank you for your purchase! </span> 
+                                <span class="text-success"> Thank you for your purchase! </span>
                             </h2>
                             <div style="text-align: center">
-                                <p >Your order number is #2023123456 </p>
+                                <p >Your order number is {{ $orderNumber }} </p>
                             </div>
                         </div>
                         <div class="card-body">
-                            
+
                         </div>
                     </div>
                 </div>

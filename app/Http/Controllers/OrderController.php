@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Payment;
-use App\Models\PaymentMethod;
 use App\Models\Product;
-use App\Models\Region;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
+use App\Models\PaymentConfirm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -20,6 +22,11 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $orders = Order::whereHas('payment.paymentConfirm', function ($query) {
+            $query->where('confirm_status', 'accepted');
+        })->get();
+
+        return view('admin.order.orderList', compact('orders'));
     }
 
     /**
@@ -34,7 +41,7 @@ class OrderController extends Controller
         $defaultAddress = $user->addresses->where('setDefault', true)->first();
 
         $cart_data = [];
-        $delifee   = session('cart.delifee');
+        // $delifee   = session('cart.delifee');
 
         foreach ($cart as $id => $item) {
             $product = Product::find($item['product_id']);
@@ -75,19 +82,50 @@ class OrderController extends Controller
 
         $order              = new Order();
         $order->customer_id = $user->id;
-        // $orderNumber = Hash::make($user->id . $product->id . Carbon::now());
+        $orderNumber = '#' . date('Y') . $user->id . rand(100000, 999999);
+        $order->order_number = $orderNumber;
+
+        // Retrieve default address of user
+        $defaultAddress = $user->addresses->where('setDefault', true)->first();
+
+        if ($defaultAddress->township) {
+            $deliFee = $defaultAddress->township->deliFees->first()->fee;
+        } else {
+            $deliFee = 3000;
+        }
+        // Store default address details in order
+        $order->address_id = $defaultAddress->id;
+        $order->deli_fee = strval($deliFee);
+
+        $order->save();
+
+        foreach ($cart as $id => $item) {
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                $order->products()->attach($product, ['quantity' => $item['quantity']]);
+            }
+        }
+        // foreach ($cart as $product_id => $quantity) {
+        //     $product = Product::find($product_id);
+        //     $order->products()->attach($product, ['quantity' => $quantity]);
+        // }
+        $now = Carbon::now('Asia/Yangon');
 
         $payment            = new Payment();
-        $payment->account = $request->input('account');
+        $payment->payment_method_id = $request->input('account');
         $payment->payment_screenshot = $randomName;
+        $payment->paid_at = $now;
+        $payment->order_id = $order->id;
         $payment->save();
 
-
-        
+        $payment_confirm = new PaymentConfirm();
+        $payment_confirm->payment_id = $payment->id;
+        $payment_confirm->total_amount = $request->input('totalAmt');
+        $payment_confirm->save();
 
         $categories = Category::all();
-
-        return view('customer.orderConfirmed', compact('categories'));
+        Session::forget('cart');
+        return view('customer.orderConfirmed', compact('categories', 'orderNumber'));
     }
 
     /**

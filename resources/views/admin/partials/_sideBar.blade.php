@@ -97,7 +97,7 @@
                 <li
                     class="nav-item {{ request()->is('user')
                         ? 'menu-is-opening menu-open'
-                        : (request()->is('admin')
+                        : (request()->is('adminAcc')
                             ? 'menu-is-opening menu-open'
                             : '') }}">
                     <a href="#"
@@ -118,9 +118,40 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('adminAcc') }}"
-                                class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                                class="nav-link {{ request()->is('adminAcc') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Admin Account List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ request()->is('order')
+                        ? 'menu-is-opening menu-open'
+                        : (request()->is('paymentConfirm')
+                            ? 'menu-is-opening menu-open'
+                            : '') }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('order') ? 'active' : (request()->is('paymentConfirm') ? 'active' : '') }}">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Order management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('paymentConfirm') }}"
+                                class="nav-link {{ request()->is('paymentConfirm') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Payment List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('order') }}"
+                                class="nav-link {{ request()->is('order') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>

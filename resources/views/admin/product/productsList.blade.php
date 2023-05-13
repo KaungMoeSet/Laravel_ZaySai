@@ -43,11 +43,12 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped table-hover">
-                                    <thead>
+                                <table id="example1" class="table table-hover">
+                                    <thead class="thead-light">
                                         <tr>
                                             <th>#</th>
                                             <th>Product</th>
+                                            <th>Photo Qty</th>
                                             <th>Name</th>
                                             <th>Category</th>
                                             <th>Buying Price</th>
@@ -57,16 +58,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no = 1; ?>
+                                        @php
+                                            $no = 1;
+                                        @endphp
                                         @foreach ($products as $product)
+                                            <?php $productQty = 0; ?>
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>
-                                                    @foreach ($product->images as $image)
-                                                            <img src="{{ asset('storage/img/' . $image->image_name) }}"
-                                                                width="100px" height="100px" alt="Image">
-                                                    @endforeach
+                                                    @if ($product->images->isNotEmpty())
+                                                        <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                            width="100px" height="100px" alt="Image">
+                                                    @endif
 
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    @php
+                                                        foreach ($product->images as $image) {
+                                                            $productQty++;
+                                                        }
+                                                    @endphp
+                                                    {{ $productQty }}
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td> {{ $product->sub_category->name }} </td>

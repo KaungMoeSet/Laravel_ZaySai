@@ -18,8 +18,10 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentConfirmController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Models\Category;
+use App\Models\PaymentConfirm;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +69,7 @@ Route::get('/trackOrder', function () {
     return view('pages.trackOrder');
 });
 
-Route::get('/orderConfirmed', function() {
+Route::get('/orderConfirmed', function () {
     $categories = Category::all();
     return view('customer.orderConfirmed', compact('categories'));
 });
@@ -112,40 +114,31 @@ Route::middleware(['auth.user'])->group(function () {
     Route::get('/profile', [UserController::class, 'showMyProfile']);
 });
 
-Route::match(['get', 'post'], '/admin', [AdminController::class, 'index']);
-
-// Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
-
-// Admin
-Route::resource('admin', AdminController::class);
-
-// Products
-Route::resource('product', ProductController::class);
-Route::get('/get-subCategoires/{id}', [ProductController::class, 'getSubCategories']);
-
-// Product Image
-Route::resource('productImage', ProductImageController::class);
-// Route::resource('/productImage/{id}', [ProductImageController::class, 'destroy']);
-
-// Categories
-Route::resource('subCategory', SubCategoryController::class);
-Route::resource('category', CategoryController::class);
-
-// Payments
-Route::resource('paymentMethod', PaymentMethodController::class);
-
-// Hero Carousel
-Route::resource('heroCarousel', HeroCarouselController::class);
-
-Route::resource('user', UserController::class);
-// });
-
 Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
     Route::view('/login', 'auth.login', ['url' => 'admin']);
     Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 });
 
-Route::middleware(['auth:admin'])->group(function () {
-    Route::resource('/admin/create', AdminController::class);
-    // Route::post('/admin', 'Admin\AdminController@store')->name('admin.store');
+Route::middleware(['auth.admin'])->group(function () {
+
+    Route::resource('admin', AdminController::class);
+    Route::resource('user', UserController::class);
+
+    Route::resource('product', ProductController::class);
+
+    Route::get('/get-subCategoires/{id}', [ProductController::class, 'getSubCategories']);
+    Route::resource('productImage', ProductImageController::class);
+    Route::resource('subCategory', SubCategoryController::class);
+    Route::resource('category', CategoryController::class);
+
+    Route::resource('paymentMethod', PaymentMethodController::class);
+    Route::resource('heroCarousel', HeroCarouselController::class);
+
+    Route::resource('order', OrderController::class);
+
+    Route::resource('paymentConfirm', PaymentConfirmController::class);
+
+    Route::get('paymentConfirm/accept/{id}', [PaymentConfirmController::class, 'accept'])->name('paymentConfirm.accept');
+
+    Route::get('paymentConfirm/reject/{id}', [PaymentConfirmController::class, 'reject'])->name('paymentConfirm.reject');
 });

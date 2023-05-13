@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->date('confirm_cancel_date');
-            $table->boolean('confirm_status');
+            $table->timestamp('confirm_cancel_date')->nullable();
+            $table->longText('reject_reason')->nullable();
+            $table->enum('confirm_status', ['pending', 'accepted', 'rejected'])->default('pending');
+            $table->decimal('total_amount', 8, 2);
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('admins');

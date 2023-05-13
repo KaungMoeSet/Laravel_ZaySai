@@ -77,7 +77,8 @@
                                                     <option value="" disabled selected>Choose account number</option>
                                                     @foreach ($paymentMethods as $paymentMethod)
                                                         <option value="{{ $paymentMethod->id }}">
-                                                              {{ $paymentMethod->bank_name }} - {{  $paymentMethod->acc_number }}
+                                                            {{ $paymentMethod->bank_name }} -
+                                                            {{ $paymentMethod->acc_number }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -91,7 +92,8 @@
                                         <tr>
                                             <th>Payment Screenshot </th>
                                             <td>
-                                                <input name="paymentScreenshot" type="file" value="{{ old('paymentScreenshot') }}"  class="form-control-file">
+                                                <input name="paymentScreenshot" type="file"
+                                                    value="{{ old('paymentScreenshot') }}" class="form-control-file">
                                                 @error('paymentScreenshot')
                                                     <span class="help-inline">
                                                         {{ $message }}
@@ -140,10 +142,8 @@
                                                         $total += $product->quantity * $product->selling_price;
                                                     @endphp
                                                 @endforeach
-                                                <input type="text" name="totalAmt" class="form_input"
-                                                    style="text-align: end; width: 90%; border: none; background-color: transparent; outline: none;"
+                                                <input type="text" name="totalAmt" class="form_input data_input"
                                                     value="{{ $total + $deliFee }}" readonly> Ks
-                                                {{-- Ks {{  }} --}}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -151,11 +151,14 @@
                                         <tr>
                                             <th>Total Amount</th>
                                             <td>
-
+                                                {{ $total + $deliFee }}
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <p class="text-danger">
+                                    order confirm ပြီးရင်ပြန် cancel လို့မရပါ
+                                </p>
                                 <button type="submit" class="btn btn-primary btn-xl btn-block">
                                     Confirm Order
                                 </button>
