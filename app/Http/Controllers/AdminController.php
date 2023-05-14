@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\PaymentConfirm;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -14,7 +18,12 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('admin.dashboard');
+        $orders = Order::all();
+        $users = User::all();
+        $products = Product::with('orders')->get();
+        $acceptedAmount = PaymentConfirm::where('confirm_status', 'accepted')->sum('total_amount');
+
+        return view('admin.dashboard', compact('orders', 'users',  'products', 'acceptedAmount'));
     }
 
     /**

@@ -48,7 +48,7 @@ Route::get('/contactUs', [HomeController::class, 'showContactUsPage']);
 
 Route::get('/aboutUs', [HomeController::class, 'showAboutUsPage']);
 
-Route::get('/allProducts', [HomeController::class, 'allProducts']);
+Route::get('/allProducts', [HomeController::class, 'allProducts'])->name('allProducts');
 
 Route::resource('products', HomeController::class);
 // Route::get('/allProducts/{id}', [HomeController::class, 'show']);
@@ -111,7 +111,14 @@ Route::middleware(['auth.user'])->group(function () {
 
     Route::resource('order', OrderController::class);
 
+    Route::resource('profile', UserController::class);
+
+    Route::get('profileData', [UserController::class, 'profileData'])->name('profile.profileData');
+
+    Route::get('addressBook', [UserController::class, 'addressBook'])->name('profile.addressBook');
+
     Route::get('/profile', [UserController::class, 'showMyProfile']);
+
 });
 
 Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
@@ -135,6 +142,10 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::resource('heroCarousel', HeroCarouselController::class);
 
     Route::resource('order', OrderController::class);
+
+    Route::get('order/deliver/{id}', [OrderController::class, 'deliver'])->name('order.deliver');
+
+    Route::get('order/processing/{id}', [OrderController::class, 'processing'])->name('order.processing');
 
     Route::resource('paymentConfirm', PaymentConfirmController::class);
 

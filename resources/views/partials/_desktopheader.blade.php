@@ -35,7 +35,7 @@
                                     @endphp
                                 @endforeach
                             @endif
-                            <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">@if (session('cart') == null)0 @else{{ $totalQuantity }}@endif
+                            <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill">@if (session('cart') == null)0 @else{{ $totalQuantity }} @endif
                                 </span>
                             </i>
                     </a>
@@ -89,42 +89,37 @@
                                     <div class="departments__links-wrapper">
                                         <ul class="departments__links">
                                             {{-- <li class="departments__item"><a href="#">Power Machinery</a></li> --}}
-                                            <li class="departments__item">
-                                                @foreach ($categories as $category)
-                                                    <a href="#"> {{ $category->name }}
-                                                        <svg class="departments__link-arrow" width="6px"
-                                                            height="9px">
-                                                            <use
-                                                                xlink:href="/frontend/images/sprite.svg#arrow-rounded-right-6x9">
-                                                            </use>
-                                                        </svg>
+                                            @foreach ($categories as $category)
+                                                <li class="departments__item departments__item--menu">
+                                                    <a href="#">
+                                                        {{ $category->name }}
+                                                        @if ($category->subCategories->isNotEmpty())
+                                                            <svg class="departments__link-arrow" width="6px"
+                                                                height="9px">
+                                                                <use
+                                                                    xlink:href="/frontend/images/sprite.svg#arrow-rounded-right-6x9">
+                                                                </use>
+                                                            </svg>
+                                                        @endif
                                                     </a>
-                                                    <div class="departments__megamenu departments__megamenu--sm">
-                                                        <!-- .megamenu -->
-                                                        <div class="megamenu megamenu--departments">
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <ul
-                                                                        class="megamenu__links megamenu__links--level--0">
-                                                                        <li
-                                                                            class="megamenu__item megamenu__item--with-submenu">
-                                                                            <ul
-                                                                                class="megamenu__links megamenu__links--level--1">
-                                                                                @foreach ($category->subCategories as $subCategory)
-                                                                                    <li class="megamenu__item">
-                                                                                        <a
-                                                                                            href="#">{{ $subCategory->name }}</a>
-                                                                                    </li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- .megamenu / end -->
+                                                    <div class="departments__menu">
+                                                        <!-- .menu -->
+                                                        @if ($category->subCategories->isNotEmpty())
+                                                            <ul class="menu menu--layout--classic">
+                                                                @foreach ($category->subCategories as $subCategory)
+                                                                    <li>
+                                                                        <a href="{{ route('allProducts', ['subcategory' => $subCategory->id]) }}">
+                                                                            {{ $subCategory->name }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                        <!-- .menu / end -->
                                                     </div>
-                                                @endforeach
-                                            </li>
+                                                </li>
+                                            @endforeach
+
                                         </ul>
                                     </div>
                                 </div>

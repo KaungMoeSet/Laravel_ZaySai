@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PaymentConfirm;
@@ -73,7 +74,7 @@ class PaymentConfirmController extends Controller
 
     public function accept(string $id)
     {
-        $now = Carbon::now('Asia/Yangon');
+        $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
 
         $paymentConfirm = PaymentConfirm::find($id);
 
@@ -82,7 +83,6 @@ class PaymentConfirmController extends Controller
         $paymentConfirm->reject_reason = '';
 
         $paymentConfirm->admin_id = Auth::guard('admin')->user()->id;
-
         $paymentConfirm->save();
 
         return redirect()->route('paymentConfirm.index')->with('success_message', 'Payment accepted successfully!');
@@ -90,7 +90,7 @@ class PaymentConfirmController extends Controller
 
     public function reject(string $id)
     {
-        $now = Carbon::now('Asia/Yangon');
+        $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
 
         $paymentConfirm = PaymentConfirm::find($id);
 

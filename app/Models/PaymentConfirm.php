@@ -10,7 +10,7 @@ class PaymentConfirm extends Model
     use HasFactory;
 
     public function payment()
-    {
+    {   
         return $this->belongsTo(Payment::class);
     }
 

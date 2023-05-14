@@ -50,7 +50,7 @@
                                                     {{-- {{ $order->payment->paymentConfirm->total_amount }} --}}
                                                 </td>
                                                 <td>
-                                                    {{ $order->order_date }}
+                                                    {{ \Carbon\Carbon::parse($order->order_date)->format('Y/m/d') }}
                                                 </td>
                                                 <td class="text-center">
                                                     <span
@@ -60,7 +60,7 @@
                                                     btn-secondary
                                                     @break
                                                 @case('processing')
-                                                    btn-primary
+                                                    btn-warning
                                                     @break
                                                 @case('rejected')
                                                     btn-success

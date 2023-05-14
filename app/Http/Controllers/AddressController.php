@@ -63,7 +63,7 @@ class AddressController extends Controller
         $address->city_id     = $request->input('city');
         $address->save();
 
-        return redirect()->route('checkout.index')->with('success_message', 'Address is added successfully!');
+        return redirect()->back()->with('success_message', 'Address is added successfully!');
     }
 
     /**

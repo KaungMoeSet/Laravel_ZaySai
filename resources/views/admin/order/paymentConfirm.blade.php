@@ -50,7 +50,7 @@
                                                     {{ $paymentConfirm->total_amount }}
                                                 </td>
                                                 <td>
-                                                    {{ $paymentConfirm->payment->paid_at }}
+                                                    {{ \Carbon\Carbon::parse($paymentConfirm->payment->paid_at)->format('Y/m/d') }}
                                                 </td>
                                                 <td class="text-center">
                                                     <span

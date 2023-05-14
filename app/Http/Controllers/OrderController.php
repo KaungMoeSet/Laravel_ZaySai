@@ -109,7 +109,7 @@ class OrderController extends Controller
         //     $product = Product::find($product_id);
         //     $order->products()->attach($product, ['quantity' => $quantity]);
         // }
-        $now = Carbon::now('Asia/Yangon');
+        $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
 
         $payment            = new Payment();
         $payment->payment_method_id = $request->input('account');
@@ -131,9 +131,12 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(string $id)
     {
         //
+        $order = Order::find($id);
+
+        return view('admin.order.orderDetail', compact('order'));
     }
 
     /**
@@ -158,5 +161,23 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function deliver(string $id)
+    {
+        $order = Order::find($id);
+        $order->order_status = 'delivered';
+
+        $order->save();
+        return redirect()->route('order.index')->with('success_message', 'Payment accepted successfully!');
+    }
+
+    public function processing(string $id)
+    {
+        $order = Order::find($id);
+        $order->order_status = 'processing';
+
+        $order->save();
+        return redirect()->route('order.index')->with('success_message', 'Payment accepted successfully!');
     }
 }

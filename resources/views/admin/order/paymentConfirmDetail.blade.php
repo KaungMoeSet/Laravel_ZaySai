@@ -25,7 +25,8 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Payment Detail {{ $paymentConfirm->payment->order->order_number }}
+                                <h3 class="card-title">Payment Detail of Order
+                                    <span class="text-primary"> {{ $paymentConfirm->payment->order->order_number }} </span>
                                 </h3>
                             </div>
                             <div class="card-body table-responsive">
@@ -43,7 +44,7 @@
                                             <th scope="row">Order Products</th>
                                             <td>
                                                 @foreach ($paymentConfirm->payment->order->products as $product)
-                                                    {{ $product->name }} - {{ $product->pivot->quantity }} -
+                                                    {{ $product->name }} - {{ $product->pivot->quantity }} &times;
                                                     {{ $product->selling_price }}<br>
                                                 @endforeach
 
@@ -69,12 +70,6 @@
                                             <td>
                                                 <img src="{{ asset('storage/img/' . $paymentConfirm->payment->payment_screenshot) }}"
                                                     width="70%" height="auto">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Paid Date</th>
-                                            <td>
-                                                {{ $paymentConfirm->payment->paid_at }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -116,13 +111,15 @@
                                         <tr>
                                             <th>Paid At</th>
                                             <td>
-                                                {{ $paymentConfirm->payment->paid_at }}
+                                                {{ \Carbon\Carbon::parse($paymentConfirm->payment->paid_at)->format('Y/m/d') }}
+                                                {{-- {{ $paymentConfirm->payment->paid_at }} --}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Accept/Reject At</th>
                                             <td>
-                                                {{ $paymentConfirm->confirm_cancel_date ?? '' }}
+                                                {{ \Carbon\Carbon::parse($paymentConfirm->confirm_cancel_date)->format('Y/m/d') }}
+                                                {{-- {{ $paymentConfirm->confirm_cancel_date->format('Y/m/d') ?? '' }} --}}
                                             </td>
                                         </tr>
                                         @if ($paymentConfirm->confirm_status == 'rejected')

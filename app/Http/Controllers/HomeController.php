@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -72,15 +73,33 @@ class HomeController extends Controller
         //
     }
 
-    public function allProducts()
+    // public function allProducts()
+    // {
+    //     // return view('admin.product.productsList', compact('products'))->with('i', (request()->input('page', 1) - 1) * 10);;
+    //     $products   = Product::latest()->paginate(2);
+    //     $categories = Category::all();
+
+    //     // dd($products);
+    //     return view('products', compact('products', 'categories'))->with('i', (request()->input('page', 1) - 1) * 2);
+    // }
+    public function allProducts(Request $request)
     {
-        // return view('admin.product.productsList', compact('products'))->with('i', (request()->input('page', 1) - 1) * 10);;
-        $products   = Product::latest()->paginate(2);
         $categories = Category::all();
 
-        // dd($products);
-        return view('products', compact('products', 'categories'))->with('i', (request()->input('page', 1) - 1) * 2);
+        $subcategoryId = $request->input('subcategory');
+        $subCategory = SubCategory::find($subcategoryId);
+
+        $productsQuery = Product::query();
+        if ($subCategory) {
+            $productsQuery->where('sub_category_id', $subcategoryId);
+        }
+
+        $products = $productsQuery->latest()->paginate(2);
+
+        return view('products', compact('products', 'categories', 'subCategory'))
+            ->with('i', (request()->input('page', 1) - 1) * 2);
     }
+
 
     public function showAboutUsPage()
     {

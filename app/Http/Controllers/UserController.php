@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -49,6 +51,10 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //
+        $user = User::find($id);
+        $categories = Category::all();
+
+        return view('customer.editProfile', compact('categories', 'user'));
     }
 
     /**
@@ -57,6 +63,13 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $user = User::find($id);
+        $user->name = $request->input('userName');
+        $user->birthday = $request->input('birthday');
+        $user->gender = $request->input('gender');
+        $user->save();
+
+        return redirect()->route('profile.profileData');
     }
 
     /**
@@ -73,7 +86,25 @@ class UserController extends Controller
     public function showMyProfile()
     {
         $categories = Category::all();
+        $user = Auth::user();
 
-        return view('customer.myProfile', compact('categories'));
+        return view('customer.myProfile', compact('categories', 'user'));
+    }
+
+    public function profileData()
+    {
+        $categories = Category::all();
+        $user = Auth::user();
+
+        return view('customer.profileData', compact('categories', 'user'));
+    }
+
+    public function addressBook()
+    {
+        $categories = Category::all();
+        $user = Auth::user();
+        $regions = Region::all();
+
+        return view('customer.addressBook', compact('categories', 'user', 'regions'));
     }
 }
