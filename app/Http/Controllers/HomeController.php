@@ -72,16 +72,7 @@ class HomeController extends Controller
     {
         //
     }
-
-    // public function allProducts()
-    // {
-    //     // return view('admin.product.productsList', compact('products'))->with('i', (request()->input('page', 1) - 1) * 10);;
-    //     $products   = Product::latest()->paginate(2);
-    //     $categories = Category::all();
-
-    //     // dd($products);
-    //     return view('products', compact('products', 'categories'))->with('i', (request()->input('page', 1) - 1) * 2);
-    // }
+    
     public function allProducts(Request $request)
     {
         $categories = Category::all();

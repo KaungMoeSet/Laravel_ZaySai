@@ -17,10 +17,6 @@ class CartController extends Controller
         //
         $cart = $request->session()->get('cart', []);
 
-        if (empty($cart)) {
-            // return redirect()->route('products.index')->with('status', 'No items in your cart!!');
-        }
-
         $cart_data = [];
 
         foreach ($cart as $id => $item) {
@@ -80,10 +76,19 @@ class CartController extends Controller
         } else {
             $product = Product::find($id);
             if ($product) {
-                $cart[$id] = [
-                    'product_id' => $product->id,
-                    'quantity'   => $quantity,
-                ];
+                $maxQuantity = min(10, $product->quantity); // maximum quantity allowed in cart
+                $newQuantity = min($quantity, $maxQuantity); // new quantity to add to cart
+
+                if (isset($cart[$id])) {
+                    // If the product is already in the cart, update the quantity
+                    $cart[$id]['quantity'] = $newQuantity;
+                } else {
+                    // Otherwise, add the product to the cart with the new quantity
+                    $cart[$id] = [
+                        'product_id' => $product->id,
+                        'quantity'   => $newQuantity,
+                    ];
+                }
             }
         }
 
@@ -91,7 +96,6 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
     }
-
 
 
     /**
@@ -107,7 +111,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity');
         if ($quantity) {
             $this->addToCart($id, $quantity);
-        }else {
+        } else {
             $this->addToCart($id, $quantity = 1);
         }
 
@@ -122,29 +126,39 @@ class CartController extends Controller
 
         if ($product) {
             if (isset($cart[$id])) {
-                if ($quantity === 1) {
-                    $cart[$id]['quantity']++;
-                } else {
-                    // dd($quantity);
+                if ($cart[$id]['quantity'] + $quantity <= 10 && $cart[$id]['quantity'] + $quantity <= $product->quantity) {
                     $cart[$id]['quantity'] += $quantity;
+                } else {
+                    // Handle the case where the maximum quantity has been reached
+                    // You can redirect back to the product page with an error message
+                    return redirect()->back()->with('error', 'Maximum quantity reached.');
                 }
             } else {
-                $cart[$id] = [
-                    'product_id' => $id,
-                    'quantity'   => $quantity,
-                ];
+                if ($quantity <= 10 && $quantity <= $product->quantity) {
+                    $cart[$id] = [
+                        'product_id' => $id,
+                        'quantity'   => $quantity,
+                    ];
+                } else {
+                    // Handle the case where the maximum quantity has been reached
+                    // You can redirect back to the product page with an error message
+                    return redirect()->back()->with('error', 'Maximum quantity reached.');
+                }
             }
 
             Session::put('cart', $cart);
+
+            // Redirect to the cart page or back to the product page
+            return redirect()->route('cart.index')->with('success', 'Product added to cart.');
         } else {
             // Handle the case where the product is not found
             abort(404);
         }
     }
 
+
     public function remove($id)
     {
-        // dd($id);
         $cart = session('cart');
 
         // Remove the item with the given id from the cart

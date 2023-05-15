@@ -103,6 +103,7 @@ Route::middleware(['auth.user'])->group(function () {
     Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
     Route::resource('checkout', CheckoutController::class);
+    Route::get('/checkout/{checkout}', [CheckoutController::class, 'show'])->name('checkout.show');
     Route::get('/checkout/cities/{region}', [CheckoutController::class, 'getCitiesByRegion'])->name('checkout.getCitiesByRegion');
     Route::get('/checkout/townships/{city}', [CheckoutController::class, 'getTownships'])->name('checkout.getTownships');
     Route::post('/checkout/update-addresses', [CheckoutController::class, 'updateShippingAddress'])->name('checkout.update-addresses');

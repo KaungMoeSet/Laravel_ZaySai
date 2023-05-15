@@ -105,10 +105,6 @@ class OrderController extends Controller
                 $order->products()->attach($product, ['quantity' => $item['quantity']]);
             }
         }
-        // foreach ($cart as $product_id => $quantity) {
-        //     $product = Product::find($product_id);
-        //     $order->products()->attach($product, ['quantity' => $quantity]);
-        // }
         $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
 
         $payment            = new Payment();
@@ -125,7 +121,8 @@ class OrderController extends Controller
 
         $categories = Category::all();
         Session::forget('cart');
-        return view('customer.orderConfirmed', compact('categories', 'orderNumber'));
+
+        return view('customer.orderConfirmed', compact('categories', 'orderNumber', 'order'));
     }
 
     /**

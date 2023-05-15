@@ -8,7 +8,7 @@
                 </div>
                 <div class="block-features__content">
                     <div class="block-features__title">Free Shipping</div>
-                    <div class="block-features__subtitle">For orders from 50000Ks</div>
+                    <div class="block-features__subtitle">For orders from 50,000 Ks</div>
                 </div>
             </div>
             <div class="block-features__divider"></div>

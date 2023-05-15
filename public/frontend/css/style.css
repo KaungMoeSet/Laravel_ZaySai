@@ -715,6 +715,10 @@ h6 {
     fill: #3d464d
 }
 
+.btn-secondary:hover {
+    color: white !important;
+}
+
 .btn-secondary.disabled .fake-svg-icon,
 .btn-secondary .fake-svg-icon,
 .btn-secondary:disabled .fake-svg-icon {

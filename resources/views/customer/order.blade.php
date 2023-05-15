@@ -104,24 +104,24 @@
                                     </tbody>
                                 </table>
 
+                                @php
+                                    $itemQty = 0;
+                                    $subTotal = 0;
 
+                                    foreach ($cart_data as $product) {
+                                        $itemQty += $product->quantity;
+                                    }
+                                @endphp
                                 <h4 class="card-title">Order Summery</h4>
                                 <table class="checkout__totals">
                                     <tbody class="cart-table__body">
-                                        @php
-                                            $itemQty = 0;
-                                            $subTotal = 0;
-                                        @endphp
 
-                                        @foreach ($cart_data as $product)
-                                            @php
-                                                $itemQty += $product->quantity;
-                                            @endphp
-                                        @endforeach
+
+
 
                                         <tr class="cart-table__row">
                                             <td>
-                                                Subtotal ( {{ $itemQty }} itms and shipping fee included)
+                                                Subtotal ( {{ $itemQty }} items and shipping fee included)
                                             </td>
                                             <td>
                                                 @php
@@ -151,7 +151,7 @@
                                         <tr>
                                             <th>Total Amount</th>
                                             <td>
-                                                {{ $total + $deliFee }}
+                                                {{ $total + $deliFee }} Ks
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -159,7 +159,8 @@
                                 <p class="text-danger">
                                     order confirm ပြီးရင်ပြန် cancel လို့မရပါ
                                 </p>
-                                <button type="submit" class="btn btn-primary btn-xl btn-block">
+                                <button type="submit"
+                                    class="btn btn-primary btn-xl btn-block " {{ $itemQty == 0 ? 'hidden' : '' }}>
                                     Confirm Order
                                 </button>
                             </div>

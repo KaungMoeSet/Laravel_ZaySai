@@ -68,11 +68,6 @@
                     <a href="/login" class="px-2 btn btn-outline-secondary fs-6 px-3 mx-1">Log in</a>
                     <a href="/register" class="px-2 btn btn-dark bg-dark text-light fs-6 px-3 mx-1">Sign up</a>
                 @endauth
-                {{-- <a href="">
-                    <span class="indicator__area">
-                        <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
-                    </span>
-                </a> --}}
 
             </div>
         </div>
@@ -88,7 +83,6 @@
                                 <div class="departments__body">
                                     <div class="departments__links-wrapper">
                                         <ul class="departments__links">
-                                            {{-- <li class="departments__item"><a href="#">Power Machinery</a></li> --}}
                                             @foreach ($categories as $category)
                                                 <li class="departments__item departments__item--menu">
                                                     <a href="#">
