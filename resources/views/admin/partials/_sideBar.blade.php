@@ -97,7 +97,7 @@
                 <li
                     class="nav-item {{ request()->is('user')
                         ? 'menu-is-opening menu-open'
-                        : (request()->is('adminAcc')
+                        : (request()->is('admin/show-all-admins')
                             ? 'menu-is-opening menu-open'
                             : '') }}">
                     <a href="#"
@@ -117,8 +117,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('adminAcc') }}"
-                                class="nav-link {{ request()->is('adminAcc') ? 'active' : '' }}">
+                            <a href="{{ route('admin.show-all-admins') }}"
+                                class="nav-link {{ request()->is('admin/show-all-admins') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Admin Account List</p>
                             </a>

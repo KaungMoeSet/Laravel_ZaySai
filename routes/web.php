@@ -130,6 +130,9 @@ Route::prefix('admin')->middleware(['guest:admin'])->group(function () {
 Route::middleware(['auth.admin'])->group(function () {
 
     Route::resource('admin', AdminController::class);
+
+    Route::get('/show-all-admins', [AdminController::class, 'showAllAdmins'])->name('admin.show-all-admins');
+
     Route::resource('user', UserController::class);
 
     Route::resource('product', ProductController::class);

@@ -53,7 +53,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect('/home');
+        return redirect('/show-all-admins');
     }
 
     /**
@@ -86,5 +86,12 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showAllAdmins()
+    {
+        $admins = Admin::all();
+
+        return view('admin.account.adminAccountList', compact('admins'));
     }
 }
