@@ -43,14 +43,13 @@
                                         @endif
                                     </small>
                                 </div>
-                                <div class="form-group">
+                                <div class="">
                                     <div class="form-check">
                                         <span class="form-check-input input-check">
                                             <input class="input-check__input form-check-input" type="checkbox"
                                                 name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <span class="input-check__box"></span>
                                             <svg class="input-check__icon" width="9px" height="7px">
-                                                {{-- <use xlink:href="images/sprite.svg#check-9x7"></use> --}}
                                             </svg>
                                         </span>
                                         <label class="form-check-label" for="remember">
@@ -58,8 +57,8 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row mb-0">
-                                    <div class="">
+                                <div class="row mb-0 mt-0">
+                                    <div class="ml-3">
                                         <button type="submit" class="btn btn-primary my-2 px-5">
                                             {{ __('Login') }}
                                         </button>

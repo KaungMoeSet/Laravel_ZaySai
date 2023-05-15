@@ -51,7 +51,9 @@
                     </div><!-- .product__info / end -->
                     <!-- .product__sidebar -->
                     <div class="product__sidebar">
-                        <div class="product__prices">Ks {{ $product->selling_price }}</div><!-- .product__options -->
+                        <div class="product__prices">Ks {{ $product->selling_price }}</div>
+                        <!-- .product__options -->
+
                         <form method="POST" action="{{ route('cart.add', $product->id) }}" class="product__options">
                             @csrf
 
@@ -62,7 +64,7 @@
                                         <div class="input-number product__quantity">
                                             <input id="product-quantity"
                                                 class="input-number__input form-control form-control-lg" type="number"
-                                                min="1" value="1" name="quantity">
+                                                min="1" max="10" value="1" name="quantity">
                                             <div class="input-number__add"></div>
                                             <div class="input-number__sub"></div>
                                         </div>
@@ -71,21 +73,44 @@
 
                                 <div class="product__actions my-3 align-start" style="">
                                     <div class="product__actions-item--addtocart col-12 col-md-5 ">
-                                        <a class="btn btn-secondary btn-lg btn-block" type="button">
+                                        <a href="{{ route('checkout.show', $product->id) }}"
+                                            class="btn btn-secondary btn-lg btn-block" id="buy-now-link">
                                             Buy Now
                                         </a>
                                     </div>
                                     <div class="product__actions-item--addtocart col-12 col-md-5">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        <button type="submit" class="btn btn-lg btn-block btn-warning">
                                             <input type="text" name="id" value="{{ $product->id }}" hidden>
                                             Add To Cart
                                         </button>
                                     </div>
                                 </div>
-                        </form><!-- .product__options / end -->
+                        </form>
+                        <!-- .product__options / end -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        let quantityInput = document.getElementById('product-quantity');
+        let increaseButton = document.querySelector('.input-number__add');
+
+        quantityInput.addEventListener('change', function() {
+            if (quantityInput.value >= 10 || quantityInput.value >= {{ $product->quantity }}) {
+                increaseButton.setAttribute('hidden', true);
+            } else {
+                increaseButton.removeAttribute('hidden');
+            }
+        });
+
+        document.querySelector('#buy-now-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            var quantity = document.querySelector('#product-quantity').value;
+
+            // Send an AJAX request to the server to get the checkout page with the quantity value
+            // Pass the quantity value as a parameter to the URL
+            window.location.href = "{{ route('checkout.show', $product->id) }}?quantity=" + quantity;
+        });
+    </script>
 @endsection

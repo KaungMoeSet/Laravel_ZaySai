@@ -21,14 +21,10 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         //
-        $cart = $request->session()->get('cart', []);
+        $cart       = $request->session()->get('cart', []);
         $user       = Auth::user();
         $categories = Category::all();
         $regions    = Region::all();
-
-        if (empty($cart)) {
-            // return redirect()->route('products.index')->with('status', 'No items in your cart!!');
-        }
 
         $cart_data = [];
 
@@ -62,10 +58,24 @@ class CheckoutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
-        //
+        $cart_data[] = Product::find($id);
+        $user        = Auth::user();
+        $categories  = Category::all();
+        $regions     = Region::all();
+
+        $quantity = $request->input('quantity', 1); // get the quantity from the request, default to 1 if not provided
+        if ($quantity > 10) {
+            return redirect()->back()->with('error', 'Sorry, you can only add up to 10 units of this product to your cart.');
+        }
+
+        $cart_data[0]->quantity = $quantity;
+
+        return view('customer.checkout', compact('cart_data', 'categories', 'user', 'regions', 'quantity'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

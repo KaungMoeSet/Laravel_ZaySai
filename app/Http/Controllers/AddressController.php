@@ -31,7 +31,6 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request);
         $user = Auth::user();
 
         $request->validate([
@@ -58,7 +57,6 @@ class AddressController extends Controller
             $address->setDefault = false;
         }
 
-        // dd($address);
         $address->township_id = $request->input('township');
         $address->city_id     = $request->input('city');
         $address->save();

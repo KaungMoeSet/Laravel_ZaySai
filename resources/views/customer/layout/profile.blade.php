@@ -48,7 +48,7 @@
                                         <a href="#" class="ttr-material-button">
                                             <span class="ttr-label">My Orders</span>
                                         </a>
-                                        <ul>
+                                        {{-- <ul>
                                             <li>
                                                 <a href="basic-calendar.html" class="ttr-material-button">
                                                     <span class="ttr-label">
@@ -63,7 +63,7 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                 </ul>
                                 <!-- sidebar menu end -->

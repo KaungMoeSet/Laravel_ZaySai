@@ -30,8 +30,6 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-bag"></i>
                             </div>
-                            <!-- <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a> -->
                         </div>
                     </div>
                     <div class="col-md-3 col-12">
@@ -45,8 +43,6 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <!-- <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a> -->
                         </div>
                     </div>
                     <!-- ./col -->
@@ -63,8 +59,6 @@
                             <div class="icon">
                                 <i class="fab fa-sellsy"></i>
                             </div>
-                            <!-- <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a> -->
                         </div>
                     </div>
                     <!-- ./col -->
@@ -77,7 +71,6 @@
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="card-title">Sales</h3>
-                                    {{-- <a href="javascript:void(0);">View Report</a> --}}
                                 </div>
                             </div>
                             <div class="card-body">
@@ -189,7 +182,7 @@
                                             <th>Product</th>
                                             <th>Price</th>
                                             <th>Sales</th>
-                                            <th>More</th>
+                                            <th>Revenue</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -207,9 +200,7 @@
                                                 {{ $product->orders->sum('pivot.quantity') }} Sold
                                             </td>
                                             <td>
-                                                <a href="#" class="text-muted">
-                                                    <i class="fas fa-search"></i>
-                                                </a>
+                                                {{-- {{ }} --}}
                                             </td>
                                         </tr>
                                         @endforeach

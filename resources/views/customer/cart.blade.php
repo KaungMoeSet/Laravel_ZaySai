@@ -27,7 +27,6 @@
                         $itemsCount = 0;
                     @endphp
                     @foreach ($cart_data as $product)
-                        {{-- <h1> {{ $product->name }} </h1> --}}
                         <tr class="cart-table__row">
                             <td class="cart-table__column cart-table__column--image">
                                 <a href="{{ route('products.show', $product->id) }}">
@@ -48,7 +47,8 @@
                                     <a href="{{ route('cart.update', [$product->id, $product->quantity + 1]) }}"
                                         class="input-number__add"></a>
                                     <input type="text" value="{{ $product->quantity }}" name="quantity"
-                                        class="input-number__input" min="1" readonly>
+                                        id="product-quantity" class="input-number__input" min="1" max="10"
+                                        readonly>
                                     <a href="{{ route('cart.update', [$product->id, $product->quantity - 1]) }}"
                                         class="input-number__sub"></a>
 
@@ -67,11 +67,6 @@
                                         </svg>
                                     </button>
                                 </form>
-                                {{-- <a href="{{ route('cart.remove', $product->id) }}"  class="btn btn-light btn-sm btn-svg-icon">
-                                    <svg width="12px" height="12px">
-                                        <use xlink:href="/frontend/images/sprite.svg#cross-12"></use>
-                                    </svg>
-                                </a> --}}
                             </td>
                         </tr>
 
@@ -108,7 +103,6 @@
                                 href="{{ route('checkout.index') }}">
                                 Proceed to checkout
                             </a>
-                            {{-- {{ $itemsCount == 0 ? 'disabled': ''}} --}}
                         </div>
                     </div>
                 </div>

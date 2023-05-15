@@ -32,7 +32,8 @@
                         <div class="card-body">
                             <h4 class="card-title">Shipping Details</h4>
                             <div class="form-group">
-                                ရန်ကုန်ကလွဲပြီးကျန်မြို့တွေကို ကားဂိတ်တင်ပေးပါတယ်။
+                                ရန်ကုန်ကလွဲပြီးကျန်မြို့တွေကို ကားဂိတ်တင်ပေးပါတယ်။ <br><br>
+                                Ks 50,000 ဖိုးနဲ့အထက်ဆို deli free ပါ။
                             </div>
                             <div class="form-group">
                                 <table class="cart__table cart-table">
@@ -55,7 +56,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--product">
-                                                    <span href="#" class="cart-table__product-name">Electric Planer
+                                                    <span href="#" class="cart-table__product-name">
                                                         {{ $product->name }}
                                                     </span>
                                                 </td>
@@ -65,7 +66,7 @@
                                                 <td class="cart-table__column cart-table__column--quantity"
                                                     data-title="Quantity">
                                                     <div class="input-number">
-                                                        Qty: {{ $product->quantity }}
+                                                        {{ $product->quantity }}
                                                     </div>
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--remove">
@@ -124,6 +125,14 @@
                                         <td>Ks {{ $subTotal }}</td>
                                     </tr>
                                     <tr>
+                                        @php
+                                            $total = 0;
+                                        @endphp
+                                        @foreach ($cart_data as $product)
+                                            @php
+                                                $total += $product->quantity * $product->selling_price;
+                                            @endphp
+                                        @endforeach
                                         <th>Delivery Fee</th>
                                         <td>
                                             @php
@@ -137,6 +146,10 @@
                                                 } else {
                                                     $deliFee = 0;
                                                 }
+                                                
+                                                if ($total >= 50000) {
+                                                    $deliFee = 0;
+                                                }
                                             @endphp
                                             Ks {{ $deliFee }}
                                         </td>
@@ -146,24 +159,16 @@
                                     <tr>
                                         <th>Total</th>
                                         <td>
-                                            @php
-                                                $total = 0;
-                                            @endphp
-                                            @foreach ($cart_data as $product)
-                                                @php
-                                                    $total += $product->quantity * $product->selling_price;
-                                                @endphp
-                                            @endforeach
+
                                             Ks {{ $total + $deliFee }}
                                         </td>
                                     </tr>
                                 </tfoot>
                             </table>
-                            {{-- <input type="text" value=""> --}}
                             <a type="button"
                                 class="btn btn-primary btn-xl btn-block
                                 {{ $user->addresses->isEmpty() ? 'disabled' : ($subTotal == 0 ? 'disabled' : '') }}"
-                                href="{{ url('order/create') }}">
+                                href="{{ route('order.create') }}">
                                 Place Order
                             </a>
                         </div>
