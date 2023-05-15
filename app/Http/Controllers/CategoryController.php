@@ -49,12 +49,10 @@ class CategoryController extends Controller
         if ($insertOption === null) {
             $category              = new Category();
             $category->name        = $request->input('category_name');
-            $category->description = $request->input('description');
             $category->save();
         } else {
             $subCategory              = new SubCategory();
             $subCategory->name        = $request->input('category_name');
-            $subCategory->description = $request->input('description');
             $subCategory->category_id = $insertOption;
 
             $subCategory->save();
@@ -97,7 +95,6 @@ class CategoryController extends Controller
 
         $category              = Category::find($id);
         $category->name        = $request->input('category_name');
-        $category->description = $request->input('description');
         $category->save();
 
         return redirect()->route('category.index');

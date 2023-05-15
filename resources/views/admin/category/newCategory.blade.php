@@ -49,28 +49,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card card-outline card-info">
-                                                            <div class="card-body">
-                                                                <textarea id="summernote" name="description" value="{{ old('description')}}">
-                                                            Write description here
-                                                                </textarea>
-                                                                <span class="help-inline">
-                                                                    @error('description')
-                                                                        {{ $message }}
-                                                                    @enderror
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.col-->
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.row -->
                                 </div>

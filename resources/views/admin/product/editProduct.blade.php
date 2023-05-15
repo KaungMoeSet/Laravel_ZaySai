@@ -197,7 +197,8 @@
                                                                         <div>
                                                                             <button type="button" id="delete-form"
                                                                                 onclick="imageDelete(event, {{ $product_image->id }})"
-                                                                                class="delete btn btn-danger px-2">
+                                                                                class="delete btn btn-danger px-2"
+                                                                                {{ (count($product->images) === 1) ? 'disabled' : '' }}>
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </button>
                                                                         </div>
@@ -257,8 +258,5 @@
                 <!-- /.card -->
         </section>
     </section>
-    <script>
-        $('#image-table tr.list-item').first().find('.delete').prop('disabled', true);
-    </script>
     <script src="{{ asset('adminFrontEnd/js/product.js') }}"></script>
 @endsection
