@@ -142,8 +142,10 @@
                                                         $total += $product->quantity * $product->selling_price;
                                                     @endphp
                                                 @endforeach
-                                                <input type="text" name="totalAmt" class="form_input data_input"
+                                                <input type="text" class="form_input data_input"
                                                     value="{{ $total + $deliFee }}" readonly> Ks
+
+                                                <input type="text" name="totalAmt" value="{{ $total }}" hidden>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -159,8 +161,8 @@
                                 <p class="text-danger">
                                     order confirm ပြီးရင်ပြန် cancel လို့မရပါ
                                 </p>
-                                <button type="submit"
-                                    class="btn btn-primary btn-xl btn-block " {{ $itemQty == 0 ? 'hidden' : '' }}>
+                                <button type="submit" class="btn btn-primary btn-xl btn-block "
+                                    {{ $itemQty == 0 ? 'hidden' : '' }}>
                                     Confirm Order
                                 </button>
                             </div>

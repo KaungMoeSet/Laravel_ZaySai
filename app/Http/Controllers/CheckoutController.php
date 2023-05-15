@@ -10,6 +10,7 @@ use App\Models\Region;
 use App\Models\Category;
 use App\Models\DeliveryFees;
 use App\Models\Township;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +61,10 @@ class CheckoutController extends Controller
      */
     public function show(string $id, Request $request)
     {
+        $cart = session()->get('cart', []);
+        $cart = [];
+        session()->put('cart', $cart);
+        
         $cart_data[] = Product::find($id);
         $user        = Auth::user();
         $categories  = Category::all();
@@ -70,7 +75,13 @@ class CheckoutController extends Controller
             return redirect()->back()->with('error', 'Sorry, you can only add up to 10 units of this product to your cart.');
         }
 
+        $cart[$id] = [
+            'product_id' => $id,
+            'quantity'   => $quantity,
+        ];
+
         $cart_data[0]->quantity = $quantity;
+        session()->put('cart', $cart);
 
         return view('customer.checkout', compact('cart_data', 'categories', 'user', 'regions', 'quantity'));
     }
