@@ -53,7 +53,7 @@
                                 <p>Total sells</p>
 
                                 <h3>
-                                    Ks {{ number_format($acceptedAmount, 0, '.', ',') }}
+                                    Ks {{ number_format($acceptedAmount) }}
                                 </h3>
                             </div>
                             <div class="icon">
@@ -187,26 +187,42 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $product)
-                                        <tr>
-                                            <td>
-                                                <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
-                                                    class="img-circle img-size-32 mr-2">
-                                                {{ $product->name }}
-                                            </td>
-                                            <td>
-                                                Ks {{ number_format($product->selling_price) }}
-                                            </td>
-                                            <td>
-                                                {{ $product->orders->sum('pivot.quantity') }} Sold
-                                            </td>
-                                            <td>
-                                                {{-- {{ }} --}}
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                        class="img-circle img-size-32 mr-2">
+                                                    {{ $product->name }}
+                                                </td>
+                                                <td>
+                                                    Ks {{ number_format($product->selling_price) }}
+                                                </td>
+                                                <td>
+                                                    @php
+                                                        $soldQty = 0;
+                                                    @endphp
+                                                    @foreach ($product->orders as $order)
+                                                        @if ($order->order_status == 'delieverd')
+                                                            {{ $product->orders->sum('pivot.quantity') }} Sold
+
+                                                            @php
+                                                                $soldQty = $product->orders->sum('pivot.quantity');
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($product->sellingPrices as $price)
+                                                        @if ($price->end_date == null)
+                                                            {{ $soldQty * $prouct->buying_price - $soldQty * $price->selling_price }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                            {{ $products->links('layouts.paginationlinks') }}
                         </div>
                         <!-- /.card -->
 

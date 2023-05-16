@@ -8,6 +8,9 @@
             </div>
         </div>
     </div>
+    <div class="pt-4 pb-0">
+        @include('partials._features')
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-12">

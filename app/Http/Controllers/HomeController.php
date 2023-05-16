@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\HeroCarousel;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $heroCarousel = HeroCarousel::all();
         $products   = Product::all();
         $categories = Category::all();
+        $forYouProducts = Product::inRandomOrder()->limit(20)->get();
 
-        return view('index', compact('products', 'categories'));
+        return view('products', compact('products', 'categories', 'heroCarousel', 'forYouProducts'));
     }
 
     /**
@@ -72,7 +75,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     public function allProducts(Request $request)
     {
         $categories = Category::all();
@@ -91,7 +94,7 @@ class HomeController extends Controller
         })->latest()->paginate(2);
         // $products = $productsQuery->latest()->paginate(2);
 
-        
+
         return view('products', compact('products', 'categories', 'subCategory'))
             ->with('i', (request()->input('page', 1) - 1) * 2);
     }

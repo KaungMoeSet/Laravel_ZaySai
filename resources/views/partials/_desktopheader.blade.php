@@ -135,10 +135,6 @@
                                     <a href="/"><span>Home</span></a>
                                 </li>
 
-                                <li class="nav-links__item {{ request()->is('/allProducts') ? 'active' : '' }}">
-                                    <a href="/allProducts"><span>All Products</span></a>
-                                </li>
-
                                 <li class="nav-links__item {{ request()->is('aboutUs') ? 'active' : '' }}">
                                     <a href="/aboutUs"><span>About</span></a>
                                 </li>

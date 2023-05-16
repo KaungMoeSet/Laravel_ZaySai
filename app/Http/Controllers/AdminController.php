@@ -21,7 +21,7 @@ class AdminController extends Controller
         //
         $orders = Order::all();
         $users = User::all();
-        $products = Product::with('orders')->get();
+        $products = Product::with('orders')->paginate(2);
         $acceptedAmount = PaymentConfirm::where('confirm_status', 'accepted')->sum('total_amount');
 
         return view('admin.dashboard', compact('orders', 'users',  'products', 'acceptedAmount'));

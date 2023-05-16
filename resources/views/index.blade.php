@@ -10,18 +10,19 @@
     <!-- .block-features / end -->
 
     <!-- .block-products-carousel -->
-    <x-foryou />
+    {{-- <x-foryou /> --}}
+    {{-- @include('components.foryou') --}}
     <!-- .block-products-carousel / end -->
 
     <!-- .block-banner -->
-    @include('partials._banner')
+    {{-- @include('partials._banner') --}}
     <!-- .block-banner / end -->
 
     <!-- .block-products -->
-    <x-bestsellers />
+    {{-- <x-bestsellers /> --}}
     <!-- .block-products / end -->
 
     <!-- .block-products-carousel -->
-    <x-newArrivals />
+    {{-- <x-newArrivals /> --}}
     <!-- .block-products-carousel / end -->
 @endsection

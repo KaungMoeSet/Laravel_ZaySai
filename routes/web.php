@@ -34,15 +34,9 @@ use App\Models\PaymentConfirm;
 |
 */
 
-Route::resource('/', HomeController::class);
+Route::resource('/', [HomeController::class, 'allProducts']);
 
 Route::get('/login', [LoginController::class, 'showLoginForm']);
-
-// Route::controller(ProductController::class)->group(function () {
-//     Route::get('/allProducts', 'index');
-//     //single product
-//     Route::get('/products/{product}', 'show');
-// });
 
 Route::get('/contactUs', [HomeController::class, 'showContactUsPage']);
 
@@ -51,7 +45,6 @@ Route::get('/aboutUs', [HomeController::class, 'showAboutUsPage']);
 Route::get('/allProducts', [HomeController::class, 'allProducts'])->name('allProducts');
 
 Route::resource('products', HomeController::class);
-// Route::get('/allProducts/{id}', [HomeController::class, 'show']);
 
 Route::get('/oneProduct', function () {
     return view('product');
