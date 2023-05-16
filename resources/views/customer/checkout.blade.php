@@ -61,7 +61,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--price" data-title="Price">
-                                                    Ks {{ $product->selling_price }}
+                                                    Ks {{ number_format($product->selling_price) }}
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--quantity"
                                                     data-title="Quantity">
@@ -112,7 +112,7 @@
                                     @foreach ($cart_data as $product)
                                         <tr>
                                             <td>{{ $product->name }} × {{ $product->quantity }}</td>
-                                            <td>Ks {{ $product->quantity * $product->selling_price }}</td>
+                                            <td>Ks {{ number_format($product->quantity * $product->selling_price) }}</td>
                                         </tr>
                                         @php
                                             $subTotal += $product->quantity * $product->selling_price;

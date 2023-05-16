@@ -82,9 +82,9 @@
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td> {{ $product->sub_category->name }} </td>
-                                                <td>Ks {{ $product->buying_price }}</td>
+                                                <td>Ks {{ number_format($product->buying_price) }}</td>
                                                 <td>
-                                                    Ks {{ number_format($product->selling_price, 0, '.', ',') }}
+                                                    Ks {{ number_format($product->selling_price) }}
                                                 </td>
                                                 <td>{{ $product->quantity }}</td>
                                                 <td class="d-flex justify-content-end ">

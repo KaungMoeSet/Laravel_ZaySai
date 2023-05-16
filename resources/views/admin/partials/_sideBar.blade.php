@@ -126,13 +126,13 @@
                     </ul>
                 </li>
                 <li
-                    class="nav-item {{ request()->is('order')
+                    class="nav-item {{ request()->is('adminOrders')
                         ? 'menu-is-opening menu-open'
                         : (request()->is('paymentConfirm')
                             ? 'menu-is-opening menu-open'
                             : '') }}">
                     <a href="#"
-                        class="nav-link {{ request()->is('order') ? 'active' : (request()->is('paymentConfirm') ? 'active' : '') }}">
+                        class="nav-link {{ request()->is('adminOrders') ? 'active' : (request()->is('paymentConfirm') ? 'active' : '') }}">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Order management
@@ -148,8 +148,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('order') }}"
-                                class="nav-link {{ request()->is('order') ? 'active' : '' }}">
+                            <a href="{{ url('adminOrders') }}"
+                                class="nav-link {{ request()->is('adminOrders') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Order List</p>
                             </a>

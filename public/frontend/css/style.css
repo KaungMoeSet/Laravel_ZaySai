@@ -10974,3 +10974,12 @@ a {
     background-color: transparent;
     outline: none;
 }
+
+.form-select {
+    padding: 0.5rem 1rem;
+}
+
+.status {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+}

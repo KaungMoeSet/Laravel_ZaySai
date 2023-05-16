@@ -40,7 +40,6 @@ class CategoryController extends Controller
         //
         $request->validate([
             'category_name' => 'required',
-            'description'   => 'required'
         ]);
 
         $insertOption = $request->input('insert_option');
@@ -90,7 +89,6 @@ class CategoryController extends Controller
         //
         $request->validate([
             'category_name' => 'required',
-            'description'   => 'required'
         ]);
 
         $category              = Category::find($id);

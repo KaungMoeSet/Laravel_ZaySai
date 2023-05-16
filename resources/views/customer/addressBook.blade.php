@@ -8,74 +8,69 @@
             </div>
         </div>
 
-        <div>
-            <div class="" id="">
-                <div class="" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title mr-3" id="">
-                                Shipping Address
-                            </h5>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewAddress">
-                                Add new address
-                            </button>
-                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mr-3" id="">
+                        Shipping Address
+                    </h5>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewAddress">
+                        Add new address
+                    </button>
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button> --}}
-                        </div>
-                        <div class="modal-body">
-                            <table class="table edit-table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Full name</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Region</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="checkout__shipping-details" id="shipping-details">
-                                    <form id="address-form" action="{{ route('checkout.update-addresses') }}"
-                                        method="POST">
-                                        @csrf
-                                        @foreach ($user->addresses as $shippingAddress)
-                                            <tr>
-                                                <td>{{ $shippingAddress->name }}</td>
-                                                <td>{{ $shippingAddress->address }}</td>
-                                                <td>
-                                                    {{ $shippingAddress->city->region->name }} -
-                                                    {{ $shippingAddress->city->name }} City -
-                                                    {{ $shippingAddress->township->name ?? '' }}
-                                                </td>
-                                                <td> {{ $shippingAddress->phoneNumber }}</td>
-                                                <td class="text-secondary">
-                                                    @if ($shippingAddress->setDefault)
-                                                        <small>Default address</small>
-                                                    @endif
-                                                </td>
-                                                <td class="form-check">
-                                                    <span class="payment-methods__item-radio input-radio">
-                                                        <span class="input-radio__body">
-                                                            <input class="input-radio__input" name="shipping_address_id"
-                                                                type="radio" value="{{ $shippingAddress->id }}"
-                                                                {{ $shippingAddress->setDefault ? 'checked' : '' }}>
-                                                            <span class="input-radio__circle"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                        </form>
-                    </div>
                 </div>
+                <div class="modal-body">
+                    <table class="table edit-table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Full name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Region</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="checkout__shipping-details" id="shipping-details">
+                            <form id="address-form" action="{{ route('checkout.update-addresses') }}" method="POST">
+                                @csrf
+                                @foreach ($user->addresses as $shippingAddress)
+                                    <tr>
+                                        <td>{{ $shippingAddress->name }}</td>
+                                        <td>{{ $shippingAddress->address }}</td>
+                                        <td>
+                                            {{ $shippingAddress->city->region->name }} -
+                                            {{ $shippingAddress->city->name }} City -
+                                            {{ $shippingAddress->township->name ?? '' }}
+                                        </td>
+                                        <td> {{ $shippingAddress->phoneNumber }}</td>
+                                        <td class="text-secondary">
+                                            @if ($shippingAddress->setDefault)
+                                                <small>Default address</small>
+                                            @endif
+                                        </td>
+                                        <td class="form-check">
+                                            <span class="payment-methods__item-radio input-radio">
+                                                <span class="input-radio__body">
+                                                    <input class="input-radio__input" name="shipping_address_id"
+                                                        type="radio" value="{{ $shippingAddress->id }}"
+                                                        {{ $shippingAddress->setDefault ? 'checked' : '' }}>
+                                                    <span class="input-radio__circle"></span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>

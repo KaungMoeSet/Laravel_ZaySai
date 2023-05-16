@@ -31,7 +31,7 @@
                             <h5 class="col-10">
                                 Address Book
                             </h5>
-                            <a href="" class="btn text-primary edit-btn">
+                            <a href="{{ route('profile.addressBook') }}" class="btn text-primary edit-btn">
                                 Edit
                             </a>
                         </div>
@@ -55,7 +55,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>

@@ -63,6 +63,9 @@
                                                     btn-warning
                                                     @break
                                                 @case('rejected')
+                                                    btn-danger
+                                                    @break
+                                                @case('delivered')
                                                     btn-success
                                                     @break
                                                 @endswitch">
@@ -70,7 +73,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="d-flex justify-content-end ">
-                                                    <a href="{{ route('order.show', $order->id) }}">
+                                                    <a href="{{ route('adminOrders.show', $order->id) }}">
                                                         <button type="submit" class="btn btn-warning edit_btn">
                                                             <i class="fa-solid fa-eye"></i>
                                                         </button>

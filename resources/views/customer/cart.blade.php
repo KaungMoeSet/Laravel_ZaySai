@@ -40,7 +40,7 @@
                                 </a>
                             </td>
                             <td class="cart-table__column cart-table__column--price" data-title="Price">
-                                Ks {{ $product->selling_price }}
+                                Ks {{ number_format($product->selling_price) }}
                             </td>
                             <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
                                 <div class="input-number">
@@ -56,7 +56,7 @@
                             </td>
                             <td class="cart-table__column cart-table__column--total" data-product-id="{{ $product->id }}"
                                 data-title="Total">
-                                {{ $product->quantity * $product->selling_price }}
+                                {{ number_format($product->quantity * $product->selling_price) }}
                             </td>
                             <td class="cart-table__column cart-table__column--remove">
                                 <form method="POST" action="{{ route('cart.remove', $product->id) }}">

@@ -63,6 +63,8 @@ class OrderController extends Controller
     {
         //
         // dd($request);
+        $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
+
         $cart = session()->get('cart', []);
         $user = Auth::user();
 
@@ -81,7 +83,8 @@ class OrderController extends Controller
         }
 
         $order              = new Order();
-        $order->customer_id = $user->id;
+        $order->user_id = $user->id;
+        $order->order_date = $now;
         $orderNumber = '#' . date('Y') . $user->id . rand(100000, 999999);
         $order->order_number = $orderNumber;
 
@@ -105,7 +108,6 @@ class OrderController extends Controller
                 $order->products()->attach($product, ['quantity' => $item['quantity']]);
             }
         }
-        $now = Carbon::now('Asia/Yangon')->format('Y/m/d H:i:s');
 
         $payment            = new Payment();
         $payment->payment_method_id = $request->input('account');
@@ -166,7 +168,7 @@ class OrderController extends Controller
         $order->order_status = 'delivered';
 
         $order->save();
-        return redirect()->route('order.index')->with('success_message', 'Payment accepted successfully!');
+        return redirect()->route('adminOrders.index')->with('success_message', 'Payment accepted successfully!');
     }
 
     public function processing(string $id)
@@ -175,6 +177,6 @@ class OrderController extends Controller
         $order->order_status = 'processing';
 
         $order->save();
-        return redirect()->route('order.index')->with('success_message', 'Payment accepted successfully!');
+        return redirect()->route('adminOrders.index')->with('success_message', 'Payment accepted successfully!');
     }
 }

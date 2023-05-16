@@ -118,6 +118,8 @@ Route::middleware(['auth.user'])->group(function () {
 
     Route::get('addressBook', [UserController::class, 'addressBook'])->name('profile.addressBook');
 
+    Route::get('all-orders', [UserController::class, 'getAllOrders'])->name('profile.getAllOrders');
+
     Route::get('/profile', [UserController::class, 'showMyProfile']);
 
 });
@@ -145,11 +147,11 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::resource('paymentMethod', PaymentMethodController::class);
     Route::resource('heroCarousel', HeroCarouselController::class);
 
-    Route::resource('order', OrderController::class);
+    Route::resource('adminOrders', OrderController::class);
 
-    Route::get('order/deliver/{id}', [OrderController::class, 'deliver'])->name('order.deliver');
+    Route::get('adminOrders/deliver/{id}', [OrderController::class, 'deliver'])->name('adminOrders.deliver');
 
-    Route::get('order/processing/{id}', [OrderController::class, 'processing'])->name('order.processing');
+    Route::get('adminOrders/processing/{id}', [OrderController::class, 'processing'])->name('adminOrders.processing');
 
     Route::resource('paymentConfirm', PaymentConfirmController::class);
 

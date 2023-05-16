@@ -8,6 +8,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\PaymentConfirm;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -90,7 +91,7 @@ class AdminController extends Controller
 
     public function showAllAdmins()
     {
-        $admins = Admin::all();
+        $admins = DB::table('admins')->skip(1)->take(PHP_INT_MAX)->get();
 
         return view('admin.account.adminAccountList', compact('admins'));
     }

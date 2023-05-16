@@ -116,9 +116,6 @@
                                 <table class="checkout__totals">
                                     <tbody class="cart-table__body">
 
-
-
-
                                         <tr class="cart-table__row">
                                             <td>
                                                 Subtotal ( {{ $itemQty }} items and shipping fee included)
@@ -145,7 +142,7 @@
                                                 <input type="text" class="form_input data_input"
                                                     value="{{ $total + $deliFee }}" readonly> Ks
 
-                                                <input type="text" name="totalAmt" value="{{ $total }}" hidden>
+                                                <input type="text" name="totalAmt" value="{{ $total + $deliFee }}" hidden>
                                             </td>
                                         </tr>
                                     </tbody>

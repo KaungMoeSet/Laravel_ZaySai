@@ -10,15 +10,19 @@
 
             <div class="site-header__search">
                 <div class="search">
-                    <form class="search__form" action="#"><input class="search__input" name="search"
-                            placeholder="Search in Shop" aria-label="Site search" type="text" autocomplete="off">
-                        <button class="search__button" type="submit"><svg width="20px" height="20px">
+                    <form method="GET" class="search__form" action="{{ route('allProducts') }}">
+                        <input class="search__input" name="search" placeholder="Search in Shop"
+                            aria-label="Site search" type="text" autocomplete="off">
+                        <button class="search__button" type="submit">
+                            <svg width="20px" height="20px">
                                 <use xlink:href="/frontend/images/sprite.svg#search-20"></use>
-                            </svg></button>
+                            </svg>
+                        </button>
                         <div class="search__border"></div>
                     </form>
                 </div>
             </div>
+
             <div class="d-flex">
                 @auth
                     <a href="/cart" class="indicator__button">
@@ -102,7 +106,8 @@
                                                             <ul class="menu menu--layout--classic">
                                                                 @foreach ($category->subCategories as $subCategory)
                                                                     <li>
-                                                                        <a href="{{ route('allProducts', ['subcategory' => $subCategory->id]) }}">
+                                                                        <a
+                                                                            href="{{ route('allProducts', ['subcategory' => $subCategory->id]) }}">
                                                                             {{ $subCategory->name }}
                                                                         </a>
                                                                     </li>

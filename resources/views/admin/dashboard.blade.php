@@ -194,7 +194,7 @@
                                                 {{ $product->name }}
                                             </td>
                                             <td>
-                                                Ks {{ $product->selling_price }}
+                                                Ks {{ number_format($product->selling_price) }}
                                             </td>
                                             <td>
                                                 {{ $product->orders->sum('pivot.quantity') }} Sold

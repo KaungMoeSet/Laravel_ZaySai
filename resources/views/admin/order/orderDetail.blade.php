@@ -45,7 +45,7 @@
                                             <td>
                                                 @foreach ($order->products as $product)
                                                     {{ $product->name }} - {{ $product->pivot->quantity }} &times;
-                                                    {{ $product->selling_price }}<br>
+                                                    {{ number_format($product->selling_price) }}<br>
                                                 @endforeach
 
                                             </td>
@@ -106,7 +106,6 @@
                                                 @endswitch">
                                                     {{ $order->order_status }}
                                                 </span>
-                                                {{-- {{ \Carbon\Carbon::parse($order->confirm_cancel_date)->format('Y/m/d') }} --}}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -115,14 +114,14 @@
                         </div>
                         <div>
                             <div class="row justify-content-end">
-                                <a href="{{ route('order.index') }}" class="btn btn-secondary mx-2">
+                                <a href="{{ route('adminOrders.index') }}" class="btn btn-secondary mx-2">
                                     Cancel
                                 </a>
 
-                                <a href="{{ route('order.processing', $order->id) }}"
+                                <a href="{{ route('adminOrders.processing', $order->id) }}"
                                     class="btn btn-warning p-2 mx-2">Processing</a>
 
-                                <a href="{{ route('order.deliver', $order->id) }}"
+                                <a href="{{ route('adminOrders.deliver', $order->id) }}"
                                     class="btn btn-success  mx-2">Deliver</a>
                             </div>
                         </div>

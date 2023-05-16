@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('order_number');
 
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('address_id');
             $table->decimal('deli_fee', 8, 2);
-            $table->enum('order_status', ['pending', 'processing', 'delivered'])->default('pending');
+            $table->enum('order_status', ['pending', 'rejected', 'processing', 'delivered'])->default('pending');
 
-            $table->timestamp('order_date')->useCurrent();
+            $table->timestamp('order_date');
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('address_id')->references('id')->on('addresses');
         });
     }

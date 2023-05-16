@@ -45,18 +45,22 @@
                                             <td>
                                                 @foreach ($paymentConfirm->payment->order->products as $product)
                                                     {{ $product->name }} - {{ $product->pivot->quantity }} &times;
-                                                    {{ $product->selling_price }}<br>
+                                                    {{ number_format($product->selling_price) }}<br>
                                                 @endforeach
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Deli Fee</th>
-                                            <td>Ks {{ $paymentConfirm->payment->order->deli_fee }}</td>
+                                            <td>Ks
+                                                {{ number_format($paymentConfirm->payment->order->deli_fee, 0, '.', ',') }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Total</th>
-                                            <td>Ks {{ $paymentConfirm->total_amount }}</td>
+                                            <td>Ks
+                                                {{ number_format($paymentConfirm->total_amount, 0, '.', ',') }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Payment Method</th>
@@ -112,14 +116,12 @@
                                             <th>Paid At</th>
                                             <td>
                                                 {{ \Carbon\Carbon::parse($paymentConfirm->payment->paid_at)->format('Y/m/d') }}
-                                                {{-- {{ $paymentConfirm->payment->paid_at }} --}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Accept/Reject At</th>
                                             <td>
                                                 {{ \Carbon\Carbon::parse($paymentConfirm->confirm_cancel_date)->format('Y/m/d') }}
-                                                {{-- {{ $paymentConfirm->confirm_cancel_date->format('Y/m/d') ?? '' }} --}}
                                             </td>
                                         </tr>
                                         @if ($paymentConfirm->confirm_status == 'rejected')

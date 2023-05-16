@@ -85,8 +85,13 @@ class HomeController extends Controller
             $productsQuery->where('sub_category_id', $subcategoryId);
         }
 
-        $products = $productsQuery->latest()->paginate(2);
+        $products = Product::when(request()->search, function ($query) {
+            $search = request()->search;
+            $query->orWhere("name", "like", "%$search%");
+        })->latest()->paginate(2);
+        // $products = $productsQuery->latest()->paginate(2);
 
+        
         return view('products', compact('products', 'categories', 'subCategory'))
             ->with('i', (request()->input('page', 1) - 1) * 2);
     }

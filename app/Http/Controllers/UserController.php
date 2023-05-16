@@ -18,7 +18,7 @@ class UserController extends Controller
         //
         $users = User::all();
 
-        return view('admin.account.userAccountlist', compact('users') );
+        return view('admin.account.userAccountlist', compact('users'));
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //
-        $user = User::find($id);
+        $user       = User::find($id);
         $categories = Category::all();
 
         return view('customer.editProfile', compact('categories', 'user'));
@@ -63,10 +63,10 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $user = User::find($id);
-        $user->name = $request->input('userName');
+        $user           = User::find($id);
+        $user->name     = $request->input('userName');
         $user->birthday = $request->input('birthday');
-        $user->gender = $request->input('gender');
+        $user->gender   = $request->input('gender');
         $user->save();
 
         return redirect()->route('profile.profileData');
@@ -86,7 +86,7 @@ class UserController extends Controller
     public function showMyProfile()
     {
         $categories = Category::all();
-        $user = Auth::user();
+        $user       = Auth::user();
 
         return view('customer.myProfile', compact('categories', 'user'));
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
     public function profileData()
     {
         $categories = Category::all();
-        $user = Auth::user();
+        $user       = Auth::user();
 
         return view('customer.profileData', compact('categories', 'user'));
     }
@@ -102,9 +102,17 @@ class UserController extends Controller
     public function addressBook()
     {
         $categories = Category::all();
-        $user = Auth::user();
-        $regions = Region::all();
+        $user       = Auth::user();
+        $regions    = Region::all();
 
         return view('customer.addressBook', compact('categories', 'user', 'regions'));
+    }
+
+    public function getAllOrders()
+    {
+        $user = Auth::user();
+        $categories = Category::all();
+
+        return view('customer.allOrders', compact('categories', 'user'));
     }
 }

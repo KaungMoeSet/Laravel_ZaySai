@@ -45,25 +45,10 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#" class="ttr-material-button">
+                                        <a href="{{ route('profile.getAllOrders') }}"
+                                            class="ttr-material-button {{ request()->is('all-orders') ? 'text-primary' : '' }}">
                                             <span class="ttr-label">My Orders</span>
                                         </a>
-                                        {{-- <ul>
-                                            <li>
-                                                <a href="basic-calendar.html" class="ttr-material-button">
-                                                    <span class="ttr-label">
-                                                        My Returns
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="list-view-calendar.html" class="ttr-material-button">
-                                                    <span class="ttr-label">
-                                                        My Cancellations
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul> --}}
                                     </li>
                                 </ul>
                                 <!-- sidebar menu end -->

@@ -82,6 +82,10 @@ class PaymentConfirmController extends Controller
         $paymentConfirm->confirm_cancel_date = $now;
         $paymentConfirm->reject_reason = '';
 
+        $order = Order::find($paymentConfirm->payment->order->id);
+        $order->order_status = 'processing';
+        $order->save();
+
         $paymentConfirm->admin_id = Auth::guard('admin')->user()->id;
         $paymentConfirm->save();
 
@@ -97,6 +101,10 @@ class PaymentConfirmController extends Controller
         $paymentConfirm->confirm_status = 'rejected';
         $paymentConfirm->confirm_cancel_date = $now;
         $paymentConfirm->reject_reason = 'သင့်ရဲ့ အချက်အလက်မှားယွင်းနေပါတယ်';
+
+        $order = Order::find($paymentConfirm->payment->order->id);
+        $order->order_status = 'rejected';
+        $order->save();
 
         $paymentConfirm->admin_id = Auth::guard('admin')->user()->id;
 

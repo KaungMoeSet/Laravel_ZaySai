@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('bank_name');
             $table->string('image');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -31,7 +31,7 @@
 
                             <div class="products-list__body">
 
-                                @foreach ($products as $product)
+                                @forelse ($products as $product)
                                     <div class="products-list__item">
                                         <div class="product-card">
                                             <div class="product-card__badges-list">
@@ -54,7 +54,7 @@
                                             <div class="product-card__actions">
                                                 <div class="product-card__prices">
                                                     <span style="color: #3D464D">Price : </span></span> Ks
-                                                    {{ $product->selling_price }}
+                                                    {{ number_format($product->selling_price) }}
                                                 </div>
 
                                                 <div class="product-card__buttons product-btn">
@@ -67,7 +67,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="w-100 text-center ">
+                                        <h3> <span class="text-danger">"{{ request()->search }}"</span> data is not exist
+                                        </h3>
+                                    </div>
+                                @endforelse
 
                             </div>
                         </div>

@@ -47,7 +47,7 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $paymentConfirm->payment->order->order_number }}</td>
                                                 <td>
-                                                    {{ $paymentConfirm->total_amount }}
+                                                    {{ number_format($paymentConfirm->total_amount, 0, '.', ',') }}
                                                 </td>
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($paymentConfirm->payment->paid_at)->format('Y/m/d') }}

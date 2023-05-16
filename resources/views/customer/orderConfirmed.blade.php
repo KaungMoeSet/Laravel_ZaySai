@@ -26,8 +26,9 @@
                     <div class="card mb-0 align-items-center">
                         <table class="cart__table cart-table">
                             <tbody class="cart-table__body">
-                                <tr class="cart-table__row">
-                                    @foreach ($order->products as $product)
+                                @foreach ($order->products as $product)
+                                    <tr class="cart-table__row">
+
                                         <th class="cart-table__column cart-table__column--image">
                                             <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
                                                 alt="{{ $product->name }}">
@@ -38,15 +39,19 @@
                                             -
                                             {{ \Carbon\Carbon::parse($order->payment->paid_at)->addDays(8)->format('d M Y') }}
                                         </td>
-                                    @endforeach
-                                </tr>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <div class="accordion w-100" id="accordionExample">
                             <div class="card">
                                 @php
-                                    $deliFee = $order->address->township ? $order->address->township->deliFees : 3000;
-                                    $subTotal = $order->payment->paymentConfirm->total_amount;
+                                    if ($order->address->township) {
+                                        $deliFee = $order->address->township->deliFees->first()->fee;
+                                    } else {
+                                        $deliFee = 3000;
+                                    }
+                                    $total = $order->payment->paymentConfirm->total_amount;
                                 @endphp
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
@@ -58,7 +63,7 @@
                                                     Order Summary
                                                 </span>
                                                 <span class="col-3 text-right text-success" style="font-size: 1.5rem">
-                                                    Ks {{ number_format($deliFee + $subTotal, 0, '.', ',') }}
+                                                    Ks {{ number_format($total, 0, '.', ',') }}
                                                 </span>
                                                 <span class="col-1">
                                                     <i class="fa-solid fa-caret-down text-end"></i>
@@ -75,7 +80,7 @@
                                             Subtotal({{ $order->products->count() }} Items)
                                         </div>
                                         <div class="col-6" style="text-align:right">
-                                            Ks {{ number_format($subTotal, 0, '.', ',') }}
+                                            Ks {{ number_format($total - $deliFee, 0, '.', ',') }}
                                         </div>
                                     </div>
                                     <div class="px-4 pt-3 row">
@@ -92,7 +97,7 @@
                                             Total Amount
                                         </div>
                                         <div class="col-6" style="text-align:right">
-                                            Ks {{ number_format($deliFee + $subTotal, 0, '.', ',') }}
+                                            Ks {{ number_format($total, 0, '.', ',') }}
                                         </div>
                                     </div>
                                 </div>
