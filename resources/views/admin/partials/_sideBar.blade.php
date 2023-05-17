@@ -44,11 +44,7 @@
                                         ? 'menu-is-opening menu-open'
                                         : (request()->is('paymentMethod/create')
                                             ? 'menu-is-opening menu-open'
-                                            : (request()->is('heroCarousel')
-                                                ? 'menu-is-opening menu-open'
-                                                : (request()->is('heroCarousel/create')
-                                                    ? 'menu-is-opening menu-open'
-                                                    : ''))))))) }}">
+                                                    : ''))))) }}">
                     <a href="#"
                         class="nav-link {{ request()->is('product')
                             ? 'active'
@@ -83,13 +79,6 @@
                                 class="nav-link {{ request()->is('paymentMethod') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Payment Method List</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('heroCarousel') }}"
-                                class="nav-link {{ request()->is('heroCarousel') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hero Carousel List</p>
                             </a>
                         </li>
                     </ul>

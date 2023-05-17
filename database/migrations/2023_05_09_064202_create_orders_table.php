@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id');
             $table->decimal('deli_fee', 8, 2);
             $table->enum('order_status', ['pending', 'rejected', 'processing', 'delivered'])->default('pending');
-
             $table->timestamp('order_date');
             $table->timestamps();
 

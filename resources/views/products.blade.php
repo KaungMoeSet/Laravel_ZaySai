@@ -8,6 +8,8 @@
             </div>
         </div>
     </div>
+
+    @include('partials._features')
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -34,12 +36,10 @@
                                 @forelse ($products as $product)
                                     <div class="products-list__item">
                                         <div class="product-card">
-                                            <div class="product-card__badges-list">
-                                                <div class="product-card__badge product-card__badge--new">New</div>
-                                            </div>
                                             <div class="product-card__image">
                                                 <a href="{{ route('products.show', $product->id) }}">
-                                                    <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                    <img style="height: 230px; width: 100%;"
+                                                        src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
                                                         alt="">
                                                 </a>
                                             </div>
@@ -54,7 +54,11 @@
                                             <div class="product-card__actions">
                                                 <div class="product-card__prices">
                                                     <span style="color: #3D464D">Price : </span></span> Ks
-                                                    {{ number_format($product->selling_price) }}
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            {{ number_format($price->selling_price) }}
+                                                        @endif
+                                                    @endforeach
                                                 </div>
 
                                                 <div class="product-card__buttons product-btn">
@@ -77,7 +81,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center pt-3">
                             {{ $products->links('layouts.paginationlinks') }}
                         </div>
                     </div>

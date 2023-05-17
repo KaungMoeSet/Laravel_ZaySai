@@ -45,9 +45,12 @@
                                             <td>
                                                 @foreach ($order->products as $product)
                                                     {{ $product->name }} - {{ $product->pivot->quantity }} &times;
-                                                    {{ number_format($product->selling_price) }}<br>
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            {{ number_format($price->selling_price) }} <br>
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
-
                                             </td>
                                         </tr>
                                         <tr>

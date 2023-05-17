@@ -61,7 +61,11 @@
                                                     </span>
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--price" data-title="Price">
-                                                    Ks {{ number_format($product->selling_price) }}
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            Ks {{ number_format($price->selling_price) }}
+                                                        @endif
+                                                    @endforeach
                                                 </td>
                                                 <td class="cart-table__column cart-table__column--quantity"
                                                     data-title="Quantity">
@@ -112,17 +116,27 @@
                                     @foreach ($cart_data as $product)
                                         <tr>
                                             <td>{{ $product->name }} × {{ $product->quantity }}</td>
-                                            <td>Ks {{ number_format($product->quantity * $product->selling_price) }}</td>
+                                            <td>
+                                                @foreach ($product->selling_prices as $price)
+                                                    @if ($price->end_date == null)
+                                                        Ks {{ number_format($product->quantity * $price->selling_price) }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                         </tr>
                                         @php
-                                            $subTotal += $product->quantity * $product->selling_price;
+                                            foreach ($product->selling_prices as $price) {
+                                                if ($price->end_date == null) {
+                                                    $subTotal += $product->quantity * $price->selling_price;
+                                                }
+                                            }
                                         @endphp
                                     @endforeach
                                 </tbody>
                                 <tbody class="checkout__totals-subtotals">
                                     <tr>
                                         <th>Subtotal</th>
-                                        <td>Ks {{ $subTotal }}</td>
+                                        <td>Ks {{ number_format($subTotal) }}</td>
                                     </tr>
                                     <tr>
                                         @php
@@ -130,7 +144,11 @@
                                         @endphp
                                         @foreach ($cart_data as $product)
                                             @php
-                                                $total += $product->quantity * $product->selling_price;
+                                                foreach ($product->selling_prices as $price) {
+                                                    if ($price->end_date == null) {
+                                                        $total += $product->quantity * $price->selling_price;
+                                                    }
+                                                }
                                             @endphp
                                         @endforeach
                                         <th>Delivery Fee</th>
@@ -151,7 +169,7 @@
                                                     $deliFee = 0;
                                                 }
                                             @endphp
-                                            Ks {{ $deliFee }}
+                                            Ks {{ number_format($deliFee) }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -160,7 +178,7 @@
                                         <th>Total</th>
                                         <td>
 
-                                            Ks {{ $total + $deliFee }}
+                                            Ks {{ number_format($total + $deliFee) }}
                                         </td>
                                     </tr>
                                 </tfoot>

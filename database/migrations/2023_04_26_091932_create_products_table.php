@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('name');
             $table->unsignedBigInteger('sub_category_id');
             $table->integer('buying_price');
-            $table->integer('selling_price');
             $table->integer('quantity');
             $table->longText('description');
             $table->timestamps();

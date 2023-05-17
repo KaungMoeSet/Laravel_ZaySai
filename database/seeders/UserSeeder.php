@@ -14,11 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        $admin = new User();
-        $admin->name = 'Kaung Moe Set';
-        $admin->email = 'kaungmoeset@gmail.com';
-        $admin->password = Hash::make('12345678');
-        $admin->save();
+        User::factory()->count(10)->create([
+            'password' => bcrypt('11111111'),
+        ]);
     }
 }

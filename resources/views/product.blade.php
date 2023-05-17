@@ -51,7 +51,13 @@
                     </div><!-- .product__info / end -->
                     <!-- .product__sidebar -->
                     <div class="product__sidebar">
-                        <div class="product__prices">Ks {{ number_format($product->selling_price) }}</div>
+                        <div class="product__prices">
+                            @foreach ($product->selling_prices as $price)
+                                @if ($price->end_date == null)
+                                    {{ number_format($price->selling_price) }}
+                                @endif
+                            @endforeach
+                        </div>
                         <!-- .product__options -->
 
                         <form method="POST" action="{{ route('cart.add', $product->id) }}" class="product__options">

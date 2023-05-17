@@ -84,7 +84,11 @@
                                                 <td> {{ $product->sub_category->name }} </td>
                                                 <td>Ks {{ number_format($product->buying_price) }}</td>
                                                 <td>
-                                                    Ks {{ number_format($product->selling_price) }}
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            Ks {{ number_format($price->selling_price) }}
+                                                        @endif
+                                                    @endforeach
                                                 </td>
                                                 <td>{{ $product->quantity }}</td>
                                                 <td class="d-flex justify-content-end ">

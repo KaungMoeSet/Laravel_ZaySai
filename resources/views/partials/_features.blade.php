@@ -1,5 +1,5 @@
 <!-- .block-features -->
-<div class="block block-features block-features--layout--boxed">
+<div class="block block-features block-features--layout--boxed pt-4">
     <div class="container">
         <div class="block-features__list">
             <div class="block-features__item">

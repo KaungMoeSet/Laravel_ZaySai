@@ -53,7 +53,7 @@
                                 <p>Total sells</p>
 
                                 <h3>
-                                    Ks {{ number_format($acceptedAmount, 0, '.', ',') }}
+                                    Ks {{ number_format($acceptedAmount) }}
                                 </h3>
                             </div>
                             <div class="icon">
@@ -66,103 +66,86 @@
                 <!-- /.row -->
                 <div class="row">
                     <!-- /.col-md-6 -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
+                        <!-- /.card -->
                         <div class="card">
                             <div class="card-header border-0">
-                                <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">Sales</h3>
-                                </div>
+                                <h3 class="card-title">Recent Orders</h3>
+                                {{-- <div class="card-tools">
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="fas fa-bars"></i>
+                                    </a>
+                                </div> --}}
                             </div>
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <p class="d-flex flex-column">
-                                        <span class="text-bold text-lg">$18,230.00</span>
-                                        <span>Sales Over Time</span>
-                                    </p>
-                                    <p class="ml-auto d-flex flex-column text-right">
-                                        <span class="text-success">
-                                            <i class="fas fa-arrow-up"></i> 33.1%
-                                        </span>
-                                        <span class="text-muted">Since last month</span>
-                                    </p>
-                                </div>
-                                <!-- /.d-flex -->
-
-                                <div class="position-relative mb-4">
-                                    <canvas id="sales-chart" height="200"></canvas>
-                                </div>
-
-                                <div class="d-flex flex-row justify-content-end">
-                                    <span class="mr-2">
-                                        <i class="fas fa-square text-primary"></i> This year
-                                    </span>
-
-                                    <span>
-                                        <i class="fas fa-square text-gray"></i> Last year
-                                    </span>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-striped table-valign-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Status</th>
+                                            <th>City</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($orders as $order)
+                                            <tr>
+                                                <td>
+                                                    {{ $order->order_number }}
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="p-2 rounded-pill
+                                            @switch($order->order_status)
+                                            @case('pending')
+                                                btn-secondary
+                                                @break
+                                            @case('processing')
+                                                btn-warning
+                                                @break
+                                            @case('delivered')
+                                                btn-success
+                                                @break
+                                            @case('rejected')
+                                                btn-danger
+                                                @break
+                                            @endswitch">
+                                                        {{ $order->order_status }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {{ $order->user->addresses->where('setDefault', true)->first()->city->name }}
+                                                <td>
+                                                    {{ $order->user->name }}
+                                                </td>
+                                                <td>
+                                                    {{ \Carbon\Carbon::createFromTimestamp(strtotime($order->order_date))->format('d M Y') }}
+                                                </td>
+                                                <td>
+                                                    {{ number_format($order->payment->paymentConfirm->total_amount) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center pt-3">
+                                    {{ $orders->links('layouts.paginationlinks') }}
                                 </div>
                             </div>
                         </div>
                         <!-- /.card -->
 
-                        <div class="card">
-                            <div class="card-header border-0">
-                                <h3 class="card-title">Online Store Overview</h3>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-sm btn-tool">
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-tool">
-                                        <i class="fas fa-bars"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                    <p class="text-success text-xl">
-                                        <i class="ion ion-ios-refresh-empty"></i>
-                                    </p>
-                                    <p class="d-flex flex-column text-right">
-                                        <span class="font-weight-bold">
-                                            <i class="ion ion-android-arrow-up text-success"></i> 12%
-                                        </span>
-                                        <span class="text-muted">CONVERSION RATE</span>
-                                    </p>
-                                </div>
-                                <!-- /.d-flex -->
-                                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                    <p class="text-warning text-xl">
-                                        <i class="ion ion-ios-cart-outline"></i>
-                                    </p>
-                                    <p class="d-flex flex-column text-right">
-                                        <span class="font-weight-bold">
-                                            <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
-                                        </span>
-                                        <span class="text-muted">SALES RATE</span>
-                                    </p>
-                                </div>
-                                <!-- /.d-flex -->
-                                <div class="d-flex justify-content-between align-items-center mb-0">
-                                    <p class="text-danger text-xl">
-                                        <i class="ion ion-ios-people-outline"></i>
-                                    </p>
-                                    <p class="d-flex flex-column text-right">
-                                        <span class="font-weight-bold">
-                                            <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                                        </span>
-                                        <span class="text-muted">REGISTRATION RATE</span>
-                                    </p>
-                                </div>
-                                <!-- /.d-flex -->
-                            </div>
-                        </div>
                     </div>
                     <!-- /.col-md-6 -->
 
-                    <div class="col-lg-6">
+                    {{-- <div class="col-lg-6">
                         <!--  -->
                         <!-- /.card -->
-
                         <div class="card">
                             <div class="card-header border-0">
                                 <h3 class="card-title">Products</h3>
@@ -180,43 +163,115 @@
                                     <thead>
                                         <tr>
                                             <th>Product</th>
-                                            <th>Price</th>
+                                            <th>Price (Ks) </th>
                                             <th>Sales</th>
                                             <th>Revenue</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $product)
-                                        <tr>
-                                            <td>
-                                                <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
-                                                    class="img-circle img-size-32 mr-2">
-                                                {{ $product->name }}
-                                            </td>
-                                            <td>
-                                                Ks {{ number_format($product->selling_price) }}
-                                            </td>
-                                            <td>
-                                                {{ $product->orders->sum('pivot.quantity') }} Sold
-                                            </td>
-                                            <td>
-                                                {{-- {{ }} --}}
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                        class="img-circle img-size-50 mr-2">
+                                                    {{ $product->name }}
+                                                </td>
+                                                <td>
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            {{ number_format($price->selling_price) }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @php
+                                                        $soldQty = 0;
+                                                    @endphp
+                                                    @foreach ($product->orders as $order)
+                                                        @if (in_array($order->order_status, ['delivered']))
+                                                            {{ $order->pivot->quantity }} Sold
+                                                            @php
+                                                                $soldQty += $order->pivot->quantity;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+
+                                                </td>
+                                                <td>
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date === null)
+                                                            {{ $soldQty * $price->selling_price - $soldQty * $product->buying_price }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center pt-3">
+                                    {{ $products->links('layouts.paginationlinks') }}
+                                </div>
+
                             </div>
                         </div>
                         <!-- /.card -->
 
-                    </div>
+                    </div> --}}
 
                 </div>
                 <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <canvas id="myChart"></canvas>
+                      </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /.content -->
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

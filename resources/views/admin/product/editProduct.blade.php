@@ -31,8 +31,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('product.update', $product->id) }}"
-                    enctype="multipart/form-data">
+                <form method="POST" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <!-- SELECT2 EXAMPLE -->
@@ -107,13 +106,19 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label>Selling Price</label>
-                                                <input type="number" name="product_selling_price"
-                                                    class="form-control select2" value="{{ $product->selling_price }}">
-                                                <span class="help-inline">
-                                                    @error('product_selling_price')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </span>
+                                                @foreach ($product->selling_prices as $price)
+                                                    @if ($price->end_date == null)
+                                                        <input type="number" name="product_selling_price"
+                                                            class="form-control select2"
+                                                            value="{{ $price->selling_price }}">
+                                                        <span class="help-inline">
+                                                            @error('product_selling_price')
+                                                                {{ $message }}
+                                                            @enderror
+                                                        </span>
+                                                    @endif
+                                                @endforeach
+
                                             </div>
                                         </div>
                                     </div>
@@ -184,26 +189,25 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($product->images as $product_image)
-                                                                <tr class="list-item">
-                                                                    <td>
-                                                                        <div>
-                                                                            <img src="" alt="">
-                                                                            <img src="{{ asset('storage/img/' . $product_image->image_name) }}"
-                                                                                width="100px" height="100px"
-                                                                                alt="Image">
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div>
-                                                                            <button type="button" id="delete-form"
-                                                                                onclick="imageDelete(event, {{ $product_image->id }})"
-                                                                                class="delete btn btn-danger px-2"
-                                                                                {{ (count($product->images) === 1) ? 'disabled' : '' }}>
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                            <tr class="list-item">
+                                                                <td>
+                                                                    <div>
+                                                                        <img src="" alt="">
+                                                                        <img src="{{ asset('storage/img/' . $product_image->image_name) }}"
+                                                                            width="100px" height="100px" alt="Image">
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        <button type="button" id="delete-form"
+                                                                            onclick="imageDelete(event, {{ $product_image->id }})"
+                                                                            class="delete btn btn-danger px-2"
+                                                                            {{ count($product->images) === 1 ? 'disabled' : '' }}>
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         @endforeach
 
                                                     </tbody>

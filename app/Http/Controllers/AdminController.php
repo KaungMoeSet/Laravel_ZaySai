@@ -18,13 +18,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
-        $orders = Order::all();
-        $users = User::all();
-        $products = Product::with('orders')->get();
+        $orders         = Order::paginate(5);
+        $users          = User::all();
+        $products       = Product::with('orders')->paginate(5);
         $acceptedAmount = PaymentConfirm::where('confirm_status', 'accepted')->sum('total_amount');
 
-        return view('admin.dashboard', compact('orders', 'users',  'products', 'acceptedAmount'));
+        return view('admin.dashboard', compact('orders', 'users', 'products', 'acceptedAmount'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -43,14 +43,14 @@ class AdminController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:admins',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $admin = Admin::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
 

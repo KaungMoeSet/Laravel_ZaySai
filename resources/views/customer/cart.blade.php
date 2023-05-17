@@ -40,7 +40,11 @@
                                 </a>
                             </td>
                             <td class="cart-table__column cart-table__column--price" data-title="Price">
-                                Ks {{ number_format($product->selling_price) }}
+                                @foreach ($product->selling_prices as $price)
+                                    @if ($price->end_date == null)
+                                        Ks {{ number_format($price->selling_price) }}
+                                    @endif
+                                @endforeach
                             </td>
                             <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
                                 <div class="input-number">
@@ -56,7 +60,11 @@
                             </td>
                             <td class="cart-table__column cart-table__column--total" data-product-id="{{ $product->id }}"
                                 data-title="Total">
-                                {{ number_format($product->quantity * $product->selling_price) }}
+                                @foreach ($product->selling_prices as $price)
+                                    @if ($price->end_date == null)
+                                        Ks {{ number_format($product->quantity * $price->selling_price) }}
+                                    @endif
+                                @endforeach
                             </td>
                             <td class="cart-table__column cart-table__column--remove">
                                 <form method="POST" action="{{ route('cart.remove', $product->id) }}">
@@ -71,8 +79,12 @@
                         </tr>
 
                         @php
+                            foreach ($product->selling_prices as $price) {
+                                if ($price->end_date == null) {
+                                    $subTotal += $product->quantity * $price->selling_price;
+                                }
+                            }
                             $itemsCount++;
-                            $subTotal += $product->quantity * $product->selling_price;
                         @endphp
                     @endforeach
                 </tbody>
@@ -89,13 +101,13 @@
                                 <thead class="cart__totals-header">
                                     <tr>
                                         <th>Subtotal ({{ $itemsCount }} items)</th>
-                                        <td>Ks {{ $subTotal }}</td>
+                                        <td>Ks {{ number_format($subTotal) }}</td>
                                     </tr>
                                 </thead>
                                 <tfoot class="cart__totals-footer">
                                     <tr>
                                         <th>Total</th>
-                                        <td>Ks {{ $subTotal }}</td>
+                                        <td>Ks {{ number_format($subTotal) }}</td>
                                     </tr>
                                 </tfoot>
                             </table>

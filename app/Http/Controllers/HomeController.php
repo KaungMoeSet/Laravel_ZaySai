@@ -12,12 +12,27 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products   = Product::all();
         $categories = Category::all();
 
-        return view('index', compact('products', 'categories'));
+        $subcategoryId = $request->input('subcategory');
+        $subCategory   = SubCategory::find($subcategoryId);
+
+        $productsQuery = Product::query();
+        if ($subCategory) {
+            $productsQuery->where('sub_category_id', $subcategoryId);
+        }
+
+        $products = Product::when(request()->search, function ($query) {
+            $search = request()->search;
+            $query->orWhere("name", "like", "%$search%");
+        })->latest()->paginate(8);
+        // $products = $productsQuery->latest()->paginate(2);
+
+
+        return view('products', compact('products', 'categories', 'subCategory'))
+            ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
     /**
@@ -42,9 +57,9 @@ class HomeController extends Controller
     public function show(string $id)
     {
         //
-        $product = Product::find($id);
+        $product    = Product::find($id);
         $categories = Category::all();
-        $quantity = 1;
+        $quantity   = 1;
 
         return view('product', compact('product', 'categories', 'quantity'));
     }
@@ -72,30 +87,27 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     public function allProducts(Request $request)
     {
         $categories = Category::all();
 
         $subcategoryId = $request->input('subcategory');
-        $subCategory = SubCategory::find($subcategoryId);
+        $subCategory   = SubCategory::find($subcategoryId);
 
         $productsQuery = Product::query();
         if ($subCategory) {
             $productsQuery->where('sub_category_id', $subcategoryId);
         }
 
-        $products = Product::when(request()->search, function ($query) {
+        $products = $productsQuery->when(request()->search, function ($query) {
             $search = request()->search;
             $query->orWhere("name", "like", "%$search%");
-        })->latest()->paginate(2);
-        // $products = $productsQuery->latest()->paginate(2);
+        })->latest()->paginate(8);
 
-        
         return view('products', compact('products', 'categories', 'subCategory'))
-            ->with('i', (request()->input('page', 1) - 1) * 2);
+            ->with('i', (request()->input('page', 1) - 1) * 8);
     }
-
 
     public function showAboutUsPage()
     {

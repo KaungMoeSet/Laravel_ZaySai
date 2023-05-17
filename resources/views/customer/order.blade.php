@@ -107,7 +107,7 @@
                                 @php
                                     $itemQty = 0;
                                     $subTotal = 0;
-
+                                    
                                     foreach ($cart_data as $product) {
                                         $itemQty += $product->quantity;
                                     }
@@ -136,13 +136,18 @@
                                                 @endphp
                                                 @foreach ($cart_data as $product)
                                                     @php
-                                                        $total += $product->quantity * $product->selling_price;
+                                                        foreach ($product->selling_prices as $price) {
+                                                            if ($price->end_date == null) {
+                                                                $total += $product->quantity * $price->selling_price;
+                                                            }
+                                                        }
                                                     @endphp
                                                 @endforeach
                                                 <input type="text" class="form_input data_input"
                                                     value="{{ $total + $deliFee }}" readonly> Ks
 
-                                                <input type="text" name="totalAmt" value="{{ $total + $deliFee }}" hidden>
+                                                <input type="text" name="totalAmt" value="{{ $total + $deliFee }}"
+                                                    hidden>
                                             </td>
                                         </tr>
                                     </tbody>
