@@ -6,11 +6,6 @@
             <div class="page-header__title">
                 <h1>Frequently Asked Questions</h1>
             </div>
-            {{-- <div class="page-header__breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <span class="typography">Feel free to reach us at our Facebook messenger and</span>
-                </nav>
-            </div> --}}
         </div>
     </div>
     <div class="block faq">

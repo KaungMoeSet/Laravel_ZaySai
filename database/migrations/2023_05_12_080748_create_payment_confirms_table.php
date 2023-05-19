@@ -22,7 +22,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('admins');
-            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onUpdate('cascade');
+            $table->softDeletes();
         });
     }
 

@@ -47,7 +47,6 @@
                                                 <td>{{ $order->order_number }}</td>
                                                 <td>
                                                     {{ $order->payment->paymentConfirm->total_amount ?? '' }}
-                                                    {{-- {{ $order->payment->paymentConfirm->total_amount }} --}}
                                                 </td>
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($order->order_date)->format('Y/m/d') }}

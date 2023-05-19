@@ -275,6 +275,20 @@ class AddressSeeder extends Seeder
             'user_id' => 10
         ]);
         // user 10 end
+
+        // user 11 start
+        $address19 = Address::create([
+            'name' => $faker->name,
+            'phoneNumber' => $faker->phoneNumber,
+            'building' => $faker->buildingNumber,
+            'landmark' => $faker->optional()->word,
+            'address' => $faker->address,
+            'city_id' => 66,
+            'township_id' => 12,
+            'setDefault' => true,
+            'user_id' => 11
+        ]);
+        // user 11 start
     }
 
     

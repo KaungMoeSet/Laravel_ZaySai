@@ -24,32 +24,41 @@ class HomeController extends Controller
             $productsQuery->where('sub_category_id', $subcategoryId);
         }
 
-        $products = Product::when(request()->search, function ($query) {
+        $productsQuery->when(request()->search, function ($query) {
             $search = request()->search;
             $query->orWhere("name", "like", "%$search%");
-        })->latest()->paginate(8);
-        // $products = $productsQuery->latest()->paginate(2);
+        });
 
+        // Apply sorting based on the selected filter option
+        $filterOption = $request->input('filter_option');
+        switch ($filterOption) {
+            case '1':
+                $productsQuery->orderBy('name');
+                break;
+            case '2':
+                $productsQuery->join('selling_prices', 'products.id', '=', 'selling_prices.product_id')
+                    ->orderBy('selling_prices.selling_price')
+                    ->orderBy('selling_prices.created_at', 'desc')
+                    ->select('products.*');
+                break;
+            case '3':
+                $productsQuery->join('selling_prices', 'products.id', '=', 'selling_prices.product_id')
+                    ->orderByDesc('selling_prices.selling_price')
+                    ->orderBy('selling_prices.created_at', 'desc')
+                    ->select('products.*');
+                break;
+            // For the default option or when no filter option is selected, no additional sorting is applied
+            default:
+                // Do nothing
+                break;
+        }
+
+        $products = $productsQuery->latest()->paginate(8);
 
         return view('products', compact('products', 'categories', 'subCategory'))
             ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -62,30 +71,6 @@ class HomeController extends Controller
         $quantity   = 1;
 
         return view('product', compact('product', 'categories', 'quantity'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     public function allProducts(Request $request)

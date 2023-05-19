@@ -12,20 +12,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title mr-3">
-                        Show
-                        <select class="form-select">
-                            <option selected>Last 5 orders</option>
-                            <option value="1">Last 15 days</option>
-                            <option value="2">Last 6 months</option>
-                            <option value="3">
-                                Orders placed in {{ date('Y') }}
-                            </option>
-                        </select>
+                        <form action="{{ route('profile.getAllOrders') }}" method="GET" id="filterForm">
+                            Show
+                            <select class="form-select" name="filter_option" id="filterOptionSelect"
+                                onchange="submitFilterForm()">
+                                <option value="0">Last 5 orders</option>
+                                <option value="1">Last 15 days</option>
+                                <option value="2">Last 6 months</option>
+                                <option value="3">Orders placed in {{ date('Y') }}</option>
+                            </select>
+                        </form>
                     </h5>
                 </div>
 
                 @if (!$user->orders->isEmpty())
-                    @foreach ($user->orders as $order)
+                    @foreach ($orders as $order)
                         <div style="border: 1px solid #bbb;margin-top: 10px;">
                             <div class="modal-header">
                                 <div class="modal-title mr-3">
@@ -85,7 +86,7 @@
                                                 @case('delivered')
                                                     btn-success
                                                     @break
-                                                @case('rejected')
+                                                @default
                                                     btn-danger
                                                     @break
                                                 @endswitch">
@@ -124,4 +125,18 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var filterOption =
+                '{{ $filterOption ?? '0' }}'; // Get the selected filter option from the PHP variable
+
+            var filterOptionSelect = document.getElementById('filterOptionSelect');
+            filterOptionSelect.value = filterOption;
+        });
+
+        function submitFilterForm() {
+            document.getElementById('filterForm').submit();
+        }
+    </script>
+
 @endsection

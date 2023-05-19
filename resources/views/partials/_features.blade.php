@@ -32,15 +32,6 @@
                 </div>
             </div>
             <div class="block-features__divider"></div>
-            <!-- <div class="block-features__item">
-                            <div class="block-features__icon">
-                                <i class="fa-solid fa-fire-flame-curved"></i>
-                            </div>
-                            <div class="block-features__content">
-                                <div class="block-features__title">Hot Offers</div>
-                                <div class="block-features__subtitle">Discounts up to 90%</div>
-                            </div>
-                        </div> -->
         </div>
     </div>
 </div>

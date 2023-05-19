@@ -16,12 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('payment_method_id');
             $table->string('payment_screenshot');
-            $table->timestamp('paid_at')->nullable();
+            $table->date('paid_at')->nullable();
 
             $table->timestamps();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
             $table->index('order_id');
+            $table->softDeletes();
         });
     }
 

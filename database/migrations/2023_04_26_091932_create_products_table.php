@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->integer('quantity');
             $table->longText('description');
             $table->timestamps();
-
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
+        
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('restrict');
             $table->softDeletes();
         });
     }

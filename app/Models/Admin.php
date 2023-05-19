@@ -32,11 +32,4 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(PaymentConfirm::class);
     }
-    // public function validateCredentials(UserContract $user, array $credentials)
-    // {
-    //     $plain = $credentials['password'];
-
-    //     return $this->hasher->check($plain, $user->getAuthPassword());
-    // }
-
 }

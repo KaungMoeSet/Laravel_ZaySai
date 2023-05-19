@@ -18,12 +18,17 @@
                         <div class="products-view__options">
                             <div class="view-options">
                                 <div class="view-options__control"><label for="">Sort By</label>
-                                    <div><select class="form-control form-control-sm" name="" id="">
-                                            <option value="">Default</option>
-                                            <option value="">Name (A-Z)</option>
-                                            <option value="">Price (from low-high)</option>
-                                            <option value="">Price (from high-low)</option>
-                                        </select></div>
+                                    <div>
+                                        <form action="{{ route('index') }}" method="GET" id="filterForm">
+                                            <select class="form-select" name="filter_option" id="filterOptionSelect"
+                                                onchange="submitFilterForm()">
+                                                <option value="0">Default</option>
+                                                <option value="1">Name (A-Z)</option>
+                                                <option value="2">Price (from low-high)</option>
+                                                <option value="3">Price (from high-low)</option>
+                                            </select>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,4 +94,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function submitFilterForm() {
+            document.getElementById("filterForm").submit();
+        }
+    </script>
+    
 @endsection

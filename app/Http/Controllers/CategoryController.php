@@ -56,19 +56,8 @@ class CategoryController extends Controller
 
             $subCategory->save();
         }
-
-        // return view('admin.newCategory')->with([
-        //     'message'=>'Data added successfully!',
-        //     "categories"=>Category::all() ]);
+        
         return redirect()->route('category.index')->with('success_message', $request->input('category_name') . ' is added successfully!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -104,9 +93,10 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        $category = Category::find($id)->name;
-        Category::find($id)->delete();
+        $category = Category::findOrFail($id);
 
-        return redirect()->back()->with('success_message', $category . ' is deleted successfully!');
+        $category->delete();
+
+        return redirect()->back()->with('success_message', $category->name . ' is deleted successfully!');
     }
 }

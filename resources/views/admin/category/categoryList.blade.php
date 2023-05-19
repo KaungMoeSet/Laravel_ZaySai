@@ -71,8 +71,14 @@
                                             <form action="{{ url('category/' . $category->id) }}" method="POST" id="delete-form{{ $category->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="confirmDelete({{ $category->id }})" class="btn btn-danger px-2"><i class="fa-solid fa-trash-can"></i></button>
+                                            
+                                                @if ($category->subcategories->isEmpty())
+                                                    <button type="button" onclick="confirmDelete({{ $category->id }})" class="btn btn-danger px-2">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                @endif
                                             </form>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

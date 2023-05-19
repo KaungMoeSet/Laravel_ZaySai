@@ -127,41 +127,6 @@ class OrderController extends Controller
         return view('customer.orderConfirmed', compact('categories', 'orderNumber', 'order'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-        $order = Order::find($id);
-
-        return view('admin.order.orderDetail', compact('order'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
-
     public function deliver(string $id)
     {
         $order = Order::find($id);

@@ -67,7 +67,6 @@
                                                         @break
                                                 @endswitch">
                                                         {{ $paymentConfirm->confirm_status }}
-                                                        {{-- {{ $paymentConfirm->id }} --}}
                                                     </span>
                                                 </td>
                                                 <td class="d-flex justify-content-end ">

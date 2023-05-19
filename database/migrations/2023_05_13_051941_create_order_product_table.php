@@ -16,11 +16,12 @@ return new class extends Migration {
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
 
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade');
             $table->timestamps();
             $table->index('order_id');
             $table->index('product_id');
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('region_id')->references('id')->on('regions')->onUpdate('cascade')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

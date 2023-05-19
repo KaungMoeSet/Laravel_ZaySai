@@ -33,8 +33,6 @@
                                 <li class="footer-links__item"><a href="/aboutUs"
                                         class="footer-links__link">About
                                         Us</a></li>
-                                {{-- <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
-                                        Information</a></li> --}}
                                 <li class="footer-links__item"><a href="/privacyPolicy"
                                         class="footer-links__link">Privacy
                                         Policy</a></li>

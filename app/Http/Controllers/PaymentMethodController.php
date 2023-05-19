@@ -25,7 +25,7 @@ class PaymentMethodController extends Controller
     public function create()
     {
         //
-        $payNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
+        $payNames = ['KBZ', 'Yoma', 'AYA', 'AGD', 'CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
         return view('admin.paymentMethod.newPaymentMethod', compact('payNames'));
     }
 
@@ -40,7 +40,7 @@ class PaymentMethodController extends Controller
             'acc_no'    => 'required',
             'acc_type'  => 'required',
             'bank_name' => 'required',
-            'logo'     => 'required'
+            'logo'      => 'required'
         ]);
 
         if ($request->hasFile('logo')) {
@@ -54,23 +54,15 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $paymentMethod = new PaymentMethod();
-        $paymentMethod->acc_name = $request->input('acc_name');
+        $paymentMethod             = new PaymentMethod();
+        $paymentMethod->acc_name   = $request->input('acc_name');
         $paymentMethod->acc_number = $request->input('acc_no');
-        $paymentMethod->acc_type = $request->input('acc_type');
-        $paymentMethod->bank_name = $request->input('bank_name');
-        $paymentMethod->image = $randomName;
+        $paymentMethod->acc_type   = $request->input('acc_type');
+        $paymentMethod->bank_name  = $request->input('bank_name');
+        $paymentMethod->image      = $randomName;
 
         $paymentMethod->save();
         return redirect()->route('paymentMethod.index')->with('success_message', $request->input('acc_name') . ' is added successfully!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(PaymentMethod $paymentMethod)
-    {
-        //
     }
 
     /**
@@ -80,7 +72,7 @@ class PaymentMethodController extends Controller
     {
         //
         $paymentMethod = PaymentMethod::find($id);
-        $payNames = ['KBZ', 'AYA', 'AGD','CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
+        $payNames      = ['KBZ', 'Yoma', 'AYA', 'AGD', 'CB', 'A Bank', 'MCB', 'UAB', 'G Bank', 'Wave Pay'];
         return view('admin.paymentMethod.editPaymentMethod', compact('paymentMethod', 'payNames'));
     }
 
@@ -89,62 +81,61 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $request->validate([
             'acc_name'  => 'required',
             'acc_no'    => 'required',
             'acc_type'  => 'required',
             'bank_name' => 'required',
-            'logo'     => 'required'
+            'logo'      => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
-        
+
         $paymentMethod = PaymentMethod::find($id);
 
-        if ($request->hasFile('image')) {
-            if ($request->file('image')->isValid()) {
-                $validated = $request->validate([
-                    'image' => 'mimes:jpg,jpeg,png,gif|max:2048',
-                ]);
-                $extension = $request->image->extension();
-                $randomName = rand() . "." . $extension;
-                $request->image->storeAs('/public/img/', $randomName);
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            $logo       = $request->file('logo');
+            $extension  = $logo->getClientOriginalExtension();
+            $randomName = rand() . "." . $extension;
+            $logo->storeAs('public/img', $randomName);
 
-                $path = "public/img/{$paymentMethod->image}";
-                if (Storage::exists($path)) {
-                    Storage::delete($path);
-                }
-
-                $paymentMethod->image = $randomName;
+            $path = "public/img/{$paymentMethod->image}";
+            if (Storage::exists($path)) {
+                Storage::delete($path);
             }
-        } else {
-            $paymentMethod->image = $paymentMethod->image;
+
+            $paymentMethod->image = $randomName;
         }
 
-        $paymentMethod->acc_name = $request->input("acc_name");
+        $paymentMethod->acc_name   = $request->input("acc_name");
         $paymentMethod->acc_number = $request->input("acc_no");
-        $paymentMethod->acc_type = $request->input("acc_type");
-        $paymentMethod->bank_name = $request->input("bank_name");
+        $paymentMethod->acc_type   = $request->input("acc_type");
+        $paymentMethod->bank_name  = $request->input("bank_name");
 
         $paymentMethod->save();
-        return redirect()->route('paymentMethod.index')->with('success_message', $request->input('acc_name') . ' is Updated successfully!');
+
+        return redirect()->route('paymentMethod.index')->with('success_message', $request->input('acc_name') . ' is updated successfully!');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
-        $paymentMethod = PaymentMethod::find($id);
+        $paymentMethod     = PaymentMethod::findOrFail($id);
         $paymentMethodName = $paymentMethod->name;
         $paymentMethodLogo = $paymentMethod->image;
 
         $path = "public/img/{$paymentMethodLogo}";
-        if(Storage::exists($path)) {
+        if (Storage::exists($path)) {
             Storage::delete($path);
         }
 
-        PaymentMethod::find($id)->delete();
+        // Delete the associated payment records first
+        $paymentMethod->payments()->delete();
+
+        // Then delete the payment method
+        $paymentMethod->delete();
 
         return redirect()->back()->with('success_message', $paymentMethodName . ' is deleted successfully!');
     }

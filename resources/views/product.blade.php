@@ -44,9 +44,6 @@
                         <h1 class="product__name">{{ $product->name }}</h1>
                         <div class="product__description">{{ $product->description }}</div>
                         <ul class="product__meta">
-                            {{-- <li class="product__meta-availability">
-                                Availability: <span class="text-success">In Stock</span>
-                            </li> --}}
                         </ul>
                     </div><!-- .product__info / end -->
                     <!-- .product__sidebar -->

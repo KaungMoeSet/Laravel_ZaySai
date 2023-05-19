@@ -63,9 +63,9 @@ class ProductController extends Controller
         $sellingPrice                = new SellingPrice();
         $sellingPrice->selling_price = $request->input('product_selling_price');
         $sellingPrice->product_id    = $product->id;
+        $sellingPrice->save();
 
         $product_images = $request->file('product_images');
-        // dd($product_images);
 
         foreach ($product_images as $product_image) {
             $extension  = $product_image->extension();
@@ -87,14 +87,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -112,8 +104,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-        // dd($request);
         $request->validate([
             'product_name'          => 'required',
             'product_description'   => 'required',
@@ -128,19 +118,20 @@ class ProductController extends Controller
         $product->name            = $request->input('product_name');
         $product->sub_category_id = $request->input('sub_category');
         $product->buying_price    = $request->input('product_buying_price');
-        $product->selling_price   = $request->input('product_selling_price');
         $product->quantity        = $request->input('product_quantity');
         $product->description     = $request->input('product_description');
         $product->save();
 
-        $sell_prices           = SellingPrice::where('product_id', $id)->first();
-        $sell_prices->end_date = Carbon::now()->format('Y-m-d');
-        $sell_prices->save();
+        $existingSellingPrice = SellingPrice::where('product_id', $id)->latest()->first();
+        if ($existingSellingPrice) {
+            $existingSellingPrice->end_date = Carbon::now()->format('Y-m-d');
+            $existingSellingPrice->save();
+        }
 
-        $sell_prices_new                = new SellingPrice();
-        $sell_prices_new->selling_price = $request->input('sprice');
-        $sell_prices_new->product_id    = $product->id;
-        $sell_prices_new->save();
+        $newSellingPrice                = new SellingPrice();
+        $newSellingPrice->selling_price = $request->input('product_selling_price');
+        $newSellingPrice->product_id    = $product->id;
+        $newSellingPrice->save();
 
         if ($request->hasFile('product_images')) {
             $product_images = $request->file('product_images');
@@ -152,28 +143,31 @@ class ProductController extends Controller
                 $image             = new ProductImage();
                 $image->product_id = $product->id;
                 $image->image_name = $randomName;
-                // dd($randomName);
-                // dd($product_image);
-                $product->images()->createMany([
-                    ['image_name' => $randomName, 'product_id' => $product->id],
-                ]);
+                $image->save();
             }
         }
 
         return redirect()->route('product.index')->with('success_message', $request->input('product_name') . ' is Updated Successfully!');
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
-        $product = Product::find($id)->name;
-        Product::find($id)->delete();
+        // Find the product
+        $product = Product::findOrFail($id);
 
-        return redirect()->back()->with('success_message', $product . ' is deleted successfully!');
+        // Find and delete the associated product images
+        $product->images()->delete();
+
+        // Delete the product
+        $product->delete();
+
+        return redirect()->back()->with('success_message', $product->name . ' is deleted successfully!');
     }
+
 
     /**
      * Get SubCategory from storage.

@@ -17,9 +17,6 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewAddress">
                         Add new address
                     </button>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> --}}
                 </div>
                 <div class="modal-body">
                     <table class="table edit-table">

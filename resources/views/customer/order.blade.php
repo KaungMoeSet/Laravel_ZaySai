@@ -52,24 +52,6 @@
                                 <h4 class="card-title">Your Payment Info</h4>
                                 <table class="checkout__totals">
                                     <tbody class="checkout__totals-subtotals">
-                                        {{-- <tr>
-                                            <th>Payment/Bank Type</th>
-                                            <td>
-                                                <select id="my-select" name="bank_name" class="form-control">
-                                                    <option value="" disabled selected>Choose payment bank type</option>
-                                                    @foreach ($paymentMethods as $paymentMethod)
-                                                        <option>
-                                                            {{ $paymentMethod->bank_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="help-inline">
-                                                    @error('bank_name')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </span>
-                                            </td>
-                                        </tr> --}}
                                         <tr>
                                             <th>Account Number</th>
                                             <td>

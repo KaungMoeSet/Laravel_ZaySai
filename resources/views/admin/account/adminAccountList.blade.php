@@ -59,13 +59,8 @@
                                                 <td>{{ $admin->name }}</td>
                                                 <td> {{ $admin->email }} </td>
                                                 <td class="d-flex justify-content-end ">
-                                                    <a href="{{ url('admin/' . $admin->id . '/edit') }}">
-                                                        <button type="submit" class="btn btn-warning px-2 mx-2 edit_btn">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </a>
 
-                                                    <form action="{{ url('admin/' . $admin->id) }}"
+                                                    <form action="{{ route('admin.destroy', $admin->id) }}"
                                                         id="delete-form{{ $admin->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')

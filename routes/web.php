@@ -38,12 +38,6 @@ Route::resource('/', HomeController::class);
 
 Route::get('/login', [LoginController::class, 'showLoginForm']);
 
-// Route::controller(ProductController::class)->group(function () {
-//     Route::get('/allProducts', 'index');
-//     //single product
-//     Route::get('/products/{product}', 'show');
-// });
-
 Route::get('/contactUs', [HomeController::class, 'showContactUsPage']);
 
 Route::get('/aboutUs', [HomeController::class, 'showAboutUsPage']);
@@ -51,18 +45,20 @@ Route::get('/aboutUs', [HomeController::class, 'showAboutUsPage']);
 Route::get('/allProducts', [HomeController::class, 'allProducts'])->name('allProducts');
 
 Route::resource('products', HomeController::class);
-// Route::get('/allProducts/{id}', [HomeController::class, 'show']);
 
 Route::get('/oneProduct', function () {
-    return view('product');
+    $categories = Category::all();
+    return view('product', compact('categories'));
 });
 
 Route::get('/faq', function () {
-    return view('pages.faq');
+    $categories = Category::all();
+    return view('pages.faq', compact('categories'));
 });
 
 Route::get('/privacyPolicy', function () {
-    return view('pages.privacyPolicy');
+    $categories = Category::all();
+    return view('pages.privacyPolicy', compact('categories'));
 });
 
 Route::get('/trackOrder', function () {
@@ -134,6 +130,8 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::resource('admin', AdminController::class);
 
     Route::get('/show-all-admins', [AdminController::class, 'showAllAdmins'])->name('admin.show-all-admins');
+
+    Route::get('/filter-by-date', [AdminController::class, 'filterByDate'])->name('admin.filterByDate');
 
     Route::resource('user', UserController::class);
 

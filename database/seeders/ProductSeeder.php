@@ -340,7 +340,7 @@ class ProductSeeder extends Seeder
 
         // soap start
         $product10 = Product::create([
-            'name'            => 'Patanjali & Santoor',
+            'name'            => 'Patanjali and Santoor',
             'sub_category_id' => $subCategory7->id,
             'buying_price'    => 2000,
             'quantity'        => 10,

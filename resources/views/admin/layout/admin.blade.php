@@ -13,11 +13,9 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    {{-- <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- <link rel="stylesheet" href="{{ asset('adminFrontEnd/plugins/fontawesome-free/css/all.min.css') }}"> --}}
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -25,8 +23,6 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('adminFrontEnd/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Bootstrap -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> --}}
     <!-- Google Font: Roboto Pro -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +44,6 @@
 
     <!-- jQuery -->
     <script src="{{ asset('adminFrontEnd/plugins/jquery/jquery.min.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  --}}
 
     <!-- Summernote -->
     <script src="{{ asset('adminFrontEnd/plugins/summernote/summernote-bs4.min.js') }}"></script>
@@ -83,15 +78,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/js/app.js'])
 </head>
-<!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -106,13 +92,7 @@
         <div class="content-wrapper">
             @yield('content')
         </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        {{-- <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside> --}}
-        <!-- /.control-sidebar -->
+        <!-- /.content-wrapper -->>
 
         <!-- Main Footer -->
         @include('admin.partials._footer')
@@ -120,9 +100,6 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
-
-
     <script>
         $(function() {
             $("#example1").DataTable({

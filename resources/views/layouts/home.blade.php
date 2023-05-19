@@ -38,8 +38,6 @@
     <script src="{{ asset('/frontend/js/main.js') }}"></script>
     <script src="{{ asset('/frontend/svg4everybody-2.1.9/svg4everybody.min.js') }}"></script>
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/vendor/pagination.css') }}">
-    <script src="{{ asset('js/vendor/pagination.js') }}"></script> --}}
 
     <script>
         svg4everybody();
@@ -60,8 +58,6 @@
         gtag('js', new Date());
         gtag('config', 'UA-97489509-6');
     </script>
-    <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @vite(['resources/js/app.js'])
 </head>
 
