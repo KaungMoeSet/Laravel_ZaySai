@@ -79,11 +79,14 @@
                                                         id="delete-form{{ $paymentMethod->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button"
-                                                            onclick="confirmDelete({{ $paymentMethod->id }})"
-                                                            class="btn btn-danger px-2">
-                                                            <i class="fa-solid fa-trash-can"></i>
-                                                        </button>
+                                                        @if ($paymentMethod->payments->isEmpty())
+                                                            <button type="button"
+                                                                onclick="confirmDelete({{ $paymentMethod->id }})"
+                                                                class="btn btn-danger px-2">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </button>
+                                                        @endif
+
                                                     </form>
                                                 </td>
                                             </tr>

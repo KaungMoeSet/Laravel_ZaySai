@@ -55,12 +55,12 @@
                                         </tr>
                                         <tr>
                                             <th>Deli Fee</th>
-                                            <td>Ks {{ $order->deli_fee }}</td>
+                                            <td>Ks {{ number_format($order->deli_fee) }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Total</th>
                                             <td>
-                                                Ks {{ $order->payment->paymentConfirm->total_amount }}
+                                                Ks {{ number_format($order->payment->paymentConfirm->total_amount) }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,6 +89,12 @@
                                             <th>Order At</th>
                                             <td>
                                                 {{ \Carbon\Carbon::parse($order->order_date)->format('Y/m/d') }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Admin: {{ $order->payment->paymentConfirm->admin->name }}</th>
+                                            <td>Confirm order at -
+                                                {{ \Carbon\Carbon::parse($order->payment->paymentConfirm->confirm_cancel_date)->format('Y/m/d') }}
                                             </td>
                                         </tr>
                                         <tr>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Address;
 use App\Models\Payment;
@@ -84,8 +85,12 @@ class OrderSeeder extends Seeder
 
                 $confirmCancelDate = $randomDate->copy()->addHours(random_int(1, 24));
 
+                $adminCount    = Admin::count();
+                $randomAdminId = random_int(1, $adminCount);
+
                 $paymentConfirm = PaymentConfirm::create([
                     'payment_id'          => $payment->id,
+                    'admin_id'            => $randomAdminId,
                     'confirm_cancel_date' => $confirmCancelDate,
                     'confirm_status'      => ['pending', 'accepted', 'rejected'][random_int(0, 2)],
                     'total_amount'        => $totalAmount,

@@ -28,16 +28,42 @@
                     </div>
                     <div class="mobile-links__item-sub-links" data-collapse-content>
                         <ul class="mobile-links mobile-links--level--1">
-                            <li class="mobile-links__item" data-collapse-item>
-                                <div class="mobile-links__item-title">
-                                    <a href="#" class="mobile-links__item-link">Power Tools</a>
-                                </div>
-                            </li>
-                            <li class="mobile-links__item" data-collapse-item>
-                                <div class="mobile-links__item-title">
-                                    <a href="#" class="mobile-links__item-link">Machine Tools</a>
-                                </div>
-                            </li>
+                            @foreach ($categories as $category)
+                                <li class="mobile-links__item" data-collapse-item>
+                                    <div class="mobile-links__item-title">
+                                        <a href="" class="mobile-links__item-link">
+                                            {{ $category->name }}
+                                        </a>
+                                        @if ($category->subCategories->isNotEmpty())
+                                            <button class="mobile-links__item-toggle" type="button"
+                                                data-collapse-trigger>
+                                                <svg class="mobile-links__item-arrow" width="12px" height="7px">
+                                                    <use
+                                                        xlink:href="/frontend/images/sprite.svg#arrow-rounded-down-12x7">
+                                                    </use>
+                                                </svg>
+                                            </button>
+                                        @endif
+                                    </div>
+                                    <div class="mobile-links__item-sub-links" data-collapse-content>
+                                        @if ($category->subCategories->isNotEmpty())
+                                            <ul class="mobile-links mobile-links--level--2">
+                                                @foreach ($category->subCategories as $subCategory)
+                                                    <li class="mobile-links__item" data-collapse-item>
+                                                        <div class="mobile-links__item-title">
+                                                            <a href="{{ route('allProducts', ['subcategory' => $subCategory->id]) }}"
+                                                                class="mobile-links__item-link">
+                                                                {{ $subCategory->name }}
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 <li class="mobile-links__item" data-collapse-item>

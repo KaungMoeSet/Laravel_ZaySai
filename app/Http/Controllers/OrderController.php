@@ -126,6 +126,17 @@ class OrderController extends Controller
 
         return view('customer.orderConfirmed', compact('categories', 'orderNumber', 'order'));
     }
+    
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+        $order = Order::find($id);
+
+        return view('admin.order.orderDetail', compact('order'));
+    }
 
     public function deliver(string $id)
     {

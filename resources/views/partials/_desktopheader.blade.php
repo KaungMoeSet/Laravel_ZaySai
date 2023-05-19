@@ -89,7 +89,7 @@
                                         <ul class="departments__links">
                                             @foreach ($categories as $category)
                                                 <li class="departments__item departments__item--menu">
-                                                    <a href="#">
+                                                    <a href="">
                                                         {{ $category->name }}
                                                         @if ($category->subCategories->isNotEmpty())
                                                             <svg class="departments__link-arrow" width="6px"

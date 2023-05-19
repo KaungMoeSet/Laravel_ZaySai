@@ -15,12 +15,14 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         //
-        $admin = new Admin;
-        $admin->name = 'Admin';
-        $admin->email = 'admin@gmail.com';
-        $admin->password = Hash::make('admin123');
-        $admin->save();
+        $admin1 = Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin123')
+        ]);
 
-        
+        Admin::factory()->count(10)->create([
+            'password' => bcrypt('admin123'),
+        ]);
     }
 }

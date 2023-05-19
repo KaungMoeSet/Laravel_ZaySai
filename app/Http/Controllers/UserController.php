@@ -57,14 +57,26 @@ class UserController extends Controller
         // Find the user
         $user = User::findOrFail($id);
 
-        // Find and delete the associated orders
-        $user->orders()->delete();
+        $userName = $user->name;
+        $userMail = $user->email;
+        // Get the associated orders
+        $orders = $user->orders;
+
+        // Dissociate the orders from the user
+        $user->orders()->dissociate();
 
         // Delete the user
         $user->delete();
 
+        // Attach the orders to a dummy user or perform any other desired action
+        // For example, you can create a dummy user and associate the orders with it
+        $dummyUser = User::findOrCreate(['name' => $userName,
+                                         'email' => $userMail]);
+        $dummyUser->orders()->saveMany($orders);
+
         return redirect()->back()->with('success_message', $user->name . ' is deleted successfully!');
     }
+
 
     public function showMyProfile()
     {
