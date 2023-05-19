@@ -11,7 +11,7 @@
                             <div class="product-gallery__featured">
                                 <div class="owl-carousel" id="product-image">
                                     @foreach ($product->images as $images)
-                                        <img src="{{ asset('storage/img/' . $images->image_name) }}" alt="">
+                                        <img class="show-img" src="{{ asset('storage/img/' . $images->image_name) }}" alt="">
                                     @endforeach
                                 </div>
                             </div>

@@ -49,14 +49,26 @@
                             </a>
                         </div>
                         <div class="indicator indicator--mobile">
+                            @auth
                             <a href="/cart" class="indicator__button">
                                 <span class="indicator__area">
-                                    <svg width="20px" height="20px">
-                                        <use xlink:href="/frontend/images/sprite.svg#cart-20"></use>
-                                    </svg>
-                                    <span class="indicator__value">3</span>
-                                </span>
+                                    @php
+                                        $cart = session('cart');
+                                        $totalQuantity = 0;
+                                    @endphp
+        
+                                    @if ($cart)
+                                        @foreach ($cart as $item)
+                                            @php
+                                                $totalQuantity += $item['quantity'];
+                                            @endphp
+                                        @endforeach
+                                    @endif
+                                    <i class="fa-solid fa-cart-shopping px-2"><span class="indicator__value rounded-pill" style="background-color: #3D464D; color: white">@if (session('cart') == null)0 @else{{ $totalQuantity }} @endif
+                                        </span>
+                                    </i>
                             </a>
+                            @endauth
                         </div>
                         <div class="indicator indicator--mobile">
                             @auth

@@ -36,14 +36,43 @@
 
                         <div class="products-view__list products-list" data-layout="grid-4-full" data-with-features="false">
 
-                            <div class="products-list__body">
+                            <div class="products-list__body row">
 
                                 @forelse ($products as $product)
-                                    <div class="products-list__item">
+                                    <div class="products-item col-6 col-md-3 mb-4">
+                                        <div class="card shadow">
+                                            <a href="{{ route('products.show', $product->id) }}">
+                                                <img class="card-img-top"
+                                                    src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
+                                                    alt="Card image cap">
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <a href="{{ route('products.show', $product->id) }}">
+                                                        {{ $product->name }}
+                                                    </a>
+                                                </h5>
+                                                <p class="card-text">
+                                                    <span style="color: #3D464D">Price : </span></span> Ks
+                                                    @foreach ($product->selling_prices as $price)
+                                                        @if ($price->end_date == null)
+                                                            {{ number_format($price->selling_price) }}
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                <a href="{{ route('cart.add', $product->id) }}"
+                                                    class="btn btn-primary product-card__addtocart">
+                                                    Add To Cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- <div class="products-list__item">
                                         <div class="product-card">
                                             <div class="product-card__image">
                                                 <a href="{{ route('products.show', $product->id) }}">
-                                                    <img style="height: 230px; width: 100%;"
+                                                    <img style=""
                                                         src="{{ asset('storage/img/' . $product->images->first()->image_name) }}"
                                                         alt="">
                                                 </a>
@@ -75,7 +104,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 @empty
                                     <div class="w-100 text-center ">
                                         <h3> <span class="text-danger">"{{ request()->search }}"</span> data is not exist
@@ -99,5 +128,5 @@
             document.getElementById("filterForm").submit();
         }
     </script>
-    
+
 @endsection
