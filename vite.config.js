@@ -12,3 +12,8 @@ export default defineConfig({
         }),
     ],
 });
+export default {
+  build: {
+    outDir: 'dist', // Ensure this matches the expected output directory
+  },
+};
